@@ -1,0 +1,39 @@
+#pragma kernel CSMain
+
+RWStructuredBuffer<float3> Vertices;
+RWStructuredBuffer<int> Triangles;
+int Width;
+
+[numthreads(8,8,1)]
+void CSMain (uint3 id : SV_DispatchThreadID)
+{
+    // Calculate vertex position
+    float3 position = float3(id.x, 0, id.y);
+
+    // Calculate index in buffer
+    int vertexIndex = id.x + (id.y * Width);
+
+    // Store vertex position in buffer
+    Vertices[vertexIndex] = position;
+
+    int vertexIndex = id.x + id.y * Width;
+    int v0 = vertexIndex;
+    int v1 = vertexIndex + 1;
+    int v2 = vertexIndex + Width;
+    int v3 = vertexIndex + Width + 1;
+
+    // Calculate indices for the two triangles forming the square
+    int tIndex = (id.x + id.y * (Width - 1)) * 6;
+
+    if (id.x < Width - 1 && id.y < Width - 1) {
+        // Triangle 1
+        Triangles[tIndex++] = v0;
+        Triangles[tIndex++] = v2;
+        Triangles[tIndex++] = v1;
+
+        // Triangle 2
+        Triangles[tIndex++] = v1;
+        Triangles[tIndex++] = v2;
+        Triangles[tIndex++] = v3;
+    }
+}
