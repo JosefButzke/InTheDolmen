@@ -1,0 +1,68 @@
+.container {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(128, 128, 128, 0);
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 16px;
+    padding-right: 16px;
+    padding-bottom: 16px;
+    padding-left: 16px;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+}
+
+.periodic-table {
+    background-color: rgba(255, 255, 255, 0.41);
+    height: 869px;
+    width: 2134px;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-top: 32px;
+    padding-right: 32px;
+    padding-bottom: 32px;
+    padding-left: 32px;
+    flex-direction: row;
+    flex-grow: 0;
+    align-content: flex-start;
+    border-top-left-radius: 32px;
+    border-top-right-radius: 32px;
+    border-bottom-right-radius: 32px;
+    border-bottom-left-radius: 32px;
+}
+
+.column-7 {
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+    align-content: flex-start;
+    align-self: flex-end;
+    flex-grow: 0;
+    height: 805px;
+    width: 112px;
+}
+
+.column-6 {
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+    align-content: flex-start;
+    align-self: flex-end;
+    flex-grow: 0;
+    height: 690px;
+    width: 112px;
+}
+
+.column-4 {
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+    align-content: flex-start;
+    align-self: flex-end;
+    flex-grow: 0;
+    height: 457px;
+    width: 112px;
+}

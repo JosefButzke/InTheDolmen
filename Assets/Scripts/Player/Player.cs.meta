@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: e8630117e6b0991499f4d79ef9518c51
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - characterController: {instanceID: 0}
+  - cameraPlayer: {instanceID: 0}
+  - groundCheck: {instanceID: 0}
+  - flashlight: {instanceID: 0}
+  - animator: {instanceID: 0}
+  - canePrefab: {instanceID: 0}
+  - flagPrefab: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
