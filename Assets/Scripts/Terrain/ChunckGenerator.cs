@@ -4,6 +4,7 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class ChunkGenerator
 {
@@ -58,11 +59,23 @@ public class ChunkGenerator
             chunkGameObject.transform.parent = parent.transform;
 
             meshFilter = chunkGameObject.AddComponent<MeshFilter>();
+
             meshFilter.sharedMesh = new Mesh();
 
             meshFilter.sharedMesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
 
-            chunkGameObject.AddComponent<MeshRenderer>().sharedMaterial = Resources.Load<Material>("Materials/Soil");
+            // UNDERGROUND
+            if (position.y < 0)
+            {
+                chunkGameObject.AddComponent<MeshRenderer>().sharedMaterial = Resources.Load<Material>("Materials/Rock");
+            }
+            else
+            {
+                chunkGameObject.AddComponent<MeshRenderer>().sharedMaterial = Resources.Load<Material>("Materials/Soil");
+            }
+
+            MeshRenderer meshRenderer = chunkGameObject.GetComponent<MeshRenderer>();
+            meshRenderer.shadowCastingMode = ShadowCastingMode.TwoSided;
 
             chunk = chunkGameObject;
         }
