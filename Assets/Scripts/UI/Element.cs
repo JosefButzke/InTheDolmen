@@ -22,10 +22,14 @@ public class Element : ScriptableObject
         {Families.AlkaliMetals, new Color(108/255f, 59/255f, 1/255f, 1)},
    };
 
+  public Color nodeColor;
+  public Material nodeMaterial;
+
   private void OnValidate()
   {
     color = familiesColors[family];
+    Material material = new Material(Shader.Find("Specular"));
+    material.color = nodeColor;
+    nodeMaterial = material;
   }
-
-
 }

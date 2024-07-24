@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResourceManager : MonoBehaviour
+public class ResourceNodeGenerator : MonoBehaviour
 {
     public GameObject molecule;
 

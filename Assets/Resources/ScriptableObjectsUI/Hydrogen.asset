@@ -18,3 +18,5 @@ MonoBehaviour:
   quantity: 0
   family: 0
   color: {r: 0.24313726, g: 0.39215687, b: 0.09411765, a: 1}
+  nodeColor: {r: 0, g: 0.8207547, b: 0.72419524, a: 1}
+  nodeMaterial: {fileID: 0}

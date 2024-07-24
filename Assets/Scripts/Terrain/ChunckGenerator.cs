@@ -43,7 +43,7 @@ public class ChunkGenerator
     {
         Initialize(_parent, _position);
         GenerateMesh(verticesComputeShader, marchCubeComputeShader, _position);
-        //GenerateFaces();
+
         chunk.AddComponent<MeshCollider>();
     }
 
@@ -54,6 +54,14 @@ public class ChunkGenerator
             GameObject chunkGameObject = new GameObject(position.x + "," + position.y + "," + position.z);
             chunkGameObject.layer = LayerMask.NameToLayer("Terrain");
             chunkGameObject.tag = "Chunk";
+
+            GameObject childObject = new GameObject("TerrainBoxCollider");
+            childObject.transform.parent = chunkGameObject.transform;
+            BoxCollider boxCollider = childObject.AddComponent<BoxCollider>();
+            boxCollider.isTrigger = true;
+            boxCollider.center = Vector3.one * (TerrainData.width - 1) / 2f;
+            boxCollider.size = Vector3.one * (TerrainData.width - 1);
+            childObject.layer = LayerMask.NameToLayer("TerrainBox");
 
             chunkGameObject.transform.position = position;
             chunkGameObject.transform.parent = parent.transform;

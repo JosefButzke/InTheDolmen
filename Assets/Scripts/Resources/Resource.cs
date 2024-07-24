@@ -1,14 +1,12 @@
 using UnityEngine;
 
-public class ResourceGatherAnimation : MonoBehaviour
+public class Resource : MonoBehaviour
 {
     private Vector3 targetPosition;
-    private float startDistance;
 
     void Start()
     {
         targetPosition = MultitoolManager.Instance.transform.position;
-        startDistance = Vector3.Distance(transform.position, targetPosition);
         gameObject.transform.parent = MultitoolManager.Instance.transform;
     }
 
