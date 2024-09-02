@@ -4,8 +4,11 @@
 RWStructuredBuffer<float4> vertices;
 
 int sideChunk;
+bool first;
 float3 offset;
 float3 terraformPoint;
+float3 playerFeetPoint;
+bool terraformType;
 
 float DistanceFromCenter(float2 a)
 {
@@ -54,18 +57,23 @@ float Perlin(float x, float y, float z) {
     if(y == -(sideChunk-1)*2.0) {
         return 1;
     }
-    if(y == (sideChunk-1)) {
-        return 0;
+   
+    if(y == (sideChunk-1)*4.0) {
+        return -1;
+    }
+
+    if(Distance(terraformPoint, float3(x,y,z)) <= 4 && Distance(playerFeetPoint, float3(x,y,z)) >= 4) {
+        return terraformType;
     }
 
      // flap map center
-     if (y >= 0 && DistanceFromCenter(float2(x,z)) <= 160)
-     {
-         if(y == 0) {
-            return 1;
-         }
-         return 0;
-     }
+    //  if (y >= 0 && DistanceFromCenter(float2(x,z)) <= 160)
+    //  {
+    //      if(y == 0) {
+    //         return 1;
+    //      }
+    //      return 0;
+    //  }
 
     if (y == 0)
     {
@@ -76,8 +84,12 @@ float Perlin(float x, float y, float z) {
 
     if (y >= 0)
     {   
-        float perlinSurface = Noise(float2(x / scaleSurface * chaosSurface, z / scaleSurface * chaosSurface)) * sideChunk;
-        float weight = (y - perlinSurface) + sideChunk / 2.0;
+        float perlinSurface1 = Noise(float2(x / 32, z / 32)) * sideChunk;
+        float perlinSurface2 = Noise(float2(x / 128, z / 128)) * sideChunk * 2;
+        float perlinSurface3 = Noise(float2(x / 1024, z / 1024)) * sideChunk * 4;
+
+        float perlinSurface = perlinSurface1+perlinSurface2+perlinSurface3 - sideChunk*4;
+        float weight = y - perlinSurface;
         return -weight;
     } else
     { 
@@ -102,7 +114,33 @@ void CSMain(uint3 id : SV_DispatchThreadID)
 
     int index = id.x + id.y * sideChunk + id.z * sideChunk * sideChunk;
 
-    float noise = Perlin(id.x+offset.x, id.y+offset.y, id.z+offset.z);
+    float noise = 0;
+
+    if(first) {
+        noise = Perlin(offset.x+id.x, offset.y+id.y, offset.z+id.z);
+    } else {
+        bool skip = false;
+        if(offset.y + id.y == -(sideChunk-1)*2.0) {
+            noise = 1;
+            skip=true;
+        }
+        if(offset.y + id.y == (sideChunk-1)) {
+            noise = 0;
+            skip=true;
+        }        
+
+        if(!skip) {
+            if(Distance(terraformPoint, float3(offset.x+id.x, offset.y+id.y, offset.z+id.z)) <= 4) {
+                if(Distance(float3(offset.x+id.x, 0, offset.z+id.z), float3(playerFeetPoint.x, 0, playerFeetPoint.z)) <= 6 && offset.y + id.y > playerFeetPoint.y) {
+                    noise = 0;
+                } else { 
+                    noise = terraformType;
+                }
+            } else {
+                noise = vertices[index].w;
+            }
+        } 
+    }
 
     vertices[index] = float4(id.x, id.y, id.z, noise);
 }

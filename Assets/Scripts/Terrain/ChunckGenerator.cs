@@ -100,6 +100,9 @@ public class ChunkGenerator
         verticesComputeShader.SetBuffer(0, "vertices", verticesBuffer);
         verticesComputeShader.SetVector("offset", (Vector3)offset);
         verticesComputeShader.SetInt("sideChunk", numberOfVertexBySide);
+        verticesComputeShader.SetBool("terraformType", true);
+        verticesComputeShader.SetVector("terraformPoint", Vector3.one);
+        verticesComputeShader.SetBool("first", true);
         verticesComputeShader.Dispatch(0, threadGroups, threadGroups, threadGroups);
 
         // tris

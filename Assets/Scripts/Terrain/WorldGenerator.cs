@@ -11,27 +11,49 @@ public class WorldGenerator : MonoBehaviour
 
     private bool isCreatingChunck = false;
 
+    // void Start()
+    // {
+    //     int chunksPlayerDistanceToLoad = 10;
+
+    //     Vector3Int playerPosition = Vector3Int.zero;
+
+    //     for (int x = -chunksPlayerDistanceToLoad; x < chunksPlayerDistanceToLoad; x++)
+    //     {
+    //         for (int z = -chunksPlayerDistanceToLoad; z < chunksPlayerDistanceToLoad; z++)
+    //         {
+    //             Vector3Int positionChecked = playerPosition + (Vector3Int.forward * x * (TerrainData.width - 1)) + (Vector3Int.right * z * (TerrainData.width - 1));
+    //             if (!chuncks.ContainsKey(positionChecked))
+    //             {
+    //                 StartCoroutine(CreateChunk(positionChecked));
+    //             }
+    //         }
+    //     }
+    // }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        foreach (Transform child in transform)
-        {
-            string[] parts = child.name.Split(',');
-            Vector3Int key = new Vector3Int(int.Parse(parts[0]), int.Parse(parts[1]), int.Parse(parts[2]));
-            if (!chuncks.ContainsKey(key))
-            {
-                chuncks.Add(key, child.gameObject);
-            }
-            else
-            {
-                Debug.LogWarning("Duplicate child name found: " + child.name);
-            }
-        }
-    }
+    // void OnValidate()
+    // {
+    //     int chunksPlayerDistanceToLoad = 10;
+
+    //     Vector3Int playerPosition = new Vector3Int(NearestMultipleOfChunkSize(0), NearestMultipleOfChunkSize(0), NearestMultipleOfChunkSize(0));
+    //     playerPosition.y = 0;
+
+    //     for (int x = -chunksPlayerDistanceToLoad; x < chunksPlayerDistanceToLoad; x++)
+    //     {
+    //         for (int z = -chunksPlayerDistanceToLoad; z < chunksPlayerDistanceToLoad; z++)
+    //         {
+    //             Vector3Int positionChecked = playerPosition + (Vector3Int.forward * x * (TerrainData.width - 1)) + (Vector3Int.right * z * (TerrainData.width - 1));
+    //             if (!chuncks.ContainsKey(positionChecked))
+    //             {
+    //                 StartCoroutine(CreateChunk(positionChecked));
+    //             }
+    //         }
+    //     }
+    // }
 
     private void FixedUpdate()
     {
-        int chunksPlayerDistanceToLoad = 10;
+        int chunksPlayerDistanceToLoad = 20;
 
         Vector3Int playerPosition = new Vector3Int(NearestMultipleOfChunkSize(Player.Instance.transform.position.x), NearestMultipleOfChunkSize(Player.Instance.transform.position.y), NearestMultipleOfChunkSize(Player.Instance.transform.position.z));
         playerPosition.y = 0;
@@ -60,8 +82,11 @@ public class WorldGenerator : MonoBehaviour
         {
             isCreatingChunck = true;
             chuncks.Add(closestPositionChecked, null);
+            chuncks.Add(closestPositionChecked + Vector3Int.up * TerrainData.height, null);
+            chuncks.Add(closestPositionChecked + Vector3Int.up * 2 * TerrainData.height, null);
+            chuncks.Add(closestPositionChecked + Vector3Int.up * 3 * TerrainData.height, null);
             chuncks.Add(closestPositionChecked + Vector3Int.down * TerrainData.height, null);
-            //chuncks.Add(closestPositionChecked + Vector3Int.down * TerrainData.height * 2, null);
+            chuncks.Add(closestPositionChecked + Vector3Int.down * TerrainData.height * 2, null);
             StartCoroutine(CreateChunk(closestPositionChecked));
         }
     }
@@ -69,10 +94,12 @@ public class WorldGenerator : MonoBehaviour
     IEnumerator CreateChunk(Vector3Int positionChecked)
     {
         new ChunkGenerator(gameObject, positionChecked, verticesComputeShader, marchCubeComputeShader);
-
+        new ChunkGenerator(gameObject, positionChecked + (Vector3Int.up * (TerrainData.width - 1)), verticesComputeShader, marchCubeComputeShader);
+        new ChunkGenerator(gameObject, positionChecked + (Vector3Int.up * 2 * (TerrainData.width - 1)), verticesComputeShader, marchCubeComputeShader);
+        new ChunkGenerator(gameObject, positionChecked + (Vector3Int.up * 3 * (TerrainData.width - 1)), verticesComputeShader, marchCubeComputeShader);
         new ChunkGenerator(gameObject, positionChecked + (Vector3Int.down * (TerrainData.width - 1)), verticesComputeShader, marchCubeComputeShader);
-
         new ChunkGenerator(gameObject, positionChecked + (Vector3Int.down * 2 * (TerrainData.width - 1)), verticesComputeShader, marchCubeComputeShader);
+
         yield return null;
         isCreatingChunck = false;
     }

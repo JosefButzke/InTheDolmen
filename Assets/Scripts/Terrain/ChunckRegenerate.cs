@@ -35,7 +35,7 @@ public class ChunckRegenerate : MonoBehaviour
     public ComputeShader verticesComputeShader;
     public ComputeShader marchCubeComputeShader;
     public Vector3 terraformPoint = Vector3.one;
-    public int style = 1;
+    public bool terraformType = true;
 
     private Vector4[] verticesData = new Vector4[TerrainData.width * TerrainData.width * TerrainData.width];
 
@@ -53,12 +53,30 @@ public class ChunckRegenerate : MonoBehaviour
         {
             verticesComputeShader.SetBuffer(0, "vertices", verticesBuffer);
             verticesComputeShader.SetVector("offset", transform.position);
+            verticesComputeShader.SetBool("terraformType", terraformType);
             verticesComputeShader.SetVector("terraformPoint", terraformPoint);
+            verticesComputeShader.SetVector("playerFeetPoint", Player.Instance.groundCheck.position);
+            verticesComputeShader.SetBool("first", first);
             verticesComputeShader.SetInt("sideChunk", numberOfVertexBySide);
             verticesComputeShader.Dispatch(0, threadGroups, threadGroups, threadGroups);
 
             verticesBuffer.GetData(verticesData);
-            first = false;
+
+        }
+        else
+        {
+            verticesBuffer.SetData(verticesData);
+
+            verticesComputeShader.SetBuffer(0, "vertices", verticesBuffer);
+            verticesComputeShader.SetBool("first", first);
+            verticesComputeShader.SetVector("offset", transform.position);
+            verticesComputeShader.SetVector("terraformPoint", terraformPoint);
+            verticesComputeShader.SetVector("playerFeetPoint", Player.Instance.groundCheck.position);
+            verticesComputeShader.SetBool("terraformType", terraformType);
+            verticesComputeShader.SetInt("sideChunk", numberOfVertexBySide);
+            verticesComputeShader.Dispatch(0, threadGroups, threadGroups, threadGroups);
+
+            verticesBuffer.GetData(verticesData);
         }
 
         // tris
@@ -67,21 +85,6 @@ public class ChunckRegenerate : MonoBehaviour
 
         // Set the buffer in the compute shader
         triangleBuffer.SetCounterValue(0);
-
-        if (!first)
-        {
-            for (int i = 0; i < verticesData.Length; i++)
-            {
-                float x = transform.position.x + verticesData[i].x;
-                float y = transform.position.y + verticesData[i].y;
-                float z = transform.position.z + verticesData[i].z;
-                if (Vector3.Distance(terraformPoint, new Vector3(x, y, z)) <= 4)
-                {
-                    verticesData[i].w = style;
-                }
-            }
-            verticesBuffer.SetData(verticesData);
-        }
 
         marchCubeComputeShader.SetBuffer(0, "vertices", verticesBuffer);
         marchCubeComputeShader.SetBuffer(0, "triangles", triangleBuffer);
@@ -131,6 +134,7 @@ public class ChunckRegenerate : MonoBehaviour
 
         verticesBuffer.GetData(verticesData);
 
+        first = false;
 
         // Release the buffer
         verticesBuffer.Release();

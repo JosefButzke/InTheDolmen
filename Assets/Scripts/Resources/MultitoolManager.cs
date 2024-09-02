@@ -8,6 +8,12 @@ public class MultitoolManager : MonoBehaviour
         get; private set;
     }
 
+    enum MultitoolType
+    {
+        COLLECT,
+        TERRAFORM
+    }
+
     public LayerMask terrainLayer;
     public LayerMask resourceLayer;
 
@@ -18,6 +24,10 @@ public class MultitoolManager : MonoBehaviour
 
     private bool isTerraforming = false;
 
+    [SerializeField]
+    private GameObject mesh;
+    private MultitoolType type = MultitoolType.COLLECT;
+
     private void Awake()
     {
         if (Instance != null)
@@ -25,87 +35,103 @@ public class MultitoolManager : MonoBehaviour
             Debug.Log("There is more than one Player instance");
         }
         Instance = this;
+
+        mesh.GetComponent<MeshRenderer>().material.color = type == MultitoolType.COLLECT ? Color.green : Color.red;
     }
 
 
     void Update()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            type = type == MultitoolType.COLLECT ? MultitoolType.TERRAFORM : MultitoolType.COLLECT;
+
+            if (type == MultitoolType.COLLECT)
+            {
+                mesh.GetComponent<MeshRenderer>().material.color = Color.green;
+            }
+            else
+            {
+                mesh.GetComponent<MeshRenderer>().material.color = Color.red;
+            }
+        }
+
+        RaycastHit hit;
+
+        if (Input.GetMouseButton(0) && type == MultitoolType.TERRAFORM)
         {
             if (isTerraforming)
             {
                 return;
             }
-            RaycastHit hit;
+
             // Does the ray intersect any objects excluding the player layer
             if (Physics.Raycast(transform.position, transform.forward, out hit, interactionDistance, terrainLayer))
             {
-                Collider[] hitColliders = Physics.OverlapSphere(hit.point, 4f);
 
+                Collider[] hitColliders = Physics.OverlapSphere(hit.point, 4f);
                 foreach (var hitCollider in hitColliders)
                 {
-                    Debug.Log(hitCollider.gameObject.name);
                     if (hitCollider.gameObject.layer == LayerMask.NameToLayer("Terrain"))
                     {
                         isTerraforming = true;
-                        StartCoroutine(Terraform(hitCollider.gameObject, hit.point, 1));
+                        StartCoroutine(Terraform(hitCollider.gameObject, hit.point, true));
                     }
 
                     if (hitCollider.gameObject.layer == LayerMask.NameToLayer("TerrainBox") && hit.collider.gameObject != hitCollider.gameObject)
                     {
                         isTerraforming = true;
-                        StartCoroutine(Terraform(hitCollider.gameObject.transform.parent.gameObject, hit.point, 1));
+                        StartCoroutine(Terraform(hitCollider.gameObject.transform.parent.gameObject, hit.point, true));
                     }
                 }
-
-                // if (hit.collider.gameObject.layer == resourceLayer)
-                // {
-                //     GameObject obj = hit.collider.gameObject;
-                //     obj.GetComponent<BoxCollider>().enabled = false;
-                //     obj.GetComponent<Resource>().enabled = true;
-                // }
             }
         }
 
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButton(1) && type == MultitoolType.TERRAFORM)
         {
             if (isTerraforming)
             {
                 return;
             }
-            RaycastHit hit;
             // Does the ray intersect any objects excluding the player layer
             if (Physics.Raycast(transform.position, transform.forward, out hit, interactionDistance, terrainLayer))
             {
-                Collider[] hitColliders = Physics.OverlapSphere(hit.point, 4f);
+                Collider[] hitColliders = Physics.OverlapSphere(hit.point, 8f);
 
                 foreach (var hitCollider in hitColliders)
                 {
-                    Debug.Log(hitCollider.gameObject.name);
                     if (hitCollider.gameObject.layer == LayerMask.NameToLayer("Terrain"))
                     {
                         isTerraforming = true;
-                        StartCoroutine(Terraform(hitCollider.gameObject, hit.point, 0));
+                        StartCoroutine(Terraform(hitCollider.gameObject, hit.point, false));
                     }
 
                     if (hitCollider.gameObject.layer == LayerMask.NameToLayer("TerrainBox") && hit.collider.gameObject != hitCollider.gameObject)
                     {
                         isTerraforming = true;
-                        StartCoroutine(Terraform(hitCollider.gameObject.transform.parent.gameObject, hit.point, 0));
+                        StartCoroutine(Terraform(hitCollider.gameObject.transform.parent.gameObject, hit.point, false));
                     }
                 }
-
-                // if (hit.collider.gameObject.layer == resourceLayer)
-                // {
-                //     GameObject obj = hit.collider.gameObject;
-                //     obj.GetComponent<BoxCollider>().enabled = false;
-                //     obj.GetComponent<Resource>().enabled = true;
-                // }
             }
         }
+
+        if (Input.GetMouseButton(0) && type == MultitoolType.COLLECT)
+        {
+            // Does the ray intersect any objects excluding the player layer
+            if (Physics.Raycast(transform.position, transform.forward, out hit, interactionDistance, resourceLayer))
+            {
+                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Resource"))
+                {
+                    GameObject obj = hit.collider.gameObject;
+                    obj.GetComponent<BoxCollider>().enabled = false;
+                    obj.GetComponent<Resource>().enabled = true;
+                }
+            }
+        }
+
     }
 
-    IEnumerator Terraform(GameObject gameObject, Vector3 hitPoint, int style)
+    IEnumerator Terraform(GameObject gameObject, Vector3 hitPoint, bool terraformType)
     {
 
         if (!gameObject.GetComponent<ChunckRegenerate>())
@@ -117,10 +143,10 @@ public class MultitoolManager : MonoBehaviour
         script.terraformPoint = hitPoint;
         script.verticesComputeShader = verticesComputeShader;
         script.marchCubeComputeShader = marchCubeComputeShader;
-        script.style = style;
+        script.terraformType = terraformType;
         script.GenerateMesh();
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
         isTerraforming = false;
 
         // if (hit.collider.gameObject.layer == resourceLayer)
