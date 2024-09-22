@@ -37,14 +37,14 @@ public class ChunkGenerator
 
     private int numberOfVertexBySide = TerrainData.width;
 
-    public GameObject chunk;
+    public GameObject gameObject;
 
     public ChunkGenerator(GameObject _parent, Vector3Int _position, ComputeShader verticesComputeShader, ComputeShader marchCubeComputeShader)
     {
         Initialize(_parent, _position);
         GenerateMesh(verticesComputeShader, marchCubeComputeShader, _position);
 
-        chunk.AddComponent<MeshCollider>();
+        gameObject.AddComponent<MeshCollider>();
     }
 
     private void Initialize(GameObject parent, Vector3Int position)
@@ -85,7 +85,7 @@ public class ChunkGenerator
             MeshRenderer meshRenderer = chunkGameObject.GetComponent<MeshRenderer>();
             meshRenderer.shadowCastingMode = ShadowCastingMode.TwoSided;
 
-            chunk = chunkGameObject;
+            gameObject = chunkGameObject;
         }
     }
 
@@ -141,8 +141,10 @@ public class ChunkGenerator
                 vertices[i * 3 + j] = tris[i][j];
             }
         }
+
         meshFilter.sharedMesh.vertices = vertices;
         meshFilter.sharedMesh.triangles = meshTriangles;
+
         meshFilter.sharedMesh.RecalculateNormals();
 
         // Release the buffer

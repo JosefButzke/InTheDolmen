@@ -530,7 +530,7 @@ static const int triangulation[256][16] = {
     { 0, 9, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 },
     { 0, 3, 8, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 },
     {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 }
-};
+    };
 
 static const int cornerIndexAFromEdge[12] = {
     0,
@@ -567,8 +567,12 @@ int indexFromCoord(int x, int y, int z) {
 }
 
 float3 interpolateVerts(float4 v1, float4 v2) {
-    // return (v1.xyz + (isoLevel - v1.w) * (v2.xyz - v1.xyz)  / (v2.w - v1.w));
-    return (v1.xyz+v2.xyz)/2;
+    return (v1.xyz + (isoLevel - v1.w) * (v2.xyz - v1.xyz)  / (v2.w - v1.w));
+
+    // return (v1.xyz+v2.xyz)/2;
+    // float3 value = (v1.xyz+v2.xyz)/2;
+    
+    // return value.y != floor(value.y) ? value : value + float3(0,0.1
 }
 
 [numthreads(8, 8, 8)]
@@ -583,7 +587,7 @@ void CSMain(uint3 id : SV_DispatchThreadID)
         vertices[indexFromCoord(id.x, id.y, id.z)],
         vertices[indexFromCoord(id.x + 1, id.y, id.z)],
         vertices[indexFromCoord(id.x + 1, id.y, id.z + 1)],
-        vertices[indexFromCoord(id.x, id.y, id.z + 1)], 
+        vertices[indexFromCoord(id.x, id.y, id.z + 1)],
         vertices[indexFromCoord(id.x, id.y + 1, id.z)],
         vertices[indexFromCoord(id.x + 1, id.y + 1, id.z)],
         vertices[indexFromCoord(id.x + 1, id.y + 1, id.z + 1)],
@@ -595,14 +599,14 @@ void CSMain(uint3 id : SV_DispatchThreadID)
     // A value of 0 means cube is entirely inside surface; 255 entirely outside.
     // The value is used to look up the edge table, which indicates which edges of the cube are cut by the isosurface.
     int cubeIndex = 0;
-    if (cubeCorners[0].w <= isoLevel) cubeIndex |= 1;
-    if (cubeCorners[1].w <= isoLevel) cubeIndex |= 2;
-    if (cubeCorners[2].w <= isoLevel) cubeIndex |= 4;
-    if (cubeCorners[3].w <= isoLevel) cubeIndex |= 8;
-    if (cubeCorners[4].w <= isoLevel) cubeIndex |= 16;
-    if (cubeCorners[5].w <= isoLevel) cubeIndex |= 32; 
-    if (cubeCorners[6].w <= isoLevel) cubeIndex |= 64;
-    if (cubeCorners[7].w <= isoLevel) cubeIndex |= 128;
+    if (cubeCorners[0].w < isoLevel) cubeIndex |= 1;
+    if (cubeCorners[1].w < isoLevel) cubeIndex |= 2;
+    if (cubeCorners[2].w < isoLevel) cubeIndex |= 4;
+    if (cubeCorners[3].w < isoLevel) cubeIndex |= 8;
+    if (cubeCorners[4].w < isoLevel) cubeIndex |= 16;
+    if (cubeCorners[5].w < isoLevel) cubeIndex |= 32; 
+    if (cubeCorners[6].w < isoLevel) cubeIndex |= 64;
+    if (cubeCorners[7].w < isoLevel) cubeIndex |= 128;
 
     // Create triangles for current cube configuration
     for (int i = 0; triangulation[cubeIndex][i] != -1; i += 3) {
