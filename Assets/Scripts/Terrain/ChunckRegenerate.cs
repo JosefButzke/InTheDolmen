@@ -30,19 +30,18 @@ public class ChunckRegenerate : MonoBehaviour
 
     public MeshFilter meshFilter;
 
-    private int numberOfVertexBySide = TerrainData.width;
-
     public ComputeShader verticesComputeShader;
     public ComputeShader marchCubeComputeShader;
     public Vector3 terraformPoint = Vector3.one;
     public bool terraformType = true;
 
-    private Vector4[] verticesData = new Vector4[TerrainData.width * TerrainData.width * TerrainData.width];
+    private Vector4[] verticesData = new Vector4[TerrainData.width / 8 * TerrainData.width / 8 * TerrainData.width / 8];
 
     private bool first = true;
 
     public void GenerateMesh()
     {
+        int numberOfVertexBySide = TerrainData.width / 8;
         int pointsNumber = numberOfVertexBySide * numberOfVertexBySide * numberOfVertexBySide;
         int threadGroups = Mathf.CeilToInt(numberOfVertexBySide / 8.0f);
 

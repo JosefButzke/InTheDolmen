@@ -17,7 +17,7 @@ public class MultitoolManager : MonoBehaviour
     public LayerMask terrainLayer;
     public LayerMask resourceLayer;
 
-    public float interactionDistance = 30f;
+    public float interactionDistance = 32f;
 
     public ComputeShader verticesComputeShader;
     public ComputeShader marchCubeComputeShader;
@@ -69,7 +69,7 @@ public class MultitoolManager : MonoBehaviour
             if (Physics.Raycast(transform.position, transform.forward, out hit, interactionDistance, terrainLayer))
             {
 
-                Collider[] hitColliders = Physics.OverlapSphere(hit.point, 4f);
+                Collider[] hitColliders = Physics.OverlapSphere(hit.point, 32f);
                 foreach (var hitCollider in hitColliders)
                 {
                     if (hitCollider.gameObject.layer == LayerMask.NameToLayer("Terrain"))
@@ -96,7 +96,7 @@ public class MultitoolManager : MonoBehaviour
             // Does the ray intersect any objects excluding the player layer
             if (Physics.Raycast(transform.position, transform.forward, out hit, interactionDistance, terrainLayer))
             {
-                Collider[] hitColliders = Physics.OverlapSphere(hit.point, 8f);
+                Collider[] hitColliders = Physics.OverlapSphere(hit.point, 32f);
 
                 foreach (var hitCollider in hitColliders)
                 {

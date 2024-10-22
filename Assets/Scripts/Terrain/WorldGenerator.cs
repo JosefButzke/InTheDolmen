@@ -16,41 +16,44 @@ public class WorldGenerator : MonoBehaviour
     private bool isCreatingChunck = false;
 
     // void Start()
+    // void Start()
     // {
-    //     int chunksPlayerDistanceToLoad = 2;
-
-    //     Vector3Int playerPosition = Vector3Int.zero;
-
-    //     for (int x = -chunksPlayerDistanceToLoad; x < chunksPlayerDistanceToLoad; x++)
+    //     foreach (Transform child in parentContainer.transform)
     //     {
-    //         for (int z = -chunksPlayerDistanceToLoad; z < chunksPlayerDistanceToLoad; z++)
+    //         string[] parts = child.name.Split(',');
+    //         Vector3Int key = new Vector3Int(int.Parse(parts[0]), int.Parse(parts[1]), int.Parse(parts[2]));
+    //         if (!chunks.ContainsKey(key))
     //         {
-    //             Vector3Int positionChecked = playerPosition + (Vector3Int.forward * x * (TerrainData.width - 1)) + (Vector3Int.right * z * (TerrainData.width - 1));
-    //             if (!chunks.ContainsKey(positionChecked))
-    //             {
-    //                 StartCoroutine(CreateChunk(positionChecked));
-    //             }
+    //             chunks.Add(key, child.gameObject);
+    //         }
+    //         else
+    //         {
+    //             Debug.LogWarning("Duplicate child name found: " + child.name);
     //         }
     //     }
     // }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    // void OnValidate()
+    // void Start()
     // {
     //     int chunksPlayerDistanceToLoad = 10;
 
     //     Vector3Int playerPosition = Vector3Int.zero;
     //     playerPosition.y = 0;
 
+    //     foreach (Transform child in parentContainer.transform)
+    //     {
+    //         Destroy(child.gameObject);
+    //     }
+
     //     for (int x = -chunksPlayerDistanceToLoad; x < chunksPlayerDistanceToLoad; x++)
     //     {
     //         for (int z = -chunksPlayerDistanceToLoad; z < chunksPlayerDistanceToLoad; z++)
     //         {
-    //             Vector3Int positionChecked = playerPosition + (Vector3Int.forward * x * (TerrainData.width - 1)) + (Vector3Int.right * z * (TerrainData.width - 1));
+    //             Vector3Int positionChecked = playerPosition + (Vector3Int.forward * x * (TerrainData.width - 8)) + (Vector3Int.right * z * (TerrainData.width - 8));
     //             if (!chunks.ContainsKey(positionChecked))
     //             {
     //                 StartCoroutine(CreateChunk(positionChecked));
-
     //             }
     //         }
     //     }
@@ -80,7 +83,7 @@ public class WorldGenerator : MonoBehaviour
         {
             for (int z = -chunksPlayerDistanceToLoad; z < chunksPlayerDistanceToLoad; z++)
             {
-                Vector3Int positionChecked = playerPosition + (Vector3Int.forward * x * (TerrainData.width - 1)) + (Vector3Int.right * z * (TerrainData.width - 1));
+                Vector3Int positionChecked = playerPosition + (Vector3Int.forward * x * (TerrainData.width - 8)) + (Vector3Int.right * z * (TerrainData.width - 8));
                 if (!chunks.ContainsKey(positionChecked) && !isCreatingChunck)
                 {
                     float distanceNewChunkFromPlayer = Vector3Int.Distance(playerPosition, positionChecked);
@@ -94,15 +97,23 @@ public class WorldGenerator : MonoBehaviour
             }
         }
 
-        if (closestPositionChecked != chunkOutsideRadius)
+        if (closestPositionChecked != chunkOutsideRadius && !isCreatingChunck)
         {
             isCreatingChunck = true;
-            chunks.Add(closestPositionChecked, null);
-            chunks.Add(closestPositionChecked + Vector3Int.up * TerrainData.height, null);
-            chunks.Add(closestPositionChecked + Vector3Int.up * 2 * TerrainData.height, null);
-            chunks.Add(closestPositionChecked + Vector3Int.down * TerrainData.height, null);
-            chunks.Add(closestPositionChecked + Vector3Int.down * TerrainData.height * 2, null);
-            chunks.Add(closestPositionChecked + Vector3Int.down * TerrainData.height * 3, null);
+
+            if (Player.Instance.transform.position.y >= 0)
+            {
+                chunks.Add(closestPositionChecked, null);
+                chunks.Add(closestPositionChecked + Vector3Int.up * TerrainData.height, null);
+                chunks.Add(closestPositionChecked + Vector3Int.up * 2 * TerrainData.height, null);
+            }
+            else
+            {
+                chunks.Add(closestPositionChecked + Vector3Int.down * TerrainData.height, null);
+                chunks.Add(closestPositionChecked + Vector3Int.down * TerrainData.height * 2, null);
+                chunks.Add(closestPositionChecked + Vector3Int.down * TerrainData.height * 3, null);
+            }
+
             StartCoroutine(CreateChunk(closestPositionChecked));
         }
     }
@@ -110,11 +121,11 @@ public class WorldGenerator : MonoBehaviour
     IEnumerator CreateChunk(Vector3Int positionChecked)
     {
         chunks[positionChecked] = new ChunkGenerator(parentContainer, positionChecked, verticesComputeShader, marchCubeComputeShader).gameObject;
-        chunks[positionChecked + Vector3Int.up * TerrainData.height] = new ChunkGenerator(parentContainer, positionChecked + (Vector3Int.up * (TerrainData.width - 1)), verticesComputeShader, marchCubeComputeShader).gameObject;
-        chunks[positionChecked + Vector3Int.up * 2 * TerrainData.height] = new ChunkGenerator(parentContainer, positionChecked + (Vector3Int.up * 2 * (TerrainData.width - 1)), verticesComputeShader, marchCubeComputeShader).gameObject;
-        chunks[positionChecked + Vector3Int.down * TerrainData.height] = new ChunkGenerator(parentContainer, positionChecked + (Vector3Int.down * (TerrainData.width - 1)), verticesComputeShader, marchCubeComputeShader).gameObject;
-        chunks[positionChecked + Vector3Int.down * TerrainData.height * 2] = new ChunkGenerator(parentContainer, positionChecked + (Vector3Int.down * 2 * (TerrainData.width - 1)), verticesComputeShader, marchCubeComputeShader).gameObject;
-        chunks[positionChecked + Vector3Int.down * TerrainData.height * 3] = new ChunkGenerator(parentContainer, positionChecked + (Vector3Int.down * 3 * (TerrainData.width - 1)), verticesComputeShader, marchCubeComputeShader).gameObject;
+        chunks[positionChecked + (Vector3Int.up * (TerrainData.width - 8))] = new ChunkGenerator(parentContainer, positionChecked + (Vector3Int.up * (TerrainData.width - 8)), verticesComputeShader, marchCubeComputeShader).gameObject;
+        chunks[positionChecked + (Vector3Int.up * 2 * (TerrainData.width - 8))] = new ChunkGenerator(parentContainer, positionChecked + (Vector3Int.up * 2 * (TerrainData.width - 8)), verticesComputeShader, marchCubeComputeShader).gameObject;
+        chunks[positionChecked + (Vector3Int.down * (TerrainData.width - 8))] = new ChunkGenerator(parentContainer, positionChecked + (Vector3Int.down * (TerrainData.width - 8)), verticesComputeShader, marchCubeComputeShader).gameObject;
+        chunks[positionChecked + (Vector3Int.down * 2 * (TerrainData.width - 8))] = new ChunkGenerator(parentContainer, positionChecked + (Vector3Int.down * 2 * (TerrainData.width - 8)), verticesComputeShader, marchCubeComputeShader).gameObject;
+        chunks[positionChecked + (Vector3Int.down * 3 * (TerrainData.width - 8))] = new ChunkGenerator(parentContainer, positionChecked + (Vector3Int.down * 3 * (TerrainData.width - 8)), verticesComputeShader, marchCubeComputeShader).gameObject;
 
         yield return null;
         isCreatingChunck = false;
@@ -122,6 +133,6 @@ public class WorldGenerator : MonoBehaviour
 
     public int NearestMultipleOfChunkSize(float number)
     {
-        return Mathf.FloorToInt(number) / (TerrainData.width - 1) * (TerrainData.width - 1);
+        return Mathf.FloorToInt(number) / (TerrainData.width - 8) * (TerrainData.width - 8);
     }
 }

@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 
+
 public class ChunkGenerator
 {
 
@@ -34,9 +35,6 @@ public class ChunkGenerator
     }
 
     private MeshFilter meshFilter;
-
-    private int numberOfVertexBySide = TerrainData.width;
-
     public GameObject gameObject;
 
     public ChunkGenerator(GameObject _parent, Vector3Int _position, ComputeShader verticesComputeShader, ComputeShader marchCubeComputeShader)
@@ -91,6 +89,7 @@ public class ChunkGenerator
 
     private void GenerateMesh(ComputeShader verticesComputeShader, ComputeShader marchCubeComputeShader, Vector3Int offset)
     {
+        int numberOfVertexBySide = TerrainData.width / 8;
         int pointsNumber = numberOfVertexBySide * numberOfVertexBySide * numberOfVertexBySide;
         int threadGroups = Mathf.CeilToInt(numberOfVertexBySide / 8.0f);
 

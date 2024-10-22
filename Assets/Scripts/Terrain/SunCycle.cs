@@ -6,15 +6,15 @@ using TMPro;
 
 public class SunCycle : MonoBehaviour
 {
-    public Light sunLight;
+    public GameObject sunLight;
 
     private void Update()
     {
-        transform.Rotate(10 * Time.deltaTime, 0, 0, Space.World);
+        sunLight.transform.Rotate(10 * Time.deltaTime, 0, 0, Space.World);
 
 
-        sunLight.intensity = Mathf.Lerp(0, 1, transform.rotation.eulerAngles.x);
+        sunLight.GetComponent<Light>().intensity = Mathf.Lerp(0, 1, transform.rotation.eulerAngles.x);
 
-        
+
     }
 }

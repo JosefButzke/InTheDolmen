@@ -568,11 +568,6 @@ int indexFromCoord(int x, int y, int z) {
 
 float3 interpolateVerts(float4 v1, float4 v2) {
     return (v1.xyz + (isoLevel - v1.w) * (v2.xyz - v1.xyz)  / (v2.w - v1.w));
-
-    // return (v1.xyz+v2.xyz)/2;
-    // float3 value = (v1.xyz+v2.xyz)/2;
-    
-    // return value.y != floor(value.y) ? value : value + float3(0,0.1
 }
 
 [numthreads(8, 8, 8)]
