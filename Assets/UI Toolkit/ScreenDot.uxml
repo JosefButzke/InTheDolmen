@@ -1,0 +1,5 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="Screen" style="flex-grow: 1; align-items: center; justify-content: center; align-self: center; align-content: center;">
+        <ui:VisualElement name="Dot" style="flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: center; align-self: center; align-content: center; width: 4px; height: 4px; background-color: rgb(226, 226, 226); border-top-left-radius: 2px; border-top-right-radius: 2px; border-bottom-right-radius: 2px; border-bottom-left-radius: 2px;" />
+    </ui:VisualElement>
+</ui:UXML>

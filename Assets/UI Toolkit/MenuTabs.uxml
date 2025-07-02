@@ -1,0 +1,17 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/MenusHeader.uss?fileID=7433441132597879392&amp;guid=8433829ad3388b34fa63d98c721b9224&amp;type=3#MenusHeader" />
+    <engine:VisualElement name="Container" class="container">
+        <engine:Button text="Inventory" name="Inventory" class="button button-inventory">
+            <engine:VisualElement name="Icon" class="icon" style="background-image: url(&quot;project://database/Assets/Sprites/UI/inventory.png?fileID=2800000&amp;guid=07f99c98e33fc114995c0405100bcbdc&amp;type=3#inventory&quot;);" />
+        </engine:Button>
+        <engine:Button text="Crafting" name="Crafting" class="button button-crafting">
+            <engine:VisualElement name="Icon" class="icon" style="background-image: url(&quot;project://database/Assets/Sprites/UI/crafting.png?fileID=2800000&amp;guid=e9a2fadad39e4104b91b8466916d169c&amp;type=3#crafting&quot;);" />
+        </engine:Button>
+        <engine:Button text="Skills" name="Skills" class="button button-skills">
+            <engine:VisualElement name="Icon" class="icon" style="background-image: url(&quot;project://database/Assets/Sprites/UI/skills.png?fileID=2800000&amp;guid=420ef8d7693b87a4c8e00d095ea39c2d&amp;type=3#skills&quot;);" />
+        </engine:Button>
+        <engine:Button text="Settings" name="Settings" class="button button-settings">
+            <engine:VisualElement name="Icon" class="icon" style="background-image: url(&quot;project://database/Assets/Sprites/UI/settings.png?fileID=2800000&amp;guid=de23109c2d3b3ef4ea46c6019a181377&amp;type=3#settings&quot;);" />
+        </engine:Button>
+    </engine:VisualElement>
+</engine:UXML>
