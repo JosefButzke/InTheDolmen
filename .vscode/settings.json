@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "In The Dolmen.sln"
+    "dotnet.defaultSolution": "InTheDolmen.sln"
 }
