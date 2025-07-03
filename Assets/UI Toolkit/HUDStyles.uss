@@ -1,0 +1,23 @@
+.container {
+    position: relative;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+.hotbar {
+    position: absolute;
+    bottom: 0;
+    flex-direction: row;
+    width: 100%;
+    margin-top: auto;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.aim-dot {
+    width: 4px;
+    height: 4px;
+    margin: auto;
+    background-color: rgb(255, 255, 255);
+}

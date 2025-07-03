@@ -1,5 +1,6 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI%20Toolkit/InventoryStyles.uss?fileID=7433441132597879392&amp;guid=02875f5d30526864ca15f167e6e03748&amp;type=3#InventoryStyles" />
+    <engine:Template name="Slot" src="project://database/Assets/UI%20Toolkit/Templates/Slot.uxml?fileID=9197481963319205126&amp;guid=a8812c057738c8d4b9a635c880e026f7&amp;type=3#Slot" />
+    <Style src="project://database/Assets/UI%20Toolkit/InventoryStyles.uss?fileID=7433441132597879392&amp;guid=02875f5d30526864ca15f167e6e03748&amp;type=3" />
     <Style src="project://database/Assets/UI%20Toolkit/Global.uss?fileID=7433441132597879392&amp;guid=2e68646daaf24614fa9e32de689ad59c&amp;type=3" />
     <engine:VisualElement name="Container" class="container">
         <engine:VisualElement name="ItemsContainer" class="items-container">
@@ -60,6 +61,27 @@
                 </engine:Button>
             </engine:VisualElement>
         </engine:VisualElement>
-        <engine:VisualElement name="CharacterContainer" class="character-container" />
+        <engine:VisualElement name="CharacterContainer" class="character-container">
+            <engine:VisualElement name="Head" class="row-head">
+                <engine:Instance template="Slot" />
+            </engine:VisualElement>
+            <engine:VisualElement name="Hands1" class="row-hands">
+                <engine:Instance template="Slot" />
+                <engine:Instance template="Slot" name="TemplateContainer" />
+            </engine:VisualElement>
+            <engine:VisualElement name="Hands2" class="row-hands">
+                <engine:Instance template="Slot" name="TemplateContainer" />
+                <engine:Instance template="Slot" name="TemplateContainer" />
+            </engine:VisualElement>
+            <engine:VisualElement name="Hands3" class="row-hands">
+                <engine:Instance template="Slot" name="TemplateContainer" />
+                <engine:Instance template="Slot" name="TemplateContainer" />
+            </engine:VisualElement>
+            <engine:VisualElement name="Legs" class="row-legs">
+                <engine:Instance template="Slot" name="TemplateContainer" />
+                <engine:Instance template="Slot" name="TemplateContainer" />
+            </engine:VisualElement>
+            <engine:VisualElement name="Body" class="body" style="background-image: url(&quot;project://database/Assets/Sprites/UI/ZetaFrame.png?fileID=2800000&amp;guid=f971bf9910a2e384298f7e7df2adfc3c&amp;type=3#ZetaFrame&quot;);" />
+        </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>

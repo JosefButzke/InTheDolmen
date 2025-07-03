@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour
     }
 
     private InputActions inputActions;
-    public UIDocument ScreenDotUI;
+    public UIDocument HUDUI;
     public UIDocument MenuTabsUI;
     public UIDocument InventoryUI;
     public UIDocument CraftingUI;
@@ -53,9 +53,9 @@ public class UIManager : MonoBehaviour
         {
             MenuTabsUI.enabled = false;
         }
-        if (ScreenDotUI != null)
+        if (HUDUI != null)
         {
-            ScreenDotUI.enabled = true;
+            HUDUI.enabled = true;
         }
         if (InventoryUI != null)
         {
@@ -233,13 +233,19 @@ public class UIManager : MonoBehaviour
     {
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         UnityEngine.Cursor.visible = false;
-        ScreenDotUI.enabled = true;
+
+        VisualElement root = HUDUI.rootVisualElement;
+        VisualElement aimDot = root.Query<VisualElement>(className: "aim-dot");
+        aimDot.style.visibility = Visibility.Visible;
     }
 
     void BlockPlayerCamera()
     {
         UnityEngine.Cursor.lockState = CursorLockMode.None;
         UnityEngine.Cursor.visible = true;
-        ScreenDotUI.enabled = false;
+
+        VisualElement root = HUDUI.rootVisualElement;
+        VisualElement aimDot = root.Query<VisualElement>(className: "aim-dot");
+        aimDot.style.visibility = Visibility.Hidden;
     }
 }

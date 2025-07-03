@@ -1,6 +1,0 @@
-.container {
-    flex-direction: row;
-    margin-top: auto;
-    margin-bottom: 16px;
-    justify-content: center;
-}

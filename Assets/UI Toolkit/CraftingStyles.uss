@@ -16,8 +16,6 @@
     border-radius: 32px;
     margin-left: 64px;
     padding: 32px;
-    border-width: 8px;
-    border-color: black;
 }
 
 .row {
