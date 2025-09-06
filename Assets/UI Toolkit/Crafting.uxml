@@ -1,0 +1,21 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/CraftingStyles.uss?fileID=7433441132597879392&amp;guid=bfc369b7a751dc04dbd5c6e70b7755e6&amp;type=3#CraftingStyles" />
+    <Style src="project://database/Assets/UI%20Toolkit/Global.uss?fileID=7433441132597879392&amp;guid=2e68646daaf24614fa9e32de689ad59c&amp;type=3#Global" />
+    <engine:VisualElement name="Container" class="container">
+        <engine:VisualElement name="CategoriesContainer" class="categories-container">
+            <engine:Button name="CategoryTools" class="slot" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: url(&quot;project://database/Assets/Sprites/UI/tools.png?fileID=21300000&amp;guid=b3636b09abc9d454f8772461a0476699&amp;type=3#tools&quot;);" />
+            </engine:Button>
+            <engine:Button name="CategoryMachinary" class="slot" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: url(&quot;project://database/Assets/Sprites/UI/tables.png?fileID=21300000&amp;guid=b8172fcbd0a2e664dad410d7770fdecc&amp;type=3#tables&quot;);" />
+            </engine:Button>
+            <engine:Button name="CategoryBackpack" class="slot" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: url(&quot;project://database/Assets/Sprites/UI/backpacks.png?fileID=21300000&amp;guid=fa6c52b88d7358a4680c8a0a2dabcbac&amp;type=3#backpacks&quot;);" />
+            </engine:Button>
+            <engine:Button name="CategoryGuns" class="slot" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: url(&quot;project://database/Assets/Sprites/UI/guns.png?fileID=21300000&amp;guid=d2ec7387270af5841add3b6db4d69bbb&amp;type=3#guns&quot;); margin-right: 24px;" />
+            </engine:Button>
+        </engine:VisualElement>
+        <engine:VisualElement name="CategoryItemsContainer" class="category-items-container" />
+    </engine:VisualElement>
+</engine:UXML>

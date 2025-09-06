@@ -1,0 +1,157 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/InventoryStyles.uss?fileID=7433441132597879392&amp;guid=02875f5d30526864ca15f167e6e03748&amp;type=3#InventoryStyles" />
+    <Style src="project://database/Assets/UI%20Toolkit/Global.uss?fileID=7433441132597879392&amp;guid=2e68646daaf24614fa9e32de689ad59c&amp;type=3#Global" />
+    <engine:VisualElement name="Background" class="background">
+        <engine:VisualElement name="Container" class="container">
+            <engine:VisualElement name="ItemsContainer" class="items-container">
+                <engine:VisualElement name="Row" class="row">
+                    <engine:Button name="Slot" class="slot" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                        <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: url(&quot;project://database/Assets/Sprites/copper-rock.png?fileID=2800000&amp;guid=032d61b91e81e0b43801c7133fe63f2c&amp;type=3#copper-rock&quot;);" />
+                        <engine:Label text="12" name="Quantity" class="quantity" />
+                    </engine:Button>
+                    <engine:Button name="Slot" class="slot" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                        <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none; background-color: rgba(255, 255, 255, 0);" />
+                    </engine:Button>
+                    <engine:Button name="Slot" class="slot" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                        <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none; background-color: rgba(255, 255, 255, 0);" />
+                    </engine:Button>
+                    <engine:Button name="Slot" class="slot" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                        <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none; background-color: rgba(255, 255, 255, 0);" />
+                    </engine:Button>
+                </engine:VisualElement>
+                <engine:VisualElement name="Row" class="row row-join row-2">
+                    <engine:Button name="Slot" class="slot" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                        <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none;" />
+                    </engine:Button>
+                    <engine:Button name="Slot" class="slot" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                        <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none;" />
+                    </engine:Button>
+                    <engine:Button name="Slot" class="slot" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                        <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none;" />
+                    </engine:Button>
+                    <engine:Button name="Slot" class="slot" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                        <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none;" />
+                    </engine:Button>
+                </engine:VisualElement>
+                <engine:VisualElement name="Row" class="row row-3">
+                    <engine:Button name="Slot" class="slot" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                        <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none; background-color: rgba(255, 255, 255, 0);" />
+                    </engine:Button>
+                    <engine:Button name="Slot" class="slot" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                        <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none; background-color: rgba(255, 255, 255, 0);" />
+                    </engine:Button>
+                    <engine:Button name="Slot" class="slot" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                        <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none; background-color: rgba(255, 255, 255, 0);" />
+                    </engine:Button>
+                    <engine:Button name="Slot" class="slot" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                        <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none; background-color: rgba(255, 255, 255, 0);" />
+                    </engine:Button>
+                </engine:VisualElement>
+                <engine:VisualElement name="Row" class="row row-4">
+                    <engine:Button name="Slot" class="slot" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                        <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none; background-color: rgba(255, 255, 255, 0);" />
+                    </engine:Button>
+                    <engine:Button name="Slot" class="slot" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                        <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none; background-color: rgba(255, 255, 255, 0);" />
+                    </engine:Button>
+                    <engine:Button name="Slot" class="slot" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                        <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none; background-color: rgba(255, 255, 255, 0);" />
+                    </engine:Button>
+                    <engine:Button name="Slot" class="slot" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                        <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none; background-color: rgba(255, 255, 255, 0);" />
+                    </engine:Button>
+                </engine:VisualElement>
+                <engine:VisualElement name="Row" class="row row-5">
+                    <engine:Button name="Slot" class="slot" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                        <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none; background-color: rgba(255, 255, 255, 0);" />
+                    </engine:Button>
+                    <engine:Button name="Slot" class="slot" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                        <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none; background-color: rgba(255, 255, 255, 0);" />
+                    </engine:Button>
+                    <engine:Button name="Slot" class="slot" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                        <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none; background-color: rgba(255, 255, 255, 0);" />
+                    </engine:Button>
+                    <engine:Button name="Slot" class="slot" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                        <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none; background-color: rgba(255, 255, 255, 0);" />
+                    </engine:Button>
+                </engine:VisualElement>
+                <engine:VisualElement name="Row" class="row row-4">
+                    <engine:Button name="Slot" class="slot" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                        <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none; background-color: rgba(255, 255, 255, 0);" />
+                    </engine:Button>
+                    <engine:Button name="Slot" class="slot" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                        <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none; background-color: rgba(255, 255, 255, 0);" />
+                    </engine:Button>
+                    <engine:Button name="Slot" class="slot" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                        <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none; background-color: rgba(255, 255, 255, 0);" />
+                    </engine:Button>
+                    <engine:Button name="Slot" class="slot" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                        <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none; background-color: rgba(255, 255, 255, 0);" />
+                    </engine:Button>
+                </engine:VisualElement>
+            </engine:VisualElement>
+            <engine:VisualElement name="CharacterContainer" class="character-container" style="flex-grow: 1;">
+                <engine:VisualElement name="Head" class="row-head" style="flex-grow: 1;">
+                    <engine:Button name="Slot" class="slot" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                        <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none;" />
+                    </engine:Button>
+                </engine:VisualElement>
+                <engine:VisualElement name="Arms1" class="row-arms" style="flex-grow: 1;">
+                    <engine:Button name="Slot" class="slot" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                        <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none;" />
+                    </engine:Button>
+                    <engine:Button name="Slot" class="slot" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                        <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none;" />
+                    </engine:Button>
+                </engine:VisualElement>
+                <engine:VisualElement name="Arms2" class="row-arms" style="flex-grow: 1;">
+                    <engine:Button name="Slot" class="slot" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                        <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none;" />
+                    </engine:Button>
+                    <engine:Button name="Slot" class="slot" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                        <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none;" />
+                    </engine:Button>
+                </engine:VisualElement>
+                <engine:VisualElement name="Body" class="row-body" style="flex-grow: 1;">
+                    <engine:Button name="Slot" class="slot" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                        <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none;" />
+                    </engine:Button>
+                </engine:VisualElement>
+                <engine:VisualElement name="Legs" class="row-legs" style="flex-grow: 1;">
+                    <engine:Button name="Slot" class="slot" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                        <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none;" />
+                    </engine:Button>
+                    <engine:Button name="Slot" class="slot" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                        <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none;" />
+                    </engine:Button>
+                </engine:VisualElement>
+            </engine:VisualElement>
+        </engine:VisualElement>
+        <engine:VisualElement name="HotBar" class="hotbar">
+            <engine:Button name="Slot" class="slot unity-button" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none; background-color: rgba(255, 255, 255, 0);" />
+            </engine:Button>
+            <engine:Button name="Slot" class="slot unity-button" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none; background-color: rgba(255, 255, 255, 0);" />
+            </engine:Button>
+            <engine:Button name="Slot" class="slot unity-button" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none; background-color: rgba(255, 255, 255, 0);" />
+            </engine:Button>
+            <engine:Button name="Slot" class="slot unity-button" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none; background-color: rgba(255, 255, 255, 0);" />
+            </engine:Button>
+            <engine:Button name="Slot" class="slot unity-button" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none; background-color: rgba(255, 255, 255, 0);" />
+            </engine:Button>
+            <engine:Button name="Slot" class="slot unity-button" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none; background-color: rgba(255, 255, 255, 0);" />
+            </engine:Button>
+            <engine:Button name="Slot" class="slot unity-button" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none; background-color: rgba(255, 255, 255, 0);" />
+            </engine:Button>
+            <engine:Button name="Slot" class="slot unity-button" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
+                <engine:VisualElement name="ItemSprite" class="item-slot-sprite" style="background-image: none; background-color: rgba(255, 255, 255, 0);" />
+            </engine:Button>
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>
