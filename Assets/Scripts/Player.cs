@@ -49,6 +49,10 @@ public class Player : MonoBehaviour
     public GameObject pinPrefab;
     public Transform releasePoint;
 
+    [Header("Hovering")]
+    public float maxDistance = 5f;
+    public GameObject lastHoveredObject;
+
     private void Awake()
     {
         if (Instance != null)
@@ -87,6 +91,7 @@ public class Player : MonoBehaviour
         GroundCheck();
         MovePlayer();
         MovePlayerCamera();
+        PlayerFocusingPlace();
 
         if (inputActions.Player.Sprint.triggered)
         {
@@ -111,7 +116,7 @@ public class Player : MonoBehaviour
         {
             if (Cursor.lockState != CursorLockMode.Locked)
                 return;
-            Instantiate(pinPrefab, releasePoint.position, releasePoint.rotation);
+            Instantiate(pinPrefab, releasePoint.position, transform.localRotation);
         }
     }
 
@@ -140,6 +145,52 @@ public class Player : MonoBehaviour
 
         characterController.Move(velocity * Time.deltaTime);
     }
+
+    public void PlayerFocusingPlace()
+    {
+        Ray ray = new Ray(cameraPlayer.transform.position, cameraPlayer.transform.forward);
+        RaycastHit hit;
+        // Debug.DrawRay(ray.origin, ray.direction * 5f, Color.green);
+        // Cast a ray forward from the camera
+        if (Physics.Raycast(ray, out hit, maxDistance))
+        {
+            GameObject hitObj = hit.collider.gameObject;
+
+
+            // If new object hovered
+            if (hitObj != lastHoveredObject)
+            {
+                Debug.Log("Hovering");
+                // if previously hovering something, call OnHoverExit
+                if (lastHoveredObject != null)
+                {
+                    Debug.Log("Hovering New");
+                    Interactable prevHover = lastHoveredObject.GetComponent<Interactable>();
+                    if (prevHover != null)
+                        prevHover.OnHoverExit();
+                }
+
+                // call OnHoverEnter on the new one
+                Interactable hover = hitObj.GetComponent<Interactable>();
+                if (hover != null)
+                    hover.OnHoverEnter();
+
+                lastHoveredObject = hitObj;
+            }
+        }
+        else
+        {
+            // if ray hits nothing, stop hovering
+            if (lastHoveredObject != null)
+            {
+                Interactable prevHover = lastHoveredObject.GetComponent<Interactable>();
+                if (prevHover != null)
+                    prevHover.OnHoverExit();
+                lastHoveredObject = null;
+            }
+        }
+    }
+
 
     public void Sprint()
     {

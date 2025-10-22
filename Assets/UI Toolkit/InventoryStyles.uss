@@ -6,7 +6,7 @@
 }
 
 .container {
-    width: 60%;
+    width: 50%;
     flex-direction: row;
     margin: auto auto 0 auto;
 }
@@ -23,11 +23,12 @@
 }
 
 .items-container {
-    width: 70%;
+    width: 60%;
 }
 
 .character-container {
     width: 30%;
+    margin-left: auto;
 }
 
 .row {
