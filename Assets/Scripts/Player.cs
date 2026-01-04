@@ -28,6 +28,10 @@ public class Player : MonoBehaviour
     public float maxVerticalAngle = 80f; // Maximum vertical rotation angle
     public float minVerticalAngle = -80f; // Minimum vertical rotation angle
     private float verticalRotation = 0f;
+    [SerializeField]
+    private float maxInteractableDistance = 10f;
+    public LayerMask interactableLayer;
+    private GameObject currentFocusedObject;
 
     [Header("Ground")]
     public Transform groundCheck;
@@ -49,9 +53,8 @@ public class Player : MonoBehaviour
     public GameObject pinPrefab;
     public Transform releasePoint;
 
-    [Header("Hovering")]
-    public float maxDistance = 5f;
-    public GameObject lastHoveredObject;
+    [Header("Hands On Object")]
+    public InventoryItem handsOnObject = null;
 
     private void Awake()
     {
@@ -91,7 +94,7 @@ public class Player : MonoBehaviour
         GroundCheck();
         MovePlayer();
         MovePlayerCamera();
-        PlayerFocusingPlace();
+        CheckCurrentFocusedObject();
 
         if (inputActions.Player.Sprint.triggered)
         {
@@ -114,9 +117,44 @@ public class Player : MonoBehaviour
 
         if (inputActions.Player.Attack.triggered)
         {
+
             if (Cursor.lockState != CursorLockMode.Locked)
                 return;
-            Instantiate(pinPrefab, releasePoint.position, transform.localRotation);
+            if (handsOnObject != null)
+            {
+                CablesManager.Instance.OnLeftClick();
+                return;
+            }
+
+        }
+
+        if (inputActions.Player.QuickBar1.triggered)
+        {
+            if (Cursor.lockState != CursorLockMode.Locked)
+                return;
+
+            if (handsOnObject.item == null)
+            {
+                InventoryItem item = Inventory.Instance.quickBarItems[0];
+                if (item != null)
+                {
+                    item.OnSelect();
+                    return;
+                }
+
+                handsOnObject = item;
+            }
+        }
+
+        if (inputActions.Player.Interact.triggered)
+        {
+            Debug.Log("EEE");
+            if (currentFocusedObject != null)
+            {
+                Debug.Log("ccc");
+                currentFocusedObject.GetComponent<Interactable>().OnInteract();
+                currentFocusedObject = null;
+            }
         }
     }
 
@@ -145,52 +183,6 @@ public class Player : MonoBehaviour
 
         characterController.Move(velocity * Time.deltaTime);
     }
-
-    public void PlayerFocusingPlace()
-    {
-        Ray ray = new Ray(cameraPlayer.transform.position, cameraPlayer.transform.forward);
-        RaycastHit hit;
-        // Debug.DrawRay(ray.origin, ray.direction * 5f, Color.green);
-        // Cast a ray forward from the camera
-        if (Physics.Raycast(ray, out hit, maxDistance))
-        {
-            GameObject hitObj = hit.collider.gameObject;
-
-
-            // If new object hovered
-            if (hitObj != lastHoveredObject)
-            {
-                Debug.Log("Hovering");
-                // if previously hovering something, call OnHoverExit
-                if (lastHoveredObject != null)
-                {
-                    Debug.Log("Hovering New");
-                    Interactable prevHover = lastHoveredObject.GetComponent<Interactable>();
-                    if (prevHover != null)
-                        prevHover.OnHoverExit();
-                }
-
-                // call OnHoverEnter on the new one
-                Interactable hover = hitObj.GetComponent<Interactable>();
-                if (hover != null)
-                    hover.OnHoverEnter();
-
-                lastHoveredObject = hitObj;
-            }
-        }
-        else
-        {
-            // if ray hits nothing, stop hovering
-            if (lastHoveredObject != null)
-            {
-                Interactable prevHover = lastHoveredObject.GetComponent<Interactable>();
-                if (prevHover != null)
-                    prevHover.OnHoverExit();
-                lastHoveredObject = null;
-            }
-        }
-    }
-
 
     public void Sprint()
     {
@@ -223,6 +215,28 @@ public class Player : MonoBehaviour
     private void Jump()
     {
         velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+    }
+
+    private void CheckCurrentFocusedObject()
+    {
+        // Create a ray from the camera through the screen center
+        Ray ray = cameraPlayer.GetComponent<Camera>().ViewportPointToRay(new Vector3(0.5f, 0.5f));
+        RaycastHit hit;
+
+        Debug.DrawLine(ray.origin, ray.direction, Color.green);
+        if (Physics.Raycast(ray, out hit, maxInteractableDistance, interactableLayer))
+        {
+            currentFocusedObject = hit.collider.gameObject;
+            currentFocusedObject.GetComponent<Interactable>().OnHoverEnter();
+        }
+        else
+        {
+            if (currentFocusedObject)
+            {
+                currentFocusedObject.GetComponent<Interactable>().OnHoverExit();
+                currentFocusedObject = null;
+            }
+        }
     }
 
     public void EnablePlayer()

@@ -9,11 +9,19 @@ public class Inventory : MonoBehaviour
     {
         get; private set;
     }
-
     public UIDocument InventoryUI;
+    public UIDocument HUDUI;
 
     [SerializeField]
     public InventoryItem[] items = new InventoryItem[40];
+
+    [SerializeField]
+    public InventoryItem[] quickBarItems = new InventoryItem[8];
+
+    void OnValidate()
+    {
+        UpdateQuickBarUI();
+    }
 
     private void Awake()
     {
@@ -22,6 +30,7 @@ public class Inventory : MonoBehaviour
             Debug.Log("There is more than one Player instance");
         }
         Instance = this;
+        UpdateQuickBarUI();
     }
 
     public bool AddItem(Item newItem, int amount)
@@ -105,11 +114,13 @@ public class Inventory : MonoBehaviour
     {
         var root = InventoryUI.rootVisualElement;
 
-        var slots = root.Query<VisualElement>(className: "item-slot-sprite").ToList();
+        var slotsSprites = root.Query<VisualElement>(className: "item-slot-sprite").ToList();
+        var slotsQuantity = root.Query<Label>(className: "quantity").ToList();
 
-        for (int i = 0; i < slots.Count; i++)
+        for (int i = 0; i < slotsSprites.Count; i++)
         {
-            var slot = slots[i];
+            var slotSprite = slotsSprites[i];
+            var slotText = slotsQuantity[i];
 
             if (i < items.Count())
             {
@@ -117,6 +128,41 @@ public class Inventory : MonoBehaviour
                 if (item.item)
                 {
                     Debug.Log(i + item.item.itemName);
+                }
+                if (item.item)
+                {
+                    // Set item image or label
+                    slotSprite.style.backgroundImage = new StyleBackground(item.item.icon);
+                    slotText.style.backgroundColor = Color.white;
+                    slotText.text = items[i].quantity.ToString();
+                }
+                else
+                {
+                    slotSprite.style.backgroundImage = null;
+                    slotText.style.backgroundColor = Color.clear;
+                    slotText.text = null;
+                }
+            }
+
+        }
+    }
+
+    public void UpdateQuickBarUI()
+    {
+        var root = HUDUI.rootVisualElement;
+
+        var slots = root.Query<VisualElement>(className: "item-slot-sprite").ToList();
+
+        for (int i = 0; i < slots.Count; i++)
+        {
+            var slot = slots[i];
+
+            if (i < quickBarItems.Count())
+            {
+                var item = quickBarItems[i];
+                if (item.item)
+                {
+                    Debug.Log(i + ": " + item.item.itemName);
                 }
                 if (item.item)
                 {

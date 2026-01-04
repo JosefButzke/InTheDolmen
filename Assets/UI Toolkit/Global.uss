@@ -13,8 +13,14 @@
 }
 
 .slot:hover {
-    -unity-background-image-tint-color: rgb(172, 172, 172);
+    -unity-background-image-tint-color: rgba(65, 65, 65, 1);
     transition-duration: 0.1s;
+}
+
+.slot:focus {
+    border-width: 8px;
+    border-color: white;
+    transition-duration: 0.05s;
 }
 
 .item-slot-sprite {

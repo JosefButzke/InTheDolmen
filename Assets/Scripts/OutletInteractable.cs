@@ -3,10 +3,12 @@ using UnityEngine;
 
 public class OutletInteractable : Interactable
 {
-    public OutletConnectionType connectionType;
+    public CableConnectionType connectionType;
     private Material allowedConnectionMaterial;
     private Material blockedConnectionMaterial;
     private Material defaultConnectionMaterial;
+    public float energyIn = 0f;
+    public float energyOut = 0f;
 
     void Awake()
     {
@@ -17,9 +19,9 @@ public class OutletInteractable : Interactable
 
     override public void OnHoverEnter()
     {
-        MeshRenderer render = model.GetComponent<MeshRenderer>();
+        MeshRenderer render = gameObject.GetComponent<MeshRenderer>();
 
-        if (OutletManager.Instance.pendingConnectionType == null || OutletManager.Instance.pendingConnectionType == connectionType)
+        if (CablesManager.Instance.pendingConnectionType == null || CablesManager.Instance.pendingConnectionType == connectionType)
         {
             render.material = allowedConnectionMaterial;
         }
@@ -31,7 +33,7 @@ public class OutletInteractable : Interactable
 
     override public void OnHoverExit()
     {
-        MeshRenderer render = model.GetComponent<MeshRenderer>();
+        MeshRenderer render = gameObject.GetComponent<MeshRenderer>();
         render.material = defaultConnectionMaterial;
     }
 

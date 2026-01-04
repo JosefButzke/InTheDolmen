@@ -1,6 +1,6 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI%20Toolkit/Global.uss?fileID=7433441132597879392&amp;guid=2e68646daaf24614fa9e32de689ad59c&amp;type=3" />
-    <engine:Button name="Slot" class="slot" style="background-image: url(&quot;project://database/Assets/Sprites/UI/hexagon-vertical.png?fileID=2800000&amp;guid=ec19461a2f44eef40a87945531386830&amp;type=3#hexagon-vertical&quot;);">
-        <engine:VisualElement name="ItemSprite" class="item-slot-sprite" />
+    <Style src="project://database/Assets/UI%20Toolkit/Global.uss?fileID=7433441132597879392&amp;guid=2e68646daaf24614fa9e32de689ad59c&amp;type=3#Global"/>
+    <engine:Button name="Slot" class="slot">
+        <engine:VisualElement name="ItemSprite" class="item-slot-sprite"/>
     </engine:Button>
 </engine:UXML>
