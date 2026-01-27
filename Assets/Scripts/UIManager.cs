@@ -12,22 +12,19 @@ public class UIManager : MonoBehaviour
     private InputActions inputActions;
     public UIDocument HUDUI;
     public UIDocument MenuTabsUI;
-    public UIDocument InventoryUI;
-    public UIDocument CraftingUI;
-    public UIDocument SkillsUI;
-    public UIDocument SettingsUI;
+    public UIDocument InventoryTabUI;
+    public UIDocument CraftingTabUI;
+    public UIDocument SkillsTabUI;
+    public UIDocument SettingsTabUI;
 
+    // Tables
+    public UIDocument CraftingTableUI;
+
+    // Buttons
     private Button inventoryMenuButton;
     private Button craftingMenuButton;
-    private Button categoryToolsButton;
-    private Button categorymachinaryButton;
-    private Button categoryMachinaryButton;
-    private Button categoryBackpackButton;
-    private Button categoryGunsButton;
 
-    public VisualTreeAsset slotTemplate;
-
-    public CraftingItem[] craftingItems;
+    // FUNCTIONS
 
     private void Awake()
     {
@@ -40,15 +37,22 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
-        UnityEngine.Cursor.visible = false;
+        UnblockPlayerCamera();
     }
 
-    public void OnEnable()
+    private void OnEnable()
     {
         inputActions = new InputActions();
-        inputActions.UI.Enable();
+        inputActions.Enable();
+    }
 
+    private void OnDisable()
+    {
+        inputActions.Disable();
+    }
+
+    public void OnValidate()
+    {
         if (MenuTabsUI != null)
         {
             MenuTabsUI.enabled = false;
@@ -57,19 +61,20 @@ public class UIManager : MonoBehaviour
         {
             HUDUI.enabled = true;
         }
-        if (InventoryUI != null)
+        if (InventoryTabUI != null)
         {
-            InventoryUI.enabled = false;
+            InventoryTabUI.enabled = false;
         }
-        if (CraftingUI != null)
+        if (CraftingTabUI != null)
         {
-            CraftingUI.enabled = false;
+            CraftingTabUI.enabled = false;
         }
-    }
+        if (CraftingTableUI != null)
+        {
+            CraftingTableUI.enabled = false;
+        }
 
-    private void OnDisable()
-    {
-        inputActions.UI.Disable();
+        UnblockPlayerCamera();
     }
 
     void Update()
@@ -83,7 +88,7 @@ public class UIManager : MonoBehaviour
         if (inputActions.UI.InventoryToggle.triggered)
         {
             // CLOSING MENU
-            if (InventoryUI.enabled || CraftingUI.enabled)
+            if (InventoryTabUI.enabled || CraftingTabUI.enabled)
             {
                 CloseUI();
             }
@@ -102,90 +107,31 @@ public class UIManager : MonoBehaviour
         // Focus button
         inventoryMenuButton.Focus();
 
-        InventoryUI.enabled = true;
-        Inventory.Instance.UpdateUI();
-        BlockPlayerCamera();
+        InventoryTabUI.enabled = true;
+        Inventory.Instance.UpdateInventoryUI();
     }
 
     void CloseInventoryUI()
     {
-        InventoryUI.enabled = false;
+        InventoryTabUI.enabled = false;
     }
 
     void OpenCraftingUI(ClickEvent e = null)
     {
         CloseInventoryUI();
         craftingMenuButton.Focus();
-        CraftingUI.enabled = true;
-
-        VisualElement root = CraftingUI.rootVisualElement;
-        VisualElement categoriesContainer = root.Query<VisualElement>(className: "categories-container");
-        categoryToolsButton = root.Query<Button>(name: "CategoryTools");
-        categoryMachinaryButton = root.Query<Button>(name: "CategoryMachinary");
-        categoryBackpackButton = root.Query<Button>(name: "CategoryBackpack");
-        categoryGunsButton = root.Query<Button>(name: "CategoryGuns");
-
-        categoryToolsButton.RegisterCallback<ClickEvent>(OnPressCategoryTools);
-        categoryMachinaryButton.RegisterCallback<ClickEvent>(OnPressCategoryMachinary);
-        categoryBackpackButton.RegisterCallback<ClickEvent>(OnPressCategoryBackpack);
-        categoryGunsButton.RegisterCallback<ClickEvent>(OnPressCategoryGuns);
-
-        UpdateSlots(CraftingCategory.Tools);
-        BlockPlayerCamera();
+        CraftingTabUI.enabled = true;
     }
 
     void CloseCraftingUI()
     {
-        CraftingUI.enabled = false;
-
-
-        categoryToolsButton?.UnregisterCallback<ClickEvent>(OnPressCategoryTools);
-        categoryMachinaryButton?.UnregisterCallback<ClickEvent>(OnPressCategoryMachinary);
-        categoryBackpackButton?.UnregisterCallback<ClickEvent>(OnPressCategoryBackpack);
-        categoryGunsButton?.UnregisterCallback<ClickEvent>(OnPressCategoryGuns);
-
-    }
-
-    void OnPressCategoryTools(ClickEvent e = null)
-    {
-        UpdateSlots(CraftingCategory.Tools);
-    }
-    void OnPressCategoryMachinary(ClickEvent e = null)
-    {
-        UpdateSlots(CraftingCategory.Machinery);
-    }
-    void OnPressCategoryBackpack(ClickEvent e = null)
-    {
-        UpdateSlots(CraftingCategory.Backpack);
-    }
-    void OnPressCategoryGuns(ClickEvent e = null)
-    {
-        UpdateSlots(CraftingCategory.Guns);
-    }
-
-    void UpdateSlots(CraftingCategory category)
-    {
-        VisualElement root = CraftingUI.rootVisualElement;
-        VisualElement categoryItemsContainer = root.Query<VisualElement>(className: "category-items-container");
-
-        // CLEAN CONTAINER
-        categoryItemsContainer.Clear();
-
-        for (int i = 0; i < craftingItems.Length; i++)
-        {
-            if (craftingItems[i].category == category)
-            {
-                VisualElement slot = slotTemplate.Instantiate();
-                VisualElement slotSprite = slot.Query<VisualElement>(className: "item-slot-sprite");
-                slotSprite.style.backgroundImage = new StyleBackground(craftingItems[i].icon);
-                categoryItemsContainer.Add(slot);
-            }
-        }
+        CraftingTabUI.enabled = false;
     }
 
     void OpenUI()
     {
         OpenMenuTabs();
+        BlockPlayerCamera();
         // Buttons Actions
         VisualElement root = MenuTabsUI.rootVisualElement;
 
@@ -235,8 +181,15 @@ public class UIManager : MonoBehaviour
         UnityEngine.Cursor.visible = false;
 
         VisualElement root = HUDUI.rootVisualElement;
+        if (root == null)
+        {
+            Debug.Log("Aim dot root null");
+            return;
+        }
         VisualElement aimDot = root.Query<VisualElement>(className: "aim-dot");
         aimDot.style.visibility = Visibility.Visible;
+
+        root.style.backgroundColor = Color.clear;
     }
 
     void BlockPlayerCamera()
@@ -247,5 +200,11 @@ public class UIManager : MonoBehaviour
         VisualElement root = HUDUI.rootVisualElement;
         VisualElement aimDot = root.Query<VisualElement>(className: "aim-dot");
         aimDot.style.visibility = Visibility.Hidden;
+
+
+        Color bgColor = Color.white;
+        bgColor.a = 0.15f;
+
+        root.style.backgroundColor = bgColor;
     }
 }

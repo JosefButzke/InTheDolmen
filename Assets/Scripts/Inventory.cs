@@ -13,14 +13,19 @@ public class Inventory : MonoBehaviour
     public UIDocument HUDUI;
 
     [SerializeField]
-    public InventoryItem[] items = new InventoryItem[40];
+    public InventoryItem[] items = new InventoryItem[50];
 
     [SerializeField]
     public InventoryItem[] quickBarItems = new InventoryItem[8];
 
+    private Color slotDefaultTintColor = new Color(1f, 0f, 0f, 0.5f);
+    private Color slotSelectedTintColor = new Color(1f, 0.6f, 0f, 1f);
+
     void OnValidate()
     {
         UpdateQuickBarUI();
+
+        UpdateInventoryUI();
     }
 
     private void Awake()
@@ -36,67 +41,15 @@ public class Inventory : MonoBehaviour
     public bool AddItem(Item newItem, int amount)
     {
         bool canBeAdded = false;
-        bool canBeStacked = false;
-        int amountTmp = amount;
-        int amountLeft = amount;
 
-        for (int i = 0; i < 40; i++)
+        for (int i = 0; i < 50; i++)
         {
             InventoryItem itemSlot = items[i];
             if (!itemSlot.item)
             {
-                canBeAdded = true;
+                items[i].item = newItem;
+                items[i].quantity = amount;
                 break;
-            }
-            if (itemSlot.item == newItem)
-            {
-                amountTmp = amountTmp - itemSlot.item.maxStack - itemSlot.quantity;
-
-                if (amountTmp <= 0)
-                {
-                    canBeStacked = true;
-                    break;
-                }
-            }
-        }
-
-        if (canBeStacked)
-        {
-            for (int i = 0; i < 40; i++)
-            {
-                InventoryItem itemSlot = items[i];
-                if (itemSlot.item == newItem)
-                {
-                    int amountLeftSlot = itemSlot.item.maxStack - itemSlot.quantity;
-                    if (amountLeftSlot >= amountLeft)
-                    {
-                        amountLeft = 0;
-                        itemSlot.quantity = itemSlot.quantity + amountLeft;
-                    }
-                    else
-                    {
-                        amountLeft = amountLeft - amountLeftSlot;
-                        itemSlot.quantity = itemSlot.quantity + amountLeftSlot;
-                    }
-                    if (amountLeft <= 0)
-                    {
-                        break;
-                    }
-                }
-            }
-        }
-
-        if (canBeAdded)
-        {
-            for (int i = 0; i < 40; i++)
-            {
-                InventoryItem itemSlot = items[i];
-                if (!itemSlot.item)
-                {
-                    items[i].item = newItem;
-                    items[i].quantity = amount;
-                    break;
-                }
             }
         }
 
@@ -110,38 +63,40 @@ public class Inventory : MonoBehaviour
         return true;
     }
 
-    public void UpdateUI()
+    public void UpdateInventoryUI()
     {
         var root = InventoryUI.rootVisualElement;
+
+        if (root == null)
+        {
+            Debug.Log("UpdateInventoryUI" + "root line 73 null");
+            return;
+        }
 
         var slotsSprites = root.Query<VisualElement>(className: "item-slot-sprite").ToList();
         var slotsQuantity = root.Query<Label>(className: "quantity").ToList();
 
-        for (int i = 0; i < slotsSprites.Count; i++)
+        for (int i = 0; i < slotsSprites.Count(); i++)
         {
             var slotSprite = slotsSprites[i];
             var slotText = slotsQuantity[i];
 
-            if (i < items.Count())
+            var item = items[i];
+
+            if (item.item)
             {
-                var item = items[i];
-                if (item.item)
-                {
-                    Debug.Log(i + item.item.itemName);
-                }
-                if (item.item)
-                {
-                    // Set item image or label
-                    slotSprite.style.backgroundImage = new StyleBackground(item.item.icon);
-                    slotText.style.backgroundColor = Color.white;
-                    slotText.text = items[i].quantity.ToString();
-                }
-                else
-                {
-                    slotSprite.style.backgroundImage = null;
-                    slotText.style.backgroundColor = Color.clear;
-                    slotText.text = null;
-                }
+                // Set item image or label
+                slotSprite.style.backgroundImage = new StyleBackground(item.item.icon);
+                slotText.style.backgroundColor = Color.white;
+                slotText.style.color = Color.black;
+                slotText.text = items[i].quantity.ToString();
+            }
+            else
+            {
+                slotSprite.style.backgroundImage = null;
+                slotText.style.backgroundColor = Color.clear;
+                slotText.style.color = Color.clear;
+                slotText.text = null;
             }
 
         }
@@ -149,32 +104,46 @@ public class Inventory : MonoBehaviour
 
     public void UpdateQuickBarUI()
     {
+        if (HUDUI == null)
+        {
+            Debug.LogWarning("HUDUI is null in UpdateQuickBarUI");
+            return;
+        }
+
         var root = HUDUI.rootVisualElement;
 
-        var slots = root.Query<VisualElement>(className: "item-slot-sprite").ToList();
-
-        for (int i = 0; i < slots.Count; i++)
+        if (root == null)
         {
-            var slot = slots[i];
+            Debug.LogWarning("Root is null in UpdateQuickBarUI");
+            return;
+        }
 
-            if (i < quickBarItems.Count())
+        var slotsSprites = root.Query<VisualElement>(className: "item-slot-sprite").ToList();
+        var slotsQuantity = root.Query<Label>(className: "quantity").ToList();
+
+        for (int i = 0; i < quickBarItems.Count(); i++)
+        {
+            VisualElement slotSprite = slotsSprites[i];
+            Label slotText = slotsQuantity[i];
+            InventoryItem item = quickBarItems[i];
+
+            if (quickBarItems[i].item)
             {
-                var item = quickBarItems[i];
-                if (item.item)
+                // Set item image or label
+                slotSprite.style.backgroundImage = new StyleBackground(item.item.icon);
+                slotText.text = items[i].quantity.ToString();
+
+                if (item.isSelected)
                 {
-                    Debug.Log(i + ": " + item.item.itemName);
-                }
-                if (item.item)
-                {
-                    // Set item image or label
-                    slot.style.backgroundImage = new StyleBackground(item.item.icon);
-                }
-                else
-                {
-                    slot.style.backgroundImage = null;
+                    var slotButton = root.Query<VisualElement>(className: "slot").AtIndex(i);
+                    slotButton.style.unityBackgroundImageTintColor = slotSelectedTintColor;
                 }
             }
-
+            else
+            {
+                slotSprite.style.backgroundImage = null;
+                slotText.text = null;
+            }
         }
     }
 }

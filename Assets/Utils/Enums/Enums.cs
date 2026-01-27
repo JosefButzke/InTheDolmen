@@ -1,4 +1,4 @@
-public enum ItemType { Resource, Refine, Tech, Gear }
+public enum ItemType { Resource, Refine, Tech, Gear, Food }
 
 public enum CraftingCategory { Tools, Machinery, Backpack, Guns }
 

@@ -1,0 +1,38 @@
+.slot {
+    width: 96px;
+    height: 96px;
+    -unity-background-image-tint-color: rgba(255, 0, 0, 0.3);
+    justify-content: center;
+    align-items: center;
+    border-width: 0;
+    position: relative;
+
+    /* normal state transition */
+    transition-property: -unity-background-image-tint-color;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;
+}
+
+.slot:hover {
+    -unity-background-image-tint-color: rgba(255, 153, 0, 1);
+    transition-duration: 0s;
+}
+
+.item-slot-sprite {
+    width: 70%;
+    height: 70%;
+    border-color: rgb(255, 255, 255);
+}
+
+.quantity {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    color: rgb(255, 255, 255);
+    -unity-font-style: bold;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+}
+
+

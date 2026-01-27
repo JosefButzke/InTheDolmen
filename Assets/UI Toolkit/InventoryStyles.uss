@@ -1,34 +1,21 @@
 .background {
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.05);
-    padding-bottom: 96px;
+    margin-bottom: 128px;
 }
 
 .container {
-    width: 50%;
     flex-direction: row;
     margin: auto auto 0 auto;
 }
 
-.hotbar {
-    position: absolute;
-    bottom: 0;
-    flex-direction: row;
-    width: 100%;
-    margin-top: auto;
-    justify-content: center;
-    margin-bottom: 16px;
-    z-index: 50;
-}
-
 .items-container {
-    width: 60%;
+    justify-content: flex-end;
 }
 
 .character-container {
-    width: 30%;
-    margin-left: auto;
+    width: 320px;
+    margin-left: 32px;
 }
 
 .row {
@@ -62,15 +49,11 @@
     margin-top: -24px;
 }
 
-.quantity {
-    position: absolute;
-    bottom: 12px;
-    right: 16px;
-    color: rgba(255, 255, 255, 1);
-    -unity-font-style: bold;
-    border-radius: 50%;
-    width: 32px;
-    height: 32px;
+.row-6 {
+    flex-direction: row;
+    width: 100%;
+    margin-left: 48px;
+    margin-top: -24px;
 }
 
 .row-head {
@@ -96,3 +79,5 @@
     width: 100%;
     justify-content: space-between;
 }
+
+

@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class CablesManager : MonoBehaviour
 {
+    [Header("Hovering")]
+    public float maxDistance = 5f;
+
+    [SerializeField]
+    public GameObject lastHoveredObject;
+
     public CableConnectionType? pendingConnectionType = null;
 
-    public GameObject interactableManager;
     public Material lineMaterial;
 
     private bool lineDone = false;
@@ -42,18 +47,55 @@ public class CablesManager : MonoBehaviour
         line.numCornerVertices = 8;
     }
 
-    public void Enable()
-    {
-        interactableManager.SetActive(true);
-    }
-
-    public void Unable()
-    {
-        interactableManager.SetActive(false);
-    }
-
     void Update()
     {
+        Ray rayCamera = Player.Instance.cameraPlayer.GetComponent<Camera>().ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+        // Debug.DrawRay(rayCamera.origin, rayCamera.direction * 10f, Color.red);
+        RaycastHit hitCamera;
+
+        // Debug.DrawRay(ray.origin, ray.direction * 5f, Color.green);
+        // Cast a ray forward from the camera
+        if (Physics.Raycast(rayCamera, out hitCamera, maxDistance))
+        {
+            GameObject hitObj = hitCamera.collider.gameObject;
+
+
+            // If new object hovered
+            if (hitObj != lastHoveredObject)
+            {
+                Debug.Log("Hovering");
+                // if previously hovering something, call OnHoverExit
+                if (lastHoveredObject != null)
+                {
+                    Debug.Log("Hovering New");
+                    Interactable prevHover = lastHoveredObject.GetComponent<Interactable>();
+                    if (prevHover != null)
+                        prevHover.OnHoverExit();
+                }
+
+                // call OnHoverEnter on the new one
+                Interactable hover = hitObj.GetComponent<Interactable>();
+                if (hover != null)
+                {
+                    hover.OnHoverEnter();
+                }
+
+
+                lastHoveredObject = hitObj;
+            }
+        }
+        else
+        {
+            // if ray hits nothing, stop hovering
+            if (lastHoveredObject != null)
+            {
+                Interactable prevHover = lastHoveredObject.GetComponent<Interactable>();
+                if (prevHover != null)
+                    prevHover.OnHoverExit();
+                lastHoveredObject = null;
+            }
+        }
+
         if (points.Count == 0)
         {
             return;
@@ -73,17 +115,17 @@ public class CablesManager : MonoBehaviour
             line.SetPosition(i, points[i]);
         }
 
+
         if (!lineDone)
         {
-            Ray ray = new Ray(Player.Instance.cameraPlayer.transform.position, Player.Instance.cameraPlayer.transform.forward);
-            RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, 10f))
+            if (Physics.Raycast(rayCamera, out hitCamera, 10f))
             {
-                line.SetPosition(points.Count, hit.point + Vector3.up * 0.1f);
+                line.SetPosition(points.Count, hitCamera.point + Vector3.up * 0.1f);
             }
 
         }
+
     }
 
     public void FixFinalLineDirection()

@@ -139,6 +139,7 @@ public class Player : MonoBehaviour
                 if (item != null)
                 {
                     item.OnSelect();
+
                     return;
                 }
 
@@ -148,10 +149,8 @@ public class Player : MonoBehaviour
 
         if (inputActions.Player.Interact.triggered)
         {
-            Debug.Log("EEE");
             if (currentFocusedObject != null)
             {
-                Debug.Log("ccc");
                 currentFocusedObject.GetComponent<Interactable>().OnInteract();
                 currentFocusedObject = null;
             }
@@ -220,20 +219,20 @@ public class Player : MonoBehaviour
     private void CheckCurrentFocusedObject()
     {
         // Create a ray from the camera through the screen center
-        Ray ray = cameraPlayer.GetComponent<Camera>().ViewportPointToRay(new Vector3(0.5f, 0.5f));
+        Ray ray = cameraPlayer.GetComponent<Camera>().ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+        // Debug.DrawRay(ray.origin, ray.direction * 10f, Color.green);
         RaycastHit hit;
 
-        Debug.DrawLine(ray.origin, ray.direction, Color.green);
         if (Physics.Raycast(ray, out hit, maxInteractableDistance, interactableLayer))
         {
             currentFocusedObject = hit.collider.gameObject;
-            currentFocusedObject.GetComponent<Interactable>().OnHoverEnter();
+            currentFocusedObject.GetComponent<Interactable>()?.OnHoverEnter();
         }
         else
         {
             if (currentFocusedObject)
             {
-                currentFocusedObject.GetComponent<Interactable>().OnHoverExit();
+                currentFocusedObject.GetComponent<Interactable>()?.OnHoverExit();
                 currentFocusedObject = null;
             }
         }

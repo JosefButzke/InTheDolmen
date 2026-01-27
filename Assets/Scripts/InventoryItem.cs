@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 
 [System.Serializable]
@@ -6,6 +7,8 @@ public class InventoryItem
     public Item item;
     public int quantity;
     public bool isSelected;
+
+    public static event Action OnCablesManagerRequired;
 
     public InventoryItem(Item data, int qty)
     {
@@ -16,6 +19,7 @@ public class InventoryItem
     public void OnSelect()
     {
         isSelected = true;
-        CablesManager.Instance.Enable();
+        Inventory.Instance.UpdateQuickBarUI();
+        OnCablesManagerRequired?.Invoke();
     }
 }
