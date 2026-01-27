@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     public float minVerticalAngle = -80f; // Minimum vertical rotation angle
     private float verticalRotation = 0f;
     [SerializeField]
-    private float maxInteractableDistance = 10f;
+    private float maxInteractableDistance = 5f;
     public LayerMask interactableLayer;
     private GameObject currentFocusedObject;
 
@@ -100,6 +100,12 @@ public class Player : MonoBehaviour
         {
             Sprint();
         }
+
+        if (inputActions.Player.Attack.triggered && !CablesManager.Instance.enabled)
+        {
+            Instantiate(pinPrefab, releasePoint.position, releasePoint.rotation);
+        }
+
         if (inputActions.Player.Sprint.WasReleasedThisFrame())
         {
             Walk();
@@ -113,19 +119,6 @@ public class Player : MonoBehaviour
         if (inputActions.Player.Jump.triggered && isGrounded)
         {
             Jump();
-        }
-
-        if (inputActions.Player.Attack.triggered)
-        {
-
-            if (Cursor.lockState != CursorLockMode.Locked)
-                return;
-            if (handsOnObject != null)
-            {
-                CablesManager.Instance.OnLeftClick();
-                return;
-            }
-
         }
 
         if (inputActions.Player.QuickBar1.triggered)

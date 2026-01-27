@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Battery : MonoBehaviour
+public class BatteryManager : Interactable
 {
     private OutletInteractable outletIn;
     private OutletInteractable outletOut;
@@ -50,5 +50,23 @@ public class Battery : MonoBehaviour
     public void SetEnergyInput(OutletInteractable o)
     {
         outletIn = o;
+    }
+
+    public override void OnHoverEnter()
+    {
+        Debug.Log("Show UI");
+        UIManager.Instance.ToggleInteractableUI(true, "Battery", Color.gray);
+    }
+
+    public override void OnHoverExit()
+    {
+        Debug.Log("Remove UI");
+        UIManager.Instance.ToggleInteractableUI(false);
+    }
+
+    public override void OnInteract()
+    {
+        Debug.Log("Collected");
+        UIManager.Instance.ToggleCraftingTableUI(true);
     }
 }

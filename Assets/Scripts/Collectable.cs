@@ -8,11 +8,13 @@ public class Collectable : Interactable
     override public void OnHoverEnter()
     {
         Debug.Log("Show UI");
+        UIManager.Instance.ToggleInteractableUI(true, "COLLECT");
     }
 
     override public void OnHoverExit()
     {
         Debug.Log("Remove UI");
+        UIManager.Instance.ToggleInteractableUI(false);
     }
 
     override public void OnInteract()
@@ -20,5 +22,6 @@ public class Collectable : Interactable
         Debug.Log("Collected");
         Inventory.Instance.AddItem(reward, amount);
         Destroy(gameObject);
+        UIManager.Instance.ToggleInteractableUI(false);
     }
 }

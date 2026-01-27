@@ -1,4 +1,5 @@
 using Unity.VisualScripting;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -175,6 +176,30 @@ public class UIManager : MonoBehaviour
         craftingMenuButton.UnregisterCallback<ClickEvent>(OpenCraftingUI);
     }
 
+    public void ToggleInteractableUI(bool status, string text = null, Color? bgColor = null)
+    {
+        VisualElement root = HUDUI.rootVisualElement;
+        if (root == null)
+        {
+            Debug.Log("Aim dot root null");
+            return;
+        }
+        VisualElement interactableContainer = root.Query<VisualElement>(className: "interactable-container");
+        interactableContainer.style.visibility = status ? Visibility.Visible : Visibility.Hidden;
+        interactableContainer.style.backgroundColor = bgColor ?? Color.green;
+
+        if (status)
+        {
+            Label textLabel = root.Query<Label>(className: "text");
+            textLabel.text = text;
+        }
+    }
+
+    public void ToggleCraftingTableUI(bool status)
+    {
+        CraftingTableUI.enabled = status;
+    }
+
     void UnblockPlayerCamera()
     {
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
@@ -190,6 +215,9 @@ public class UIManager : MonoBehaviour
         aimDot.style.visibility = Visibility.Visible;
 
         root.style.backgroundColor = Color.clear;
+
+        VisualElement interactableContainer = root.Query<VisualElement>(className: "interactable-container");
+        interactableContainer.style.visibility = Visibility.Hidden;
     }
 
     void BlockPlayerCamera()

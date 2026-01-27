@@ -19,6 +19,7 @@ public class CablesManager : MonoBehaviour
     private LineRenderer line;
     private Interactable outletStart;
     private Interactable outletEnd;
+    private InputActions inputActions;
 
     [SerializeField]
     private List<Vector3> points = new List<Vector3>();
@@ -27,6 +28,18 @@ public class CablesManager : MonoBehaviour
     {
         get; private set;
     }
+
+    public void OnEnable()
+    {
+        inputActions = new InputActions();
+        inputActions.Enable();
+    }
+
+    private void OnDisable()
+    {
+        inputActions.Disable();
+    }
+
 
     private void Awake()
     {
@@ -49,6 +62,11 @@ public class CablesManager : MonoBehaviour
 
     void Update()
     {
+        if (inputActions.Player.Attack.triggered)
+        {
+            OnLeftClick();
+        }
+
         Ray rayCamera = Player.Instance.cameraPlayer.GetComponent<Camera>().ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
         // Debug.DrawRay(rayCamera.origin, rayCamera.direction * 10f, Color.red);
         RaycastHit hitCamera;
@@ -59,15 +77,12 @@ public class CablesManager : MonoBehaviour
         {
             GameObject hitObj = hitCamera.collider.gameObject;
 
-
             // If new object hovered
             if (hitObj != lastHoveredObject)
             {
-                Debug.Log("Hovering");
                 // if previously hovering something, call OnHoverExit
                 if (lastHoveredObject != null)
                 {
-                    Debug.Log("Hovering New");
                     Interactable prevHover = lastHoveredObject.GetComponent<Interactable>();
                     if (prevHover != null)
                         prevHover.OnHoverExit();
@@ -79,7 +94,6 @@ public class CablesManager : MonoBehaviour
                 {
                     hover.OnHoverEnter();
                 }
-
 
                 lastHoveredObject = hitObj;
             }
@@ -130,7 +144,7 @@ public class CablesManager : MonoBehaviour
 
     public void FixFinalLineDirection()
     {
-        Battery battery = outletEnd.GetComponentInParent<Battery>();
+        BatteryManager battery = outletEnd.GetComponentInParent<BatteryManager>();
         // final point is a battery
         if (battery != null)
         {
@@ -139,7 +153,7 @@ public class CablesManager : MonoBehaviour
             return;
         }
 
-        battery = outletStart.GetComponentInParent<Battery>();
+        battery = outletStart.GetComponentInParent<BatteryManager>();
         // start point is a battery, so swap the points order
         if (battery != null)
         {

@@ -1,9 +1,12 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <engine:Template name="InteractUI" src="project://database/Assets/UI%20Toolkit/InteractUI.uxml?fileID=9197481963319205126&amp;guid=c9b12f85b6f1fc04e86226ea174f196f&amp;type=3#InteractUI"/>
     <engine:Template name="Slot" src="project://database/Assets/UI%20Toolkit/Templates/Slot.uxml?fileID=9197481963319205126&amp;guid=a8812c057738c8d4b9a635c880e026f7&amp;type=3#Slot"/>
     <Style src="project://database/Assets/UI%20Toolkit/HUDStyles.uss?fileID=7433441132597879392&amp;guid=be996b9935f4cbe408717e8bdfa35222&amp;type=3#HUDStyles"/>
     <Style src="project://database/Assets/UI%20Toolkit/Global.uss?fileID=7433441132597879392&amp;guid=2e68646daaf24614fa9e32de689ad59c&amp;type=3#Global"/>
     <engine:VisualElement name="Container" class="container">
-        <engine:VisualElement name="AimDot" class="aim-dot"/>
+        <engine:VisualElement name="AimDot" class="aim-dot">
+            <engine:Instance template="InteractUI"/>
+        </engine:VisualElement>
         <engine:VisualElement name="HotBar" class="hotbar">
             <engine:Instance template="Slot"/>
             <engine:Instance template="Slot"/>

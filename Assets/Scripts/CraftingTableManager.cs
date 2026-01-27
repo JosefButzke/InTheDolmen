@@ -1,12 +1,38 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class CraftingTableManager : MonoBehaviour
+public class CraftingTableManager : Interactable
 {
-    public UIDocument craftingTableUI;
+    Light lightGameObject = null;
 
-    void Awake()
+    public override void OnHoverEnter()
     {
-        craftingTableUI.enabled = false;
+        Debug.Log("Show UI");
+        UIManager.Instance.ToggleInteractableUI(true, "Crafting Table", Color.gray);
+        if (lightGameObject == null)
+        {
+            lightGameObject = GetComponentInChildren<Light>();
+        }
+        else
+        {
+            lightGameObject.enabled = true;
+        }
+    }
+
+    public override void OnHoverExit()
+    {
+        Debug.Log("Remove UI");
+        UIManager.Instance.ToggleInteractableUI(false);
+
+        if (lightGameObject != null)
+        {
+            lightGameObject.enabled = false;
+        }
+    }
+
+    public override void OnInteract()
+    {
+        Debug.Log("Collected");
+        UIManager.Instance.ToggleCraftingTableUI(true);
     }
 }

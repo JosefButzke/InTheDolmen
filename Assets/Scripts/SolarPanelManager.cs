@@ -1,21 +1,23 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class CraftingTable : Interactable
+public class SolarPanelManager : Interactable
 {
+
     public override void OnHoverEnter()
     {
         Debug.Log("Show UI");
+        UIManager.Instance.ToggleInteractableUI(true, "Solar Panel", Color.gray);
     }
 
     public override void OnHoverExit()
     {
         Debug.Log("Remove UI");
+        UIManager.Instance.ToggleInteractableUI(false);
     }
 
     public override void OnInteract()
     {
         Debug.Log("Collected");
-        GetComponent<UIDocument>().enabled = true;
+        UIManager.Instance.ToggleCraftingTableUI(true);
     }
 }

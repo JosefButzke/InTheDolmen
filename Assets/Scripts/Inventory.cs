@@ -120,6 +120,7 @@ public class Inventory : MonoBehaviour
 
         var slotsSprites = root.Query<VisualElement>(className: "item-slot-sprite").ToList();
         var slotsQuantity = root.Query<Label>(className: "quantity").ToList();
+        var slotsButton = root.Query<VisualElement>(className: "slot").ToList();
 
         for (int i = 0; i < quickBarItems.Count(); i++)
         {
@@ -135,14 +136,14 @@ public class Inventory : MonoBehaviour
 
                 if (item.isSelected)
                 {
-                    var slotButton = root.Query<VisualElement>(className: "slot").AtIndex(i);
-                    slotButton.style.unityBackgroundImageTintColor = slotSelectedTintColor;
+                    slotsButton[i].style.unityBackgroundImageTintColor = slotSelectedTintColor;
                 }
             }
             else
             {
                 slotSprite.style.backgroundImage = null;
                 slotText.text = null;
+                slotsButton[i].style.unityBackgroundImageTintColor = slotDefaultTintColor;
             }
         }
     }
