@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bdk88i4flrh1o"
-path="res://.godot/imported/Cave.glb-f708e305b92b842932b90c36983c9415.scn"
+uid="uid://dddrl0dvf6ilf"
+path="res://.godot/imported/Furnace.glb-1938ac4ea9259605c33d7c8d8bababb6.scn"
 
 [deps]
 
-source_file="res://Assets/Models/Cave.glb"
-dest_files=["res://.godot/imported/Cave.glb-f708e305b92b842932b90c36983c9415.scn"]
+source_file="res://Assets/Models/Furnace.glb"
+dest_files=["res://.godot/imported/Furnace.glb-1938ac4ea9259605c33d7c8d8bababb6.scn"]
 
 [params]
 
@@ -37,14 +37,6 @@ import_script/path=""
 materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
-_subresources={
-"materials": {
-"Terrain": {
-"use_external/enabled": true,
-"use_external/fallback_path": "res://Assets/Materials/Soil.tres",
-"use_external/path": "uid://dihcew3818baf"
-}
-}
-}
+_subresources={}
 gltf/naming_version=2
 gltf/embedded_image_handling=1

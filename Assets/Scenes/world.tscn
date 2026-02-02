@@ -1,16 +1,17 @@
 [gd_scene format=3 uid="uid://bptteobbrql1y"]
 
-[ext_resource type="PackedScene" uid="uid://xiiepsmnu8i1" path="res://Assets/Models/Cave.glb" id="1_vost8"]
-[ext_resource type="Material" uid="uid://bm7yqvs13b6ka" path="res://Assets/Materials/pin.tres" id="3_iacna"]
-[ext_resource type="PackedScene" uid="uid://omqkbtb75to5" path="res://Assets/Models/Crafting.blend" id="3_uc036"]
-
-[sub_resource type="Environment" id="Environment_vost8"]
+[ext_resource type="Script" uid="uid://2fnd4es5fg6p" path="res://Assets/Scenes/Player.gd" id="3_dv8ie"]
+[ext_resource type="PackedScene" uid="uid://c5rt7c2yxgj1h" path="res://Assets/Models/Crafting.fbx" id="3_iacna"]
+[ext_resource type="PackedScene" uid="uid://ddkfu4x2nxdjr" path="res://Assets/Scenes/cave.tscn" id="3_uc036"]
+[ext_resource type="PackedScene" uid="uid://dmllstk231tig" path="res://Assets/Models/TreeT1.glb" id="4_uc036"]
+[ext_resource type="PackedScene" uid="uid://yhawvcoxtp2p" path="res://Assets/Models/Grass.glb" id="5_dv8ie"]
+[ext_resource type="PackedScene" uid="uid://dddrl0dvf6ilf" path="res://Assets/Models/Furnace.glb" id="6_pfv4s"]
 
 [sub_resource type="Environment" id="Environment_iacna"]
 background_mode = 1
 background_color = Color(0, 0.8156863, 1, 1)
 ambient_light_source = 3
-ambient_light_color = Color(0.14264143, 0.00028888078, 0.7600284, 1)
+ambient_light_color = Color(0.646029, 0.646029, 0.646029, 1)
 ambient_light_sky_contribution = 0.52
 fog_enabled = true
 fog_mode = 1
@@ -21,78 +22,126 @@ volumetric_fog_albedo = Color(0.99999994, 0.5811288, 0.14529783, 1)
 volumetric_fog_emission = Color(1, 0.64279395, 0.3291971, 1)
 volumetric_fog_length = 200.0
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_uc036"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uc036"]
+
 [node name="World" type="Node3D" unique_id=425380973]
-
-[node name="Cave" parent="." unique_id=142691780 instance=ExtResource("1_vost8")]
-transform = Transform3D(1, -0.00011078277, -8.4910804e-05, 0.00011078277, 1, 3.5842563e-06, 8.4910804e-05, -3.5842563e-06, 1, -5.1441565, -70.59698, -5.3761835)
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1203197107]
-transform = Transform3D(1, 0, 0, 0, -0.39970922, 0.91664195, 0, -0.91664195, -0.39970922, 0, 0, 0)
-light_cull_mask = 4294966273
-shadow_enabled = true
-directional_shadow_max_distance = 200.0
-
-[node name="Cave2" parent="." unique_id=1387158406 instance=ExtResource("1_vost8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1441565, -70.59698, 113.67027)
-
-[node name="Cave3" parent="." unique_id=485456161 instance=ExtResource("1_vost8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1441565, -70.59698, -122.7307)
-
-[node name="Cave4" parent="." unique_id=636290557 instance=ExtResource("1_vost8")]
-transform = Transform3D(1, -0.00011078277, -8.4910804e-05, 0.00011078277, 1, 3.5842563e-06, 8.4910804e-05, -3.5842563e-06, 1, 112.46735, -70.60708, 3.2475815)
-
-[node name="Cave5" parent="." unique_id=1703259584 instance=ExtResource("1_vost8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 112.46735, -70.60708, 122.29404)
-
-[node name="Cave6" parent="." unique_id=660589730 instance=ExtResource("1_vost8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 112.46735, -70.60708, -114.10693)
-
-[node name="Cave7" parent="." unique_id=665993143 instance=ExtResource("1_vost8")]
-transform = Transform3D(1, -0.00011078277, -8.4910804e-05, 0.00011078277, 1, 3.5842563e-06, 8.4910804e-05, -3.5842563e-06, 1, -132.22577, -73.22563, 7.5518494)
-
-[node name="Cave8" parent="." unique_id=62543960 instance=ExtResource("1_vost8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -132.22577, -73.22563, 126.598305)
-
-[node name="Cave9" parent="." unique_id=1723990707 instance=ExtResource("1_vost8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -132.22577, -73.22563, -109.802666)
-
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1581750692]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6110849, 5.132702)
-environment = SubResource("Environment_vost8")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=618804016]
 environment = SubResource("Environment_iacna")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=790310775]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.59202, -56.69253, 0)
-light_energy = 5.296
-light_size = 0.963
-omni_range = 21.131224
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=1203197107]
+transform = Transform3D(0.9910159, 0.053458728, -0.1225954, 0.13374403, -0.39611822, 0.9084068, 0, -0.916642, -0.39970925, 0, 0, 0)
+light_cull_mask = 4294966273
+shadow_enabled = true
+shadow_opacity = 0.96
+directional_shadow_max_distance = 200.0
+sky_mode = 1
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="OmniLight3D" unique_id=1059262711]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.005951, 3.806549, 9.536743e-07)
-material_override = ExtResource("3_iacna")
+[node name="Crafting" parent="." unique_id=228808817 instance=ExtResource("3_iacna")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.9583774, 7.076522)
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="." unique_id=406508786]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.953442, -66.72164, -5.981798)
-light_energy = 5.296
-light_size = 0.963
-omni_range = 21.131224
+[node name="Player" type="CharacterBody3D" parent="." unique_id=1768123653 node_paths=PackedStringArray("characterBody", "camera_pivot", "camera")]
+transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, 0, 2.8520212, 0)
+script = ExtResource("3_dv8ie")
+characterBody = NodePath(".")
+camera_pivot = NodePath("CameraPivot")
+camera = NodePath("CameraPivot/Camera3D")
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="OmniLight3D2" unique_id=1686354982]
-material_override = ExtResource("3_iacna")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=369928066]
+mesh = SubResource("CapsuleMesh_uc036")
 
-[node name="OmniLight3D3" type="OmniLight3D" parent="." unique_id=1808217797]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5881767, -82.2425, -27.329388)
-light_energy = 5.296
-light_size = 0.963
-omni_range = 21.131224
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=1463814721]
+shape = SubResource("CapsuleShape3D_uc036")
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="OmniLight3D3" unique_id=735215866]
-material_override = ExtResource("3_iacna")
+[node name="CameraPivot" type="Node3D" parent="Player" unique_id=1559629034]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.93043256, 0)
 
-[node name="Crafting" parent="." unique_id=762629428 instance=ExtResource("3_uc036")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2536573, 0, 1.7223024)
+[node name="Camera3D" type="Camera3D" parent="Player/CameraPivot" unique_id=1152764537]
+current = true
+fov = 90.0
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Crafting" unique_id=796018215]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.118833065, 4.431807, 0.08443761)
+[node name="Cave" parent="." unique_id=1227416436 instance=ExtResource("3_uc036")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -0.08409208, -0.06777191, -0.11385662)
+
+[node name="TreeT1" parent="." unique_id=162848842 instance=ExtResource("4_uc036")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.91641, -0.46676853, 14.7516985)
+
+[node name="TreeT2" parent="." unique_id=849116089 instance=ExtResource("4_uc036")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.37215, 4.8594394, 50.059418)
+
+[node name="TreeT3" parent="." unique_id=1866247351 instance=ExtResource("4_uc036")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.83856, -0.4947416, 73.88271)
+
+[node name="TreeT4" parent="." unique_id=2087547781 instance=ExtResource("4_uc036")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66.85437, -1.3074319, -37.580997)
+
+[node name="TreeT5" parent="." unique_id=842408872 instance=ExtResource("4_uc036")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128.13904, -9.546455, 15.914474)
+
+[node name="TreeT6" parent="." unique_id=1261458336 instance=ExtResource("4_uc036")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.05044, 11.453218, 181.791)
+
+[node name="TreeT7" parent="." unique_id=1698838957 instance=ExtResource("4_uc036")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.13752, 8.100723, 61.091644)
+
+[node name="TreeT8" parent="." unique_id=1998162723 instance=ExtResource("4_uc036")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.504675, 4.6709867, 15.005232)
+
+[node name="TreeT9" parent="." unique_id=416019714 instance=ExtResource("4_uc036")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -68.60868, 6.358155, -4.005244)
+
+[node name="TreeT10" parent="." unique_id=31372018 instance=ExtResource("4_uc036")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.624603, 3.8190324, -16.09866)
+
+[node name="TreeT11" parent="." unique_id=849036664 instance=ExtResource("4_uc036")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -71.461296, 1.1161462, -129.32661)
+
+[node name="TreeT12" parent="." unique_id=2093807336 instance=ExtResource("4_uc036")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.6376605, -8.875437, -171.03322)
+
+[node name="Grass" parent="." unique_id=1874469117 instance=ExtResource("5_dv8ie")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 11.237014, 1.2790573, 18.237345)
+
+[node name="Grass2" parent="." unique_id=1455846233 instance=ExtResource("5_dv8ie")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 22.178566, 0.49352884, 24.025253)
+
+[node name="Grass3" parent="." unique_id=1556659950 instance=ExtResource("5_dv8ie")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -6.7974596, 2.6595867, 18.237345)
+
+[node name="Grass4" parent="." unique_id=1034078029 instance=ExtResource("5_dv8ie")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -36.661713, 5.0504766, 18.237345)
+
+[node name="Grass5" parent="." unique_id=1271996488 instance=ExtResource("5_dv8ie")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 11.237014, 1.6839299, 61.103622)
+
+[node name="Grass6" parent="." unique_id=1675631675 instance=ExtResource("5_dv8ie")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -16.863571, 4.692791, 84.55199)
+
+[node name="Grass7" parent="." unique_id=1319193874 instance=ExtResource("5_dv8ie")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 11.237014, 1.101572, 1.7464466)
+
+[node name="Grass8" parent="." unique_id=676513163 instance=ExtResource("5_dv8ie")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 22.975231, 0.30936193, 1.7464466)
+
+[node name="Grass9" parent="." unique_id=934730717 instance=ExtResource("5_dv8ie")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 39.58459, -0.7143152, -7.540841)
+
+[node name="Grass10" parent="." unique_id=1860069746 instance=ExtResource("5_dv8ie")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 61.089737, -2.4350445, 8.301246)
+
+[node name="Grass11" parent="." unique_id=604612795 instance=ExtResource("5_dv8ie")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 57.763405, -2.3729174, 53.8453)
+
+[node name="Grass12" parent="." unique_id=1227345937 instance=ExtResource("5_dv8ie")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 11.237014, 1.101572, 1.7464466)
+
+[node name="Grass13" parent="." unique_id=778481155 instance=ExtResource("5_dv8ie")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -5.066327, 1.7979038, -15.798676)
+
+[node name="Grass14" parent="." unique_id=848012547 instance=ExtResource("5_dv8ie")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -32.88018, 4.059509, 1.7464466)
+
+[node name="Furnace" parent="." unique_id=1094389301 instance=ExtResource("6_pfv4s")]
+transform = Transform3D(-0.3202783, 0.033532575, -0.3824883, 0.0380261, 0.498411, 0.011854138, 0.38206783, -0.021495828, -0.3218107, 8.22251, 2.2284548, 8.639619)
