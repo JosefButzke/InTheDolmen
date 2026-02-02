@@ -1,0 +1,98 @@
+[gd_scene format=3 uid="uid://bptteobbrql1y"]
+
+[ext_resource type="PackedScene" uid="uid://xiiepsmnu8i1" path="res://Assets/Models/Cave.glb" id="1_vost8"]
+[ext_resource type="Material" uid="uid://bm7yqvs13b6ka" path="res://Assets/Materials/pin.tres" id="3_iacna"]
+[ext_resource type="PackedScene" uid="uid://omqkbtb75to5" path="res://Assets/Models/Crafting.blend" id="3_uc036"]
+
+[sub_resource type="Environment" id="Environment_vost8"]
+
+[sub_resource type="Environment" id="Environment_iacna"]
+background_mode = 1
+background_color = Color(0, 0.8156863, 1, 1)
+ambient_light_source = 3
+ambient_light_color = Color(0.14264143, 0.00028888078, 0.7600284, 1)
+ambient_light_sky_contribution = 0.52
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0, 0.7921569, 1, 1)
+fog_density = 0.2
+volumetric_fog_density = 0.02
+volumetric_fog_albedo = Color(0.99999994, 0.5811288, 0.14529783, 1)
+volumetric_fog_emission = Color(1, 0.64279395, 0.3291971, 1)
+volumetric_fog_length = 200.0
+
+[node name="World" type="Node3D" unique_id=425380973]
+
+[node name="Cave" parent="." unique_id=142691780 instance=ExtResource("1_vost8")]
+transform = Transform3D(1, -0.00011078277, -8.4910804e-05, 0.00011078277, 1, 3.5842563e-06, 8.4910804e-05, -3.5842563e-06, 1, -5.1441565, -70.59698, -5.3761835)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1203197107]
+transform = Transform3D(1, 0, 0, 0, -0.39970922, 0.91664195, 0, -0.91664195, -0.39970922, 0, 0, 0)
+light_cull_mask = 4294966273
+shadow_enabled = true
+directional_shadow_max_distance = 200.0
+
+[node name="Cave2" parent="." unique_id=1387158406 instance=ExtResource("1_vost8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1441565, -70.59698, 113.67027)
+
+[node name="Cave3" parent="." unique_id=485456161 instance=ExtResource("1_vost8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1441565, -70.59698, -122.7307)
+
+[node name="Cave4" parent="." unique_id=636290557 instance=ExtResource("1_vost8")]
+transform = Transform3D(1, -0.00011078277, -8.4910804e-05, 0.00011078277, 1, 3.5842563e-06, 8.4910804e-05, -3.5842563e-06, 1, 112.46735, -70.60708, 3.2475815)
+
+[node name="Cave5" parent="." unique_id=1703259584 instance=ExtResource("1_vost8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 112.46735, -70.60708, 122.29404)
+
+[node name="Cave6" parent="." unique_id=660589730 instance=ExtResource("1_vost8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 112.46735, -70.60708, -114.10693)
+
+[node name="Cave7" parent="." unique_id=665993143 instance=ExtResource("1_vost8")]
+transform = Transform3D(1, -0.00011078277, -8.4910804e-05, 0.00011078277, 1, 3.5842563e-06, 8.4910804e-05, -3.5842563e-06, 1, -132.22577, -73.22563, 7.5518494)
+
+[node name="Cave8" parent="." unique_id=62543960 instance=ExtResource("1_vost8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -132.22577, -73.22563, 126.598305)
+
+[node name="Cave9" parent="." unique_id=1723990707 instance=ExtResource("1_vost8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -132.22577, -73.22563, -109.802666)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1581750692]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6110849, 5.132702)
+environment = SubResource("Environment_vost8")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=618804016]
+environment = SubResource("Environment_iacna")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=790310775]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.59202, -56.69253, 0)
+light_energy = 5.296
+light_size = 0.963
+omni_range = 21.131224
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="OmniLight3D" unique_id=1059262711]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.005951, 3.806549, 9.536743e-07)
+material_override = ExtResource("3_iacna")
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="." unique_id=406508786]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.953442, -66.72164, -5.981798)
+light_energy = 5.296
+light_size = 0.963
+omni_range = 21.131224
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="OmniLight3D2" unique_id=1686354982]
+material_override = ExtResource("3_iacna")
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="." unique_id=1808217797]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5881767, -82.2425, -27.329388)
+light_energy = 5.296
+light_size = 0.963
+omni_range = 21.131224
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="OmniLight3D3" unique_id=735215866]
+material_override = ExtResource("3_iacna")
+
+[node name="Crafting" parent="." unique_id=762629428 instance=ExtResource("3_uc036")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2536573, 0, 1.7223024)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Crafting" unique_id=796018215]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.118833065, 4.431807, 0.08443761)
