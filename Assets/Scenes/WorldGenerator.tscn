@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://b6jv68n1pqbpn"]
+
+[ext_resource type="Script" uid="uid://ct0e0qktgpshh" path="res://Assets/Scripts/world_manager.gd" id="1_xn8fo"]
+[ext_resource type="Material" uid="uid://dihcew3818baf" path="res://Assets/Materials/Soil.tres" id="2_yhspu"]
+
+[node name="WorldGenerator" type="Node2D" unique_id=1809437303]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=41349620]
+script = ExtResource("1_xn8fo")
+size = 32
+material = ExtResource("2_yhspu")

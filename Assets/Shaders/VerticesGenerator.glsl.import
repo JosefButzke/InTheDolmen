@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://yngu55iwayji"
+path="res://.godot/imported/VerticesGenerator.glsl-89cd91f5860328b6d9501d46962283b9.res"
+
+[deps]
+
+source_file="res://Assets/Shaders/VerticesGenerator.glsl"
+dest_files=["res://.godot/imported/VerticesGenerator.glsl-89cd91f5860328b6d9501d46962283b9.res"]
+
+[params]
+

@@ -1,7 +1,0 @@
-[gd_resource type="Sky" format=3 uid="uid://cecjwrcnlnrf7"]
-
-[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_h4u0f"]
-rayleigh_color = Color(0, 1, 0.7647059, 1)
-
-[resource]
-sky_material = SubResource("PhysicalSkyMaterial_h4u0f")

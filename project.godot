@@ -14,7 +14,7 @@ general/updates_per_second=100
 
 [application]
 
-config/name="DangerZone"
+config/name="InTheDolmen"
 run/main_scene="uid://bptteobbrql1y"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
