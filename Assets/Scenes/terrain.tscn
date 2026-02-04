@@ -5,5 +5,5 @@
 
 [node name="WorldGenerator" type="Node3D" unique_id=1561706391]
 script = ExtResource("1_absrc")
-size = 128
+size = 32
 material = ExtResource("2_cfsy4")

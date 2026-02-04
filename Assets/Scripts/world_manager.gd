@@ -3,7 +3,7 @@ extends Node3D
 
 var SEED: int = 0
 
-@export_range(0, 128) var size: int = 1:
+@export_range(0, 64) var size: int = 1:
 	set(value):
 		size = value
 		
@@ -49,12 +49,25 @@ func generate_world():
 		
 	remove_children()
 	generate(Vector3(0, 0, 0))
-	#generate(Vector3(size+1, 0, 0))
-	#generate(Vector3((size+1)*2, 0, 0))
-	#generate(Vector3((size+1)*3, 0, 0))
-	#generate(Vector3(size+1, (size+1)*1, 0))
-	#generate(Vector3((size+1)*2, (size+1)*2, 0))
-	#generate(Vector3((size+1)*3, (size+1)*3, 0))
+	generate(Vector3((size+1), 0, 0))
+	generate(Vector3((size+1)*2, 0, 0))
+	generate(Vector3((size+1)*3, 0, 0))
+	
+	generate(Vector3(0, 0, (size+1)))
+	generate(Vector3((size+1), 0, (size+1)))
+	generate(Vector3((size+1)*2, 0, (size+1)))
+	generate(Vector3((size+1)*3, 0, (size+1)))
+	
+	generate(Vector3(0, 0, (size+1)*2))
+	generate(Vector3((size+1), 0, (size+1)*2))
+	generate(Vector3((size+1)*2, 0, (size+1)*2))
+	generate(Vector3((size+1)*3, 0, (size+1)*2))
+	
+	generate(Vector3(0, 0, (size+1)*3))
+	generate(Vector3((size+1), 0, (size+1)*3))
+	generate(Vector3((size+1)*2, 0, (size+1)*3))
+	generate(Vector3((size+1)*3, 0, (size+1)*3))
+	
 	
 func generate(position: Vector3) -> void:
 	print("Generating World...")
@@ -66,13 +79,6 @@ func generate(position: Vector3) -> void:
 	
 	# Create centers mesh
 	print("Creating Mesh...")
-	var mesh_centers = ImmediateMesh.new()
-
-	mesh_centers.surface_begin(Mesh.PRIMITIVE_POINTS)
-	
-	# Create cubes mesh
-	var mesh_cubes = ImmediateMesh.new()
-	mesh_cubes.surface_begin(Mesh.PRIMITIVE_LINES)
 	
 	# Create cubes mesh
 	var mesh_triangles = ImmediateMesh.new()
@@ -85,20 +91,13 @@ func generate(position: Vector3) -> void:
 		for y in range(start, end):
 			for z in range(start, end):
 				var center := Vector3(float(x)/float(resolution), float(y)/float(resolution), float(z)/float(resolution))
-				
-				# Get the value of the center from the perlin noise
-				
-				var center_value := noise.get_noise_3d(center.x, center.y, center.z)
-				
+					
 				# Create marching cube vertices
 				var cube_vertices: Array[Vector3] = create_cube_vertices(center)
 				
 				# Get the scalar values at the corners of the current cube
 				var cube_values: Array[float] = get_cube_values(noise, cube_vertices, position)
-				
-				if center_value < cutoff:
-					add_cubes_vertices(mesh_cubes, cube_vertices)
-					
+									
 				var lookup_index: int = get_lookup_index(cube_values)
 				
 				var triangles: Array = Constants.marching_triangules[lookup_index]
@@ -108,10 +107,6 @@ func generate(position: Vector3) -> void:
 					float(center.y + size) / float(size * 2),
 					float(center.z + size) / float(size * 2)
 				)
-				
-				if triangles.size() > 1:
-					mesh_centers.surface_add_vertex(center)
-					mesh_centers.surface_set_color(color)
 					
 				for index in range(0, triangles.size(), 3):
 					var point_1 = triangles[index]
@@ -159,52 +154,16 @@ func generate(position: Vector3) -> void:
 					mesh_triangles.surface_add_vertex(vertex2)
 					mesh_triangles.surface_add_vertex(vertex3)					
 				
-	mesh_centers.surface_end()
-	mesh_cubes.surface_end()
 	mesh_triangles.surface_end()
 	
 	print("Creating Mesh Instance...")
-	
-	# Create mesh instance
-	var mesh_instance_centers = MeshInstance3D.new()
-	mesh_instance_centers.name = "MeshInstanceCenters"
-	mesh_instance_centers.visible = show_centers
-	add_child(mesh_instance_centers)
-	mesh_instance_centers.global_position = position
-	
-	# Create cubes instance
-	var mesh_instance_cubes = MeshInstance3D.new()
-	mesh_instance_cubes.name = "MeshInstanceCubes"
-	mesh_instance_cubes.visible = show_grid
-	add_child(mesh_instance_cubes)
-	mesh_instance_cubes.global_position = position
 	
 	# Create triangles instance
 	var mesh_instance_triangles = MeshInstance3D.new()
 	add_child(mesh_instance_triangles)
 	mesh_instance_triangles.global_position = position
-
-	print("Creating Material...")
-
-	# Create centers material
-	var material_centers = StandardMaterial3D.new()
-	material_centers.vertex_color_use_as_albedo = true;
-	material_centers.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	material_centers.use_point_size = true
-	material_centers.point_size = 8
-	
-	# Create cubes material
-	var material_cubes = StandardMaterial3D.new()
-	material_cubes.vertex_color_use_as_albedo = true;
-	material_cubes.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 		
-	print("Mixing...")
-	mesh_centers.surface_set_material(0, material_centers)
-	mesh_instance_centers.mesh = mesh_centers
-	
-	mesh_cubes.surface_set_material(0, material_cubes)
-	mesh_instance_cubes.mesh = mesh_cubes
-	
+	print("Mixing...")	
 	mesh_triangles.surface_set_material(0, material)
 	mesh_instance_triangles.mesh = mesh_triangles
 	add_trimesh_collision(self, mesh_triangles, Transform3D(Basis.IDENTITY, position))
@@ -245,26 +204,26 @@ func create_cube_vertices(position: Vector3) -> Array[Vector3]:
 	var offset := 1.0 / float(resolution)
 	
 	return [
-		Vector3(position.x - offset / 2, position.y - offset / 2, position.z - offset / 2),
-		Vector3(position.x + offset / 2, position.y - offset / 2, position.z - offset / 2),
-		Vector3(position.x + offset / 2, position.y + offset / 2, position.z - offset / 2),
-		Vector3(position.x - offset / 2, position.y + offset / 2, position.z - offset / 2),
-		Vector3(position.x - offset / 2, position.y - offset / 2, position.z + offset / 2),
-		Vector3(position.x + offset / 2, position.y - offset / 2, position.z + offset / 2),
-		Vector3(position.x + offset / 2, position.y + offset / 2, position.z + offset / 2),
-		Vector3(position.x - offset / 2, position.y + offset / 2, position.z + offset / 2),
+		Vector3(position.x, position.y, position.z),
+		Vector3(position.x+1, position.y, position.z),
+		Vector3(position.x+1, position.y, position.z+1),
+		Vector3(position.x, position.y, position.z+1),
+		Vector3(position.x, position.y+1, position.z),
+		Vector3(position.x+1, position.y+1, position.z),
+		Vector3(position.x+1, position.y+1, position.z+1),
+		Vector3(position.x, position.y+1, position.z+1),
 	]
 
 func get_cube_values(noise: FastNoiseLite, cube_vertices: Array[Vector3], position: Vector3) -> Array[float]:
 	return [
-		noise.get_noise_3d(cube_vertices[0].x + position.x, cube_vertices[0].y + position.y, cube_vertices[0].z + position.z),
-		noise.get_noise_3d(cube_vertices[1].x + position.x, cube_vertices[1].y + position.y, cube_vertices[1].z + position.z),
-		noise.get_noise_3d(cube_vertices[2].x + position.x, cube_vertices[2].y + position.y, cube_vertices[2].z + position.z),
-		noise.get_noise_3d(cube_vertices[3].x + position.x, cube_vertices[3].y + position.y, cube_vertices[3].z + position.z),
-		noise.get_noise_3d(cube_vertices[4].x + position.x, cube_vertices[4].y + position.y, cube_vertices[4].z + position.z),
-		noise.get_noise_3d(cube_vertices[5].x + position.x, cube_vertices[5].y + position.y, cube_vertices[5].z + position.z),
-		noise.get_noise_3d(cube_vertices[6].x + position.x, cube_vertices[6].y + position.y, cube_vertices[6].z + position.z),
-		noise.get_noise_3d(cube_vertices[7].x + position.x, cube_vertices[7].y + position.y, cube_vertices[7].z + position.z),
+		1 - cube_vertices[0].y + 32 * noise.get_noise_3d(cube_vertices[0].x + position.x, cube_vertices[0].y + position.y, cube_vertices[0].z + position.z),
+		1 - cube_vertices[1].y + 32 * noise.get_noise_3d(cube_vertices[1].x + position.x, cube_vertices[1].y + position.y, cube_vertices[1].z + position.z),
+		1 - cube_vertices[2].y + 32 * noise.get_noise_3d(cube_vertices[2].x + position.x, cube_vertices[2].y + position.y, cube_vertices[2].z + position.z),
+		1 - cube_vertices[3].y + 32 * noise.get_noise_3d(cube_vertices[3].x + position.x, cube_vertices[3].y + position.y, cube_vertices[3].z + position.z),
+		1 - cube_vertices[4].y + 32 * noise.get_noise_3d(cube_vertices[4].x + position.x, cube_vertices[4].y + position.y, cube_vertices[4].z + position.z),
+		1 - cube_vertices[5].y + 32 * noise.get_noise_3d(cube_vertices[5].x + position.x, cube_vertices[5].y + position.y, cube_vertices[5].z + position.z),
+		1 - cube_vertices[6].y + 32 * noise.get_noise_3d(cube_vertices[6].x + position.x, cube_vertices[6].y + position.y, cube_vertices[6].z + position.z),
+		1 - cube_vertices[7].y + 32 * noise.get_noise_3d(cube_vertices[7].x + position.x, cube_vertices[7].y + position.y, cube_vertices[7].z + position.z),
 	]
 	
 func add_cubes_vertices(mesh: ImmediateMesh, cube_vertices: Array[Vector3]) -> void:
