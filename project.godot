@@ -23,12 +23,13 @@ config/icon="res://icon.svg"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/mode=2
 window/vsync/vsync_mode=0
 
 [file_customization]
 
 folder_colors={
-"res://Assets/Models/": "blue"
+"res://Models/": "blue"
 }
 
 [input]

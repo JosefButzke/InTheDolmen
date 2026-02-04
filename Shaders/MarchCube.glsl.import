@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://dyndrlso7mxyt"
+path="res://.godot/imported/MarchCube.glsl-ee479a6f3b6060520364fdb3bafbe7a2.res"
+
+[deps]
+
+source_file="res://Shaders/MarchCube.glsl"
+dest_files=["res://.godot/imported/MarchCube.glsl-ee479a6f3b6060520364fdb3bafbe7a2.res"]
+
+[params]
+
