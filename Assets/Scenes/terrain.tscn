@@ -1,9 +1,0 @@
-[gd_scene format=3 uid="uid://227rbtbdcrol"]
-
-[ext_resource type="Script" uid="uid://ct0e0qktgpshh" path="res://Assets/Scripts/world_manager.gd" id="1_absrc"]
-[ext_resource type="Material" uid="uid://dihcew3818baf" path="res://Assets/Materials/Soil.tres" id="2_cfsy4"]
-
-[node name="WorldGenerator" type="Node3D" unique_id=1561706391]
-script = ExtResource("1_absrc")
-size = 32
-material = ExtResource("2_cfsy4")

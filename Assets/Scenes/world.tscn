@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bptteobbrql1y"]
 
-[ext_resource type="Script" uid="uid://2fnd4es5fg6p" path="res://Assets/Scripts/player.gd" id="3_dv8ie"]
-[ext_resource type="PackedScene" uid="uid://227rbtbdcrol" path="res://Assets/Scenes/terrain.tscn" id="3_pfv4s"]
+[ext_resource type="Script" uid="uid://2fnd4es5fg6p" path="res://Assets/Scripts/player.gd" id="1_pqu7k"]
+[ext_resource type="PackedScene" uid="uid://db3dw4elilubw" path="res://Assets/Scenes/WorldManager.tscn" id="2_pqu7k"]
 
 [sub_resource type="Gradient" id="Gradient_31mi3"]
 offsets = PackedFloat32Array(0, 0.15990454, 0.849642, 0.9976134)
@@ -19,9 +19,9 @@ sky_material = SubResource("ProceduralSkyMaterial_31mi3")
 
 [sub_resource type="Environment" id="Environment_iacna"]
 background_mode = 2
-background_color = Color(0, 0.8156863, 1, 1)
+background_color = Color(0.023769587, 0, 0.41579223, 1)
 sky = SubResource("Sky_44f6d")
-reflected_light_source = 2
+ambient_light_sky_contribution = 0.0
 tonemap_mode = 2
 ssao_radius = 0.01
 sdfgi_enabled = true
@@ -29,8 +29,6 @@ fog_density = 0.002
 fog_sky_affect = 0.0
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.002
-volumetric_fog_albedo = Color(0, 0, 0, 1)
-volumetric_fog_emission = Color(1, 1, 1, 1)
 volumetric_fog_length = 30.0
 volumetric_fog_sky_affect = 0.0
 adjustment_enabled = true
@@ -40,6 +38,11 @@ adjustment_color_correction = SubResource("GradientTexture1D_44f6d")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uc036"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pqu7k"]
+resource_local_to_scene = true
+albedo_color = Color(0.46677214, 0.33421144, 0.15571445, 1)
+metallic_specular = 0.0
+
 [node name="World" type="Node3D" unique_id=425380973]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=618804016]
@@ -47,17 +50,16 @@ environment = SubResource("Environment_iacna")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=1203197107]
 transform = Transform3D(0.9670825, -0.23874483, 0.08804787, -0.055827316, 0.13851932, 0.98878497, -0.24826364, -0.96115214, 0.12063112, 0, 0, 0)
-light_energy = 2.0
 light_volumetric_fog_energy = 5.0
 light_cull_mask = 4294966273
 shadow_enabled = true
 shadow_opacity = 0.96
-directional_shadow_max_distance = 200.0
+directional_shadow_max_distance = 300.0
 sky_mode = 1
 
 [node name="Player" type="CharacterBody3D" parent="." unique_id=1768123653 node_paths=PackedStringArray("characterBody", "camera_pivot", "camera")]
-transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, 0, 48.192657, 0)
-script = ExtResource("3_dv8ie")
+transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, 0, 5.629421, 0)
+script = ExtResource("1_pqu7k")
 speed = 10.0
 characterBody = NodePath(".")
 camera_pivot = NodePath("CameraPivot")
@@ -76,6 +78,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.93043256, 0)
 current = true
 fov = 90.0
 
-[node name="WorldGenerator" parent="." unique_id=1561706391 instance=ExtResource("3_pfv4s")]
-transform = Transform3D(0.9999999, 0, 0, 0, 0.9999998, 0, 0, 0, 0.99999976, 0, 0, 0)
-randomize = true
+[node name="WorldGenerator" parent="." unique_id=1561706391 instance=ExtResource("2_pqu7k")]
+material = SubResource("StandardMaterial3D_pqu7k")
