@@ -15,6 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://bigguoih0f70p" path="res://Models/SolarPanel.glb" id="9_kn06e"]
 [ext_resource type="PackedScene" uid="uid://b2cl8ke4k8jun" path="res://Models/WindTurbine.glb" id="10_7yo87"]
 [ext_resource type="PackedScene" uid="uid://bg4ve414bndkl" path="res://Scenes/FurnaceT1.tscn" id="13_op4cu"]
+[ext_resource type="PackedScene" uid="uid://785u8sb6pbtc" path="res://Scenes/Hotbar.tscn" id="16_xiqgv"]
+[ext_resource type="PackedScene" uid="uid://8q0lfykmhgqv" path="res://Scenes/Inventory.tscn" id="17_waglr"]
 
 [sub_resource type="Gradient" id="Gradient_31mi3"]
 offsets = PackedFloat32Array(0, 0.15990454, 0.849642, 0.9976134)
@@ -78,7 +80,7 @@ shadow_opacity = 0.96
 directional_shadow_max_distance = 300.0
 sky_mode = 1
 
-[node name="Player" type="CharacterBody3D" parent="." unique_id=1768123653 node_paths=PackedStringArray("characterBody", "camera_pivot", "camera")]
+[node name="Player" type="CharacterBody3D" parent="." unique_id=1768123653 node_paths=PackedStringArray("characterBody", "camera_pivot", "camera", "inventory")]
 transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, 0, 5.208164, 0)
 script = ExtResource("1_pqu7k")
 speed = 10.0
@@ -86,6 +88,7 @@ characterBody = NodePath(".")
 camera_pivot = NodePath("CameraPivot")
 camera = NodePath("CameraPivot/Camera3D")
 RAY_LENGTH = 2
+inventory = NodePath("../Inventory")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=369928066]
 layers = 524288
@@ -428,3 +431,8 @@ transform = Transform3D(-0.4130091, 0, -0.9107269, 0, 1, 0, 0.9107269, 0, -0.413
 
 [node name="Furnace1" parent="." unique_id=1658222846 instance=ExtResource("13_op4cu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.08441, 4.157904, 2.6366591)
+
+[node name="Hotbar" parent="." unique_id=1407471595 instance=ExtResource("16_xiqgv")]
+
+[node name="Inventory" parent="." unique_id=1195171337 instance=ExtResource("17_waglr")]
+visible = false

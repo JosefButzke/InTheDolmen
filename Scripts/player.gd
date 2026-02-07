@@ -10,6 +10,8 @@ extends Node3D
 @export_range(0, 16) var RAY_LENGTH: int = 8:
 	set(value):
 		RAY_LENGTH = value
+@export var inventory: Control
+		
 var current_interactable_object: Interactable = null
 
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -37,7 +39,15 @@ func _process(delta: float) -> void:
 		if(Input.mouse_mode == Input.MOUSE_MODE_VISIBLE):
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)	
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			
+	if Input.is_action_just_pressed("Inventory"):
+		if inventory.visible:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			inventory.visible = false
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			inventory.visible = true
 	pass
 
 func _physics_process(delta: float) -> void:
@@ -57,7 +67,7 @@ func _physics_process(delta: float) -> void:
 
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
-	if direction:
+	if direction: 
 		characterBody.velocity.x = direction.x * speed
 		characterBody.velocity.z = direction.z * speed
 	else:

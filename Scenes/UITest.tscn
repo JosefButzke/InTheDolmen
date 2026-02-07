@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://3f46ssngi4l3"]
+
+[ext_resource type="PackedScene" uid="uid://8q0lfykmhgqv" path="res://Scenes/Inventory.tscn" id="1_vg7xi"]
+[ext_resource type="PackedScene" uid="uid://785u8sb6pbtc" path="res://Scenes/Hotbar.tscn" id="2_3gp53"]
+
+[node name="UiTest" type="Control" unique_id=890247363]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Inventory" parent="." unique_id=1195171337 instance=ExtResource("1_vg7xi")]
+layout_mode = 1
+
+[node name="Hotbar" parent="." unique_id=1407471595 instance=ExtResource("2_3gp53")]
+layout_mode = 1

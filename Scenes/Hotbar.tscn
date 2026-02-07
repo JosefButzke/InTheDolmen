@@ -1,0 +1,180 @@
+[gd_scene format=3 uid="uid://785u8sb6pbtc"]
+
+[ext_resource type="PackedScene" uid="uid://b7xhpmht22rem" path="res://Scenes/Slot.tscn" id="1_1074w"]
+
+[node name="Hotbar" type="Control" unique_id=1407471595]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1084101752]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -390.0
+offset_top = -124.0
+offset_right = 390.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBS1" type="Panel" parent="HBoxContainer" unique_id=595596518]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(108, 108)
+layout_mode = 2
+
+[node name="Slot" parent="HBoxContainer/HBS1" unique_id=1587687222 instance=ExtResource("1_1074w")]
+layout_mode = 0
+offset_right = 108.0
+offset_bottom = 108.0
+
+[node name="Label" type="Label" parent="HBoxContainer/HBS1" unique_id=999207211]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -34.0
+offset_right = 30.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "1"
+
+[node name="HBS2" type="Panel" parent="HBoxContainer" unique_id=415707344]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(108, 108)
+layout_mode = 2
+
+[node name="Slot" parent="HBoxContainer/HBS2" unique_id=863137491 instance=ExtResource("1_1074w")]
+layout_mode = 0
+offset_right = 108.0
+offset_bottom = 108.0
+
+[node name="Label" type="Label" parent="HBoxContainer/HBS2" unique_id=1926817593]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -23.0
+offset_right = 26.000006
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "2"
+
+[node name="HBS3" type="Panel" parent="HBoxContainer" unique_id=1242879957]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(108, 108)
+layout_mode = 2
+
+[node name="Slot" parent="HBoxContainer/HBS3" unique_id=860777230 instance=ExtResource("1_1074w")]
+layout_mode = 0
+offset_right = 108.0
+offset_bottom = 108.0
+
+[node name="Label" type="Label" parent="HBoxContainer/HBS3" unique_id=603480200]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -23.0
+offset_right = 26.000006
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "3"
+
+[node name="HBS4" type="Panel" parent="HBoxContainer" unique_id=1661851635]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(108, 108)
+layout_mode = 2
+
+[node name="Slot" parent="HBoxContainer/HBS4" unique_id=1352618491 instance=ExtResource("1_1074w")]
+layout_mode = 0
+offset_right = 108.0
+offset_bottom = 108.0
+
+[node name="Label" type="Label" parent="HBoxContainer/HBS4" unique_id=1202038951]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -23.0
+offset_right = 26.000006
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "4"
+
+[node name="HBS5" type="Panel" parent="HBoxContainer" unique_id=1151825420]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(108, 108)
+layout_mode = 2
+
+[node name="Slot" parent="HBoxContainer/HBS5" unique_id=911385768 instance=ExtResource("1_1074w")]
+layout_mode = 0
+offset_right = 108.0
+offset_bottom = 108.0
+
+[node name="Label" type="Label" parent="HBoxContainer/HBS5" unique_id=1957859493]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -23.0
+offset_right = 26.000006
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "5"
+
+[node name="HBS6" type="Panel" parent="HBoxContainer" unique_id=1696806588]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(108, 108)
+layout_mode = 2
+
+[node name="Slot" parent="HBoxContainer/HBS6" unique_id=899450872 instance=ExtResource("1_1074w")]
+layout_mode = 0
+offset_right = 108.0
+offset_bottom = 108.0
+
+[node name="Label" type="Label" parent="HBoxContainer/HBS6" unique_id=1253182206]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -23.0
+offset_right = 26.000006
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "6"
+
+[node name="HBS7" type="Panel" parent="HBoxContainer" unique_id=409690754]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(108, 108)
+layout_mode = 2
+
+[node name="Slot" parent="HBoxContainer/HBS7" unique_id=1940890228 instance=ExtResource("1_1074w")]
+layout_mode = 0
+offset_right = 108.0
+offset_bottom = 108.0
+
+[node name="Label" type="Label" parent="HBoxContainer/HBS7" unique_id=1759235218]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -23.0
+offset_right = 26.000006
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "7"
