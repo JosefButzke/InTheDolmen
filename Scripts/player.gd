@@ -7,6 +7,10 @@ extends Node3D
 @export var characterBody: CharacterBody3D
 @export var camera_pivot: Node3D
 @export var camera: Camera3D
+@export_range(0, 16) var RAY_LENGTH: int = 8:
+	set(value):
+		RAY_LENGTH = value
+var current_interactable_object: Interactable = null
 
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -61,3 +65,30 @@ func _physics_process(delta: float) -> void:
 		characterBody.velocity.z = move_toward(characterBody.velocity.z, 0, speed)
 		
 	characterBody.move_and_slide()
+	
+	var space_state = get_world_3d().direct_space_state
+	var mousepos = get_viewport().get_mouse_position()
+	
+	var origin = camera.project_ray_origin(mousepos)
+	var end = origin + camera.project_ray_normal(mousepos) * RAY_LENGTH
+	var query = PhysicsRayQueryParameters3D.create(origin, end, Constants.interactableLayer)
+	query.exclude = [self]
+	query.collide_with_areas = true
+
+	var result = space_state.intersect_ray(query)
+	
+	var new_interactable_object: Interactable = null
+	
+	if not result.is_empty():
+		var collider = result["collider"]
+		var parent = collider.get_parent()
+		
+		if parent is Interactable:
+			new_interactable_object = parent
+			
+	if new_interactable_object != current_interactable_object:
+		if current_interactable_object:
+			current_interactable_object.on_hover_exit()
+		if new_interactable_object:
+			new_interactable_object.on_hover_enter()
+		current_interactable_object = new_interactable_object

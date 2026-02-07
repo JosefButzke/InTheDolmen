@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://bg4ve414bndkl"]
+
+[ext_resource type="PackedScene" uid="uid://bieep0lxwip17" path="res://Models/Furnace1.glb" id="1_sqw68"]
+[ext_resource type="Script" uid="uid://b5jskmn24qyuh" path="res://Scripts/FurnaceManager.gd" id="2_q3a0b"]
+[ext_resource type="AudioStream" uid="uid://jme5khxdggu" path="res://Audios/fire-working.mp3" id="3_q3a0b"]
+[ext_resource type="AudioStream" uid="uid://s68abnhn50ah" path="res://Audios/fire-stop.wav" id="4_nar2h"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sqw68"]
+size = Vector3(1, 1.7568359, 1)
+
+[node name="Furnace1" unique_id=1658222846 node_paths=PackedStringArray("fire", "audioPlayer") instance=ExtResource("1_sqw68")]
+script = ExtResource("2_q3a0b")
+fire = NodePath("Sphere_001")
+audioPlayer = NodePath("AudioStreamPlayer3D")
+audioFireWorking = ExtResource("3_q3a0b")
+audioFireStop = ExtResource("4_nar2h")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="12" unique_id=1245901341]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.88853884, 0)
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0" unique_id=1262149522]
+shape = SubResource("BoxShape3D_sqw68")
+debug_color = Color(0.99591845, 0, 0.20490283, 0.41960785)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="13" unique_id=1012356560]
+max_distance = 16.0
