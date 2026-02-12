@@ -39,6 +39,8 @@ var SEED: int = 0
 				child.visible = value
 				
 @export var material: StandardMaterial3D
+
+@export var noise_texture: Texture2D
 		
 # Syntax: @export_tool_button("Button Text", "IconName")
 @export_tool_button("Generate World", "WorldEnvironment") var generate_world_action = generate_world
@@ -52,27 +54,26 @@ func generate_world():
 	
 	remove_children()
 	
-	var start = -float(chunks_size)/2
-	var end = float(chunks_size)/2
-	var offset = size+1
+	var start = - float(chunks_size) / 2
+	var end = float(chunks_size) / 2
+	var offset = size + 1
 	
 	for x in range(start, end):
 		for z in range(start, end):
-			generate(Vector3(offset*x, 0.0, offset*z))
-			#generate(Vector3(offset*x, offset, offset*z))
-			#generate(Vector3(offset*x, offset*2, offset*z))
-			#generate(Vector3(offset*x, offset*3, offset*z))	
+			generate(Vector3(offset * x, 0.0, offset * z))
+			generate(Vector3(offset * x, offset, offset * z))
+			#generate(Vector3(offset*x, offset*3, offset*z))
 	
 func generate(chunk_position: Vector3) -> void:
 	print("Generating World...")
 	
 	# Instantiate noise
 	print("Generating Noise...")
-	var noise = FastNoiseLite.new()
-	noise.seed = SEED
 	
 	# Create centers mesh
 	print("Creating Mesh...")
+	
+	var img := noise_texture.get_image()
 	
 	# Create cubes mesh	
 	var vertices: PackedVector3Array = PackedVector3Array()
@@ -93,39 +94,15 @@ func generate(chunk_position: Vector3) -> void:
 				var cube_vertices: Array[Vector3] = create_cube_vertices(vertex)
 				
 				var cube_values: Array[float] = [
-					noise.get_noise_3d(cube_vertices[0].x + chunk_position.x, cube_vertices[0].y + chunk_position.y, cube_vertices[0].z + chunk_position.z),
-					noise.get_noise_3d(cube_vertices[1].x + chunk_position.x, cube_vertices[1].y + chunk_position.y, cube_vertices[1].z + chunk_position.z),
-					noise.get_noise_3d(cube_vertices[2].x + chunk_position.x, cube_vertices[2].y + chunk_position.y, cube_vertices[2].z + chunk_position.z),
-					noise.get_noise_3d(cube_vertices[3].x + chunk_position.x, cube_vertices[3].y + chunk_position.y, cube_vertices[3].z + chunk_position.z),
-					noise.get_noise_3d(cube_vertices[4].x + chunk_position.x, cube_vertices[4].y + chunk_position.y, cube_vertices[4].z + chunk_position.z),
-					noise.get_noise_3d(cube_vertices[5].x + chunk_position.x, cube_vertices[5].y + chunk_position.y, cube_vertices[5].z + chunk_position.z),
-					noise.get_noise_3d(cube_vertices[6].x + chunk_position.x, cube_vertices[6].y + chunk_position.y, cube_vertices[6].z + chunk_position.z),
-					noise.get_noise_3d(cube_vertices[7].x + chunk_position.x, cube_vertices[7].y + chunk_position.y, cube_vertices[7].z + chunk_position.z),
+					get_noise_3d(cube_vertices[0].x + chunk_position.x, cube_vertices[0].y + chunk_position.y, cube_vertices[0].z + chunk_position.z, img),
+					get_noise_3d(cube_vertices[1].x + chunk_position.x, cube_vertices[1].y + chunk_position.y, cube_vertices[1].z + chunk_position.z, img),
+					get_noise_3d(cube_vertices[2].x + chunk_position.x, cube_vertices[2].y + chunk_position.y, cube_vertices[2].z + chunk_position.z, img),
+					get_noise_3d(cube_vertices[3].x + chunk_position.x, cube_vertices[3].y + chunk_position.y, cube_vertices[3].z + chunk_position.z, img),
+					get_noise_3d(cube_vertices[4].x + chunk_position.x, cube_vertices[4].y + chunk_position.y, cube_vertices[4].z + chunk_position.z, img),
+					get_noise_3d(cube_vertices[5].x + chunk_position.x, cube_vertices[5].y + chunk_position.y, cube_vertices[5].z + chunk_position.z, img),
+					get_noise_3d(cube_vertices[6].x + chunk_position.x, cube_vertices[6].y + chunk_position.y, cube_vertices[6].z + chunk_position.z, img),
+					get_noise_3d(cube_vertices[7].x + chunk_position.x, cube_vertices[7].y + chunk_position.y, cube_vertices[7].z + chunk_position.z, img),
 				]
-				
-				if (vertex.y+chunk_position.y) == 4:
-					cube_values = [
-						1.0,
-						1.0,
-						1.0,
-						1.0,
-						-1*(cube_vertices[4].y + chunk_position.y) - size * noise.get_noise_2d(cube_vertices[4].x + chunk_position.x, cube_vertices[4].z + chunk_position.z),
-						-1*(cube_vertices[5].y + chunk_position.y) - size * noise.get_noise_2d(cube_vertices[5].x + chunk_position.x, cube_vertices[5].z + chunk_position.z),
-						-1*(cube_vertices[6].y + chunk_position.y) - size * noise.get_noise_2d(cube_vertices[6].x + chunk_position.x, cube_vertices[6].z + chunk_position.z),
-						-1*(cube_vertices[7].y + chunk_position.y) - size * noise.get_noise_2d(cube_vertices[7].x + chunk_position.x, cube_vertices[7].z + chunk_position.z)
-					]
-								
-				if (vertex.y+chunk_position.y) > 4:
-					cube_values = [
-						-1*(cube_vertices[0].y + chunk_position.y) - size * noise.get_noise_2d(cube_vertices[0].x + chunk_position.x, cube_vertices[0].z + chunk_position.z),
-						-1*(cube_vertices[1].y + chunk_position.y) - size * noise.get_noise_2d(cube_vertices[1].x + chunk_position.x, cube_vertices[1].z + chunk_position.z),
-						-1*(cube_vertices[2].y + chunk_position.y) - size * noise.get_noise_2d(cube_vertices[2].x + chunk_position.x, cube_vertices[2].z + chunk_position.z),
-						-1*(cube_vertices[3].y + chunk_position.y) - size * noise.get_noise_2d(cube_vertices[3].x + chunk_position.x, cube_vertices[3].z + chunk_position.z),
-						-1*(cube_vertices[4].y + chunk_position.y) - size * noise.get_noise_2d(cube_vertices[4].x + chunk_position.x, cube_vertices[4].z + chunk_position.z),
-						-1*(cube_vertices[5].y + chunk_position.y) - size * noise.get_noise_2d(cube_vertices[5].x + chunk_position.x, cube_vertices[5].z + chunk_position.z),
-						-1*(cube_vertices[6].y + chunk_position.y) - size * noise.get_noise_2d(cube_vertices[6].x + chunk_position.x, cube_vertices[6].z + chunk_position.z),
-						-1*(cube_vertices[7].y + chunk_position.y) - size * noise.get_noise_2d(cube_vertices[7].x + chunk_position.x, cube_vertices[7].z + chunk_position.z),
-					]
 				
 				var lookup_index: int = get_lookup_index(cube_values)
 				
@@ -186,10 +163,8 @@ func generate(chunk_position: Vector3) -> void:
 					indices.append(base + 2)
 					
 					
-				
 	if vertex_count == 0:
 		return
-	
 	var arrays := []
 	arrays.resize(Mesh.ARRAY_MAX)
 	arrays[Mesh.ARRAY_VERTEX] = vertices
@@ -205,7 +180,7 @@ func generate(chunk_position: Vector3) -> void:
 	mesh_instance_triangles.position = chunk_position
 		
 	print("Mixing...")
-	var mesh := ArrayMesh.new()		
+	var mesh := ArrayMesh.new()
 	
 	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 	mesh.surface_set_material(0, material)
@@ -214,7 +189,7 @@ func generate(chunk_position: Vector3) -> void:
 	add_child(mesh_instance_triangles)
 	mesh_instance_triangles.owner = self
 	
-	add_trimesh_collision(self, mesh, Transform3D(Basis.IDENTITY, chunk_position))
+	add_trimesh_collision(self , mesh, Transform3D(Basis.IDENTITY, chunk_position))
 	
 	print("Generating Done")
 	
@@ -251,6 +226,10 @@ func remove_children():
 	
 func randomize_seed():
 		SEED = randi()
+		
+func get_noise_3d(x: float, y: float, z: float, img: Image):
+	var ton = img.get_pixel(int(x) + int(noise_texture.get_width() / 2), int(z) + int(noise_texture.get_width() / 2)).r * size
+	return ton - y
 		
 func create_cube_vertices(base_vertex: Vector3) -> Array[Vector3]:
 	return [

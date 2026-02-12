@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://mwx5q7pol7ky"]
+
+[ext_resource type="Script" uid="uid://x6khisff42ed" path="res://Scripts/CraftingTableManager.gd" id="1_8y42y"]
+[ext_resource type="AudioStream" uid="uid://digoc3ss2annx" path="res://Audios/switch-on.mp3" id="2_nt55c"]
+[ext_resource type="AudioStream" uid="uid://ds6e5m0r0ywx4" path="res://Audios/switch-off.mp3" id="3_qwhyd"]
+[ext_resource type="PackedScene" uid="uid://c5rt7c2yxgj1h" path="res://Models/Crafting.fbx" id="4_fytvy"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_op4cu"]
+size = Vector3(2.074463, 1.225708, 1.0049858)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8l3nt"]
+size = Vector3(1.9919434, 1.6416016, 0.5686035)
+
+[node name="CraftingTable" type="Node3D" unique_id=281181077 node_paths=PackedStringArray("light", "audioPlayer")]
+script = ExtResource("1_8y42y")
+light = NodePath("OmniLight3D")
+audioPlayer = NodePath("AudioStreamPlayer3D")
+audioSwitchOn = ExtResource("2_nt55c")
+audioSwitchOff = ExtResource("3_qwhyd")
+
+[node name="Crafting" parent="." unique_id=640451925 instance=ExtResource("4_fytvy")]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1049517902]
+transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0.04201746, 2.315936, -0.11812687)
+omni_range = 2.0754929
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1879964201]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=985714250]
+transform = Transform3D(0.9999971, 0, -3.1292439e-07, 0, 1, 0, 3.1292439e-07, 0, 0.9999971, 0.009644628, 0.6080575, 0.020497322)
+shape = SubResource("BoxShape3D_op4cu")
+debug_color = Color(0.98259956, 0, 0.36494964, 0.41960785)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" unique_id=911795698]
+transform = Transform3D(0.99999326, 0, -6.2584877e-07, 0, 1, 0, 6.2584877e-07, 0, 0.99999326, -0.012367845, 2.0179787, -0.38219547)
+shape = SubResource("BoxShape3D_8l3nt")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=2028183021]

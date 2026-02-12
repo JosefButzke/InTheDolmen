@@ -1,31 +1,30 @@
 [gd_scene format=3 uid="uid://b7xhpmht22rem"]
 
-[ext_resource type="Texture2D" uid="uid://cyym2mlrb3bul" path="res://Sprites/hexagon-vertical.png" id="1_vqo0j"]
-[ext_resource type="Texture2D" uid="uid://c3hvylylfgim6" path="res://Sprites/hexagon-vertical - border.png" id="2_4h18v"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6hjk3"]
-load_path = "res://.godot/imported/hexagon-vertical-border.png-b7d9121a25bd14594272f89b250329cd.ctex"
+[ext_resource type="Texture2D" uid="uid://cyym2mlrb3bul" path="res://Sprites/hexagon-vertical.png" id="1_4h18v"]
+[ext_resource type="Texture2D" uid="uid://c3hvylylfgim6" path="res://Sprites/hexagon-vertical-border.png" id="2_4h18v"]
 
 [node name="Slot" type="TextureButton" unique_id=863137491]
 custom_minimum_size = Vector2(108, 108)
 offset_right = 96.0
 offset_bottom = 96.0
-texture_normal = ExtResource("1_vqo0j")
+texture_normal = ExtResource("1_4h18v")
 texture_hover = ExtResource("2_4h18v")
 ignore_texture_size = true
-stretch_mode = 4
+stretch_mode = 5
 
 [node name="Label" type="Label" parent="." unique_id=638070256]
 visible = false
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
+anchors_preset = 7
+anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -34.0
-grow_horizontal = 0
+offset_left = -17.0
+offset_top = -31.0
+offset_right = 17.000015
+offset_bottom = 2.9999847
+grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 16
@@ -33,6 +32,18 @@ text = "99"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=888407608]
-visible = false
-texture = SubResource("CompressedTexture2D_6hjk3")
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1393189191]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 2
+stretch_mode = 5

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://cofy5qr1b7til"]
+
+[ext_resource type="Script" uid="uid://es4wis8qb51s" path="res://Scripts/Item.gd" id="1_3wbis"]
+[ext_resource type="Texture2D" uid="uid://d3a7kweqkhsh4" path="res://Sprites/copper-rock.png" id="1_go0ox"]
+
+[resource]
+script = ExtResource("1_3wbis")
+name = "Copper"
+description = "Resource from initial area"
+icon = ExtResource("1_go0ox")
+weight = 1.0
+item_type = 4
+metadata/_custom_type_script = "uid://es4wis8qb51s"

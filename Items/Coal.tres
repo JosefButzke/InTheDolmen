@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://be8qqkosu5r7p"]
+
+[ext_resource type="Texture2D" uid="uid://okqrvxxre7j3" path="res://Sprites/coal-rock.png" id="1_tumab"]
+[ext_resource type="Script" uid="uid://es4wis8qb51s" path="res://Scripts/Item.gd" id="2_a6nty"]
+
+[resource]
+script = ExtResource("2_a6nty")
+name = "Coal"
+description = "Resource from initial area"
+icon = ExtResource("1_tumab")
+weight = 0.5
+item_type = 4
+metadata/_custom_type_script = "uid://es4wis8qb51s"

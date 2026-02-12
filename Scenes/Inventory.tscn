@@ -1,6 +1,12 @@
 [gd_scene format=3 uid="uid://8q0lfykmhgqv"]
 
 [ext_resource type="PackedScene" uid="uid://b7xhpmht22rem" path="res://Scenes/Slot.tscn" id="1_ersrd"]
+[ext_resource type="Script" uid="uid://b864srjw6qvhw" path="res://Scripts/InventoryManager.gd" id="1_jbd0o"]
+[ext_resource type="Script" uid="uid://es4wis8qb51s" path="res://Scripts/Item.gd" id="2_4ne0y"]
+[ext_resource type="Resource" uid="uid://be8qqkosu5r7p" path="res://Items/Coal.tres" id="3_yeyjc"]
+[ext_resource type="Resource" uid="uid://cofy5qr1b7til" path="res://Items/Copper.tres" id="4_fih0l"]
+[ext_resource type="Resource" uid="uid://cjfg8wkhgeu5" path="res://Items/Silica.tres" id="5_tqkc6"]
+[ext_resource type="Resource" uid="uid://c6rokm658otvh" path="res://Items/EletricWire.tres" id="6_6faio"]
 
 [node name="Inventory" type="Control" unique_id=1195171337]
 layout_mode = 3
@@ -12,6 +18,8 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
+script = ExtResource("1_jbd0o")
+items = Array[ExtResource("2_4ne0y")]([ExtResource("3_yeyjc"), ExtResource("4_fih0l"), ExtResource("5_tqkc6"), ExtResource("6_6faio"), null])
 
 [node name="BoxContainer" type="BoxContainer" parent="." unique_id=384209394]
 layout_mode = 1

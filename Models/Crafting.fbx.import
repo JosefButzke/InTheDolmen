@@ -37,7 +37,45 @@ import_script/path=""
 materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
-_subresources={}
+_subresources={
+"materials": {
+"Aluminium": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://Materials/Aluminium.tres",
+"use_external/path": "uid://dsmg6t78dt2pa"
+},
+"WireNegative": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://Materials/WireNegative.tres",
+"use_external/path": "uid://c13mqo2147qi3"
+},
+"WirePositive": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://Materials/WirePositive.tres",
+"use_external/path": "uid://dqnehrmm6r565"
+},
+"Wood": {
+"use_external/enabled": true,
+"use_external/fallback_path": "",
+"use_external/path": ""
+},
+"Wood-Dark": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://Materials/Wood-Dark.tres",
+"use_external/path": "uid://dpwxdlhucnmom"
+},
+"Wood-Dark.001": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://Materials/Wood-Dark.001.tres",
+"use_external/path": "uid://b7eff414g7p3o"
+},
+"Yellow": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://Materials/Yellow.tres",
+"use_external/path": "uid://3qbft1yscwx0"
+}
+}
+}
 fbx/importer=0
 fbx/allow_geometry_helper_nodes=false
 fbx/embedded_image_handling=1

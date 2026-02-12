@@ -10,7 +10,6 @@ extends Node3D
 @export_range(0, 16) var RAY_LENGTH: int = 8:
 	set(value):
 		RAY_LENGTH = value
-@export var inventory: Control
 		
 var current_interactable_object: Interactable = null
 
@@ -40,15 +39,6 @@ func _process(delta: float) -> void:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			
-	if Input.is_action_just_pressed("Inventory"):
-		if inventory.visible:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-			inventory.visible = false
-		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			inventory.visible = true
-	pass
 
 func _physics_process(delta: float) -> void:
 	# Apply gravity
