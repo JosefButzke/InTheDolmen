@@ -200,7 +200,8 @@ func run_compute():
 	
 	var mesh_instance_triangles = MeshInstance3D.new()
 	mesh_instance_triangles.name = "Mesh" + str(Vector3(0, 0, 0))
-	mesh_instance_triangles.position = Vector3(-chunkWidth / 2, -chunkHeight / 2, -chunkWidth / 2)
+
+	mesh_instance_triangles.position = Vector3(-chunkWidth / 2.0, -chunkHeight / 2.0, -chunkWidth / 2.0)
 
 	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 	mesh.surface_set_material(0, material)
