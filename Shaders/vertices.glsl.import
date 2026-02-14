@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://c0n3vqcth4www"
+path="res://.godot/imported/vertices.glsl-8d371967dcd4475864043d3569ad7d80.res"
+
+[deps]
+
+source_file="res://Shaders/vertices.glsl"
+dest_files=["res://.godot/imported/vertices.glsl-8d371967dcd4475864043d3569ad7d80.res"]
+
+[params]
+

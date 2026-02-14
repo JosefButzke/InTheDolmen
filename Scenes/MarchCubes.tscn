@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://qaj86m116olc"]
 
-[ext_resource type="Script" uid="uid://dwv3r7hdil4nr" path="res://Scripts/ShaderTest2.gd" id="1_7r4qv"]
+[ext_resource type="Script" uid="uid://dwv3r7hdil4nr" path="res://Scripts/ChunkGenerator.gd" id="1_7r4qv"]
 
 [node name="MarchCubes" type="Node3D" unique_id=474039815]
 script = ExtResource("1_7r4qv")

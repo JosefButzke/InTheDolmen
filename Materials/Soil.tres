@@ -2,5 +2,5 @@
 
 [resource]
 resource_local_to_scene = true
-albedo_color = Color(0.7316288, 0.3272695, 0.19587654, 1)
+albedo_color = Color(0.73333335, 0.3254902, 0.19607843, 1)
 metallic_specular = 0.0

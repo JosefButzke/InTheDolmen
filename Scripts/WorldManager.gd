@@ -185,6 +185,7 @@ func generate(chunk_position: Vector3) -> void:
 	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 	mesh.surface_set_material(0, material)
 	
+	
 	mesh_instance_triangles.mesh = mesh
 	add_child(mesh_instance_triangles)
 	mesh_instance_triangles.owner = self
