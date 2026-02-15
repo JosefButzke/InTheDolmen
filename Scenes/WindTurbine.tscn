@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bsnwgybdu2td3"]
+
+[ext_resource type="PackedScene" uid="uid://b2cl8ke4k8jun" path="res://Models/WindTurbine.glb" id="1_se437"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_se437"]
+animation = &"TorusAction"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a67jo"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_a67jo"]
+states/TorusAction/node = SubResource("AnimationNodeAnimation_se437")
+states/TorusAction/position = Vector2(536, 101)
+transitions = ["Start", "TorusAction", SubResource("AnimationNodeStateMachineTransition_a67jo")]
+
+[node name="WindTurbine" unique_id=262050106 instance=ExtResource("1_se437")]
+
+[node name="Torus" parent="." index="1" unique_id=549267609]
+transform = Transform3D(0.1017275, 7.8701696e-08, 0.50011975, 0.50011975, -2.1860929e-08, -0.1017275, 5.7350698e-09, 0.5103609, -8.147985e-08, 0, 4.738952, -0.46793315)
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="4" unique_id=1240879829]
+tree_root = SubResource("AnimationNodeStateMachine_a67jo")
+anim_player = NodePath("../AnimationPlayer")

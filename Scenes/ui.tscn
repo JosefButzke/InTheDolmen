@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bwwyxaswtu3yk" path="res://Scenes/UIManager.gd" id="1_nf4gj"]
 [ext_resource type="PackedScene" uid="uid://785u8sb6pbtc" path="res://Scenes/Hotbar.tscn" id="1_nxvpl"]
 [ext_resource type="PackedScene" uid="uid://8q0lfykmhgqv" path="res://Scenes/Inventory.tscn" id="2_dewlx"]
+[ext_resource type="PackedScene" uid="uid://b7xhpmht22rem" path="res://Scenes/Slot.tscn" id="4_2246s"]
 
 [node name="UI" type="Control" unique_id=844746813 node_paths=PackedStringArray("inventory")]
 layout_mode = 3
@@ -17,6 +18,24 @@ inventory = NodePath("Inventory")
 
 [node name="Inventory" parent="." unique_id=1195171337 instance=ExtResource("2_dewlx")]
 layout_mode = 1
+offset_left = -617.802
+offset_top = -480.125
+offset_right = 617.803
+offset_bottom = -75.44574
+
+[node name="Slot" parent="Inventory" unique_id=863137491 instance=ExtResource("4_2246s")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -266.0005
+offset_top = -754.2196
+offset_right = 265.9995
+offset_bottom = -222.21964
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Hotbar" parent="." unique_id=1407471595 instance=ExtResource("1_nxvpl")]
 layout_mode = 1

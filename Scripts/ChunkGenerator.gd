@@ -3,11 +3,11 @@
 extends Node3D
 class_name MarchCubesCompute
 
-@export_range(8, 256, 8) var chunkWidth: int = 8:
+@export_range(8, 256, 8) var chunkWidth: int = 32:
 	set(value):
 		chunkWidth = value
 		
-@export_range(8, 64, 8) var chunkHeight: int = 8:
+@export_range(8, 64, 8) var chunkHeight: int = 32:
 	set(value):
 		chunkHeight = value
 
@@ -19,11 +19,11 @@ class_name MarchCubesCompute
 	set(value):
 		_lacunarity = value
 		
-@export_range(0, 1, 0.1) var _gain: float = 0.5:
+@export_range(0, 1, 0.1) var _gain: float = 0.3:
 	set(value):
 		_gain = value
 		
-@export_range(1, 64, 1) var _scale: float = 1.0:
+@export_range(16, 256, 16) var _scale: float = 16:
 	set(value):
 		_scale = value
 		
@@ -31,18 +31,30 @@ class_name MarchCubesCompute
 
 @export_tool_button("Run Compute", "Shader") var run_compute_action = run_compute
 
+const VERTICES_SHADER := preload("res://Shaders/vertices.glsl")
+const MC_SHADER := preload("res://Shaders/march_cube.glsl")
+
 func run_compute():
-	print("---------- Start vertices compute shader ---------- ")
+	print("---------- Start vertices compute shader ---------- ", Time.get_time_string_from_system())
 	remove_children()
-	
+	print("start", Time.get_time_string_from_system())
 	# Create a local rendering device.
 	var rd := RenderingServer.create_local_rendering_device()
-	
+	print("p1", Time.get_time_string_from_system())
 	# Load GLSL shader
-	var shader_vertices_file := load("res://Shaders/vertices.glsl")
+	var shader_vertices_file := VERTICES_SHADER
 	var shader_vertices_spirv: RDShaderSPIRV = shader_vertices_file.get_spirv()
 	var shader_vertices := rd.shader_create_from_spirv(shader_vertices_spirv)
-	
+	print("p2", Time.get_time_string_from_system())
+	var shader_march_cube_file := MC_SHADER
+	print("p2.1", Time.get_time_string_from_system())
+	var shader_march_cube_spirv: RDShaderSPIRV = shader_march_cube_file.get_spirv()
+	print("p2.2", Time.get_time_string_from_system())
+	var shader_march_cube := rd.shader_create_from_spirv(shader_march_cube_spirv)
+	print("p3", Time.get_time_string_from_system())
+	var pipeline := rd.compute_pipeline_create(shader_vertices)
+	var pipelineMC := rd.compute_pipeline_create(shader_march_cube)
+	print("end pipeline", Time.get_time_string_from_system())
 	# Buffer output to vertices
 	# Each float has 4 bytes (32 bit)
 	var floatBytes = 4
@@ -83,42 +95,30 @@ func run_compute():
 	uniformChunkParams.add_id(bufferChunkParams)
 	
 	var uniform_set := rd.uniform_set_create([uniformVertices, uniformNoiseParams, uniformChunkParams], shader_vertices, 0) # the last parameter (the 0) needs to match the "set" in our shader file
-	
+	print("end uni vert", Time.get_time_string_from_system())
 	# Create a compute pipeline
-	var pipeline := rd.compute_pipeline_create(shader_vertices)
+
 	var compute_list := rd.compute_list_begin()
 	rd.compute_list_bind_compute_pipeline(compute_list, pipeline)
 	rd.compute_list_bind_uniform_set(compute_list, uniform_set, 0)
 	rd.compute_list_dispatch(compute_list, int(chunkWidth / 8.0), int(chunkHeight / 8.0), int(chunkWidth / 8.0))
-	rd.compute_list_end()
 	
-	# Submit to GPU and wait for sync
-	rd.submit()
-	rd.sync()
-	
-	# var output_bytes := rd.buffer_get_data(bufferVertices)
-	# var output := output_bytes.to_vector4_array()
-	
-	# for i in range(output.size()):
-	# 	if output[i].w >= 0:
-	# 		createSphere(output[i])
-	
-	var shader_march_cube_file := load("res://Shaders/march_cube.glsl")
-	var shader_march_cube_spirv: RDShaderSPIRV = shader_march_cube_file.get_spirv()
-	var shader_march_cube := rd.shader_create_from_spirv(shader_march_cube_spirv)
-		
+	rd.compute_list_add_barrier(compute_list)
+	print("end pipe vert", Time.get_time_string_from_system())	
+
+	print("start uni mc", Time.get_time_string_from_system())
 	var uniformVerticesIn := RDUniform.new()
 	uniformVerticesIn.uniform_type = RenderingDevice.UNIFORM_TYPE_STORAGE_BUFFER
 	uniformVerticesIn.binding = 0 # this needs to match the "binding" in our shader file
 	uniformVerticesIn.add_id(bufferVertices)
-	
+	print(444, Time.get_time_string_from_system())
 	var bufferVerticesOut: RID = rd.storage_buffer_create(chunkWidth * chunkWidth * chunkHeight * floatBytes * vector4Items * 5)
 	
 	var uniformVerticesOut := RDUniform.new()
 	uniformVerticesOut.uniform_type = RenderingDevice.UNIFORM_TYPE_STORAGE_BUFFER
 	uniformVerticesOut.binding = 1 # this needs to match the "binding" in our shader file
 	uniformVerticesOut.add_id(bufferVerticesOut)
-
+	
 	#Buffer chunk params
 	var chunkParamsMC = PackedFloat32Array([
 		float(chunkWidth),
@@ -149,19 +149,21 @@ func run_compute():
 	uniformNormalsOut.add_id(bufferNormalsOut)
 	
 	var uniform_set_march_cube := rd.uniform_set_create([uniformVerticesIn, uniformVerticesOut, uniformChunkParamsMarchCube, uniformCounter, uniformNormalsOut], shader_march_cube, 0) # the last parameter (the 0) needs to match the "set" in our shader file
-	print(2)
+	print("end uni mc", Time.get_time_string_from_system())
 	# Create a compute pipeline
-	var pipeline2 := rd.compute_pipeline_create(shader_march_cube)
-	var compute_list2 := rd.compute_list_begin()
-	rd.compute_list_bind_compute_pipeline(compute_list2, pipeline2)
-	rd.compute_list_bind_uniform_set(compute_list2, uniform_set_march_cube, 0)
-	rd.compute_list_dispatch(compute_list2, int((chunkWidth) / 8.0), int(chunkHeight / 8.0), int((chunkWidth) / 8.0))
+	
+	print("start pipe mc", Time.get_time_string_from_system())
+	rd.compute_list_bind_compute_pipeline(compute_list, pipelineMC)
+	rd.compute_list_bind_uniform_set(compute_list, uniform_set_march_cube, 0)
+	rd.compute_list_dispatch(compute_list, int((chunkWidth) / 8.0), int(chunkHeight / 8.0), int((chunkWidth) / 8.0))
 	rd.compute_list_end()
-	print(3)
+	print(3, Time.get_time_string_from_system())
 	# Submit to GPU and wait for sync
+	print("end pipe mc", Time.get_time_string_from_system())
+	print("start sync", Time.get_time_string_from_system())
 	rd.submit()
 	rd.sync ()
-	print(4)
+	print("end sync", Time.get_time_string_from_system())
 	# Read back the data from the buffer
 
 	var output_vertices_bytes = rd.buffer_get_data(bufferVerticesOut)
@@ -171,7 +173,6 @@ func run_compute():
 	var triangles: PackedVector3Array = PackedVector3Array()
 	var normals: PackedVector3Array = PackedVector3Array()
 		
-	print("-------")
 	var counter_bytes = rd.buffer_get_data(counterBuffer)
 	var vertex_count = counter_bytes.to_int32_array()[0]
 
@@ -181,13 +182,14 @@ func run_compute():
 			output_vertices_vec4[i].y,
 			output_vertices_vec4[i].z
 		))
-	for i in vertex_count:
 		normals.append(Vector3(
 			output_normals_vec4[i].x,
 			output_normals_vec4[i].y,
 			output_normals_vec4[i].z
 		))
-	
+		
+		
+	print(5, Time.get_time_string_from_system())
 	print("Triangle size/ ", triangles.size(), " : ", vertex_count)
 
 	var mesh := ArrayMesh.new()
@@ -209,8 +211,9 @@ func run_compute():
 	mesh_instance_triangles.mesh = mesh
 	add_child(mesh_instance_triangles)
 	mesh_instance_triangles.owner = self
-	
+	print(6, Time.get_time_string_from_system())
 	add_trimesh_collision(self , mesh, Transform3D(Basis.IDENTITY, mesh_instance_triangles.position))
+	print(7, Time.get_time_string_from_system())
 	
 func add_trimesh_collision(parent: Node3D, tri_mesh: Mesh, xform: Transform3D) -> void:
 	# Static body to hold the collision

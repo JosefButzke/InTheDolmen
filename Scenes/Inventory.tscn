@@ -10,13 +10,16 @@
 
 [node name="Inventory" type="Control" unique_id=1195171337]
 layout_mode = 3
-anchors_preset = 8
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
+anchor_bottom = 1.0
+offset_left = -613.515
+offset_top = -410.28503
+offset_right = 622.08997
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 size_flags_horizontal = 4
 script = ExtResource("1_jbd0o")
 items = Array[ExtResource("2_4ne0y")]([ExtResource("3_yeyjc"), ExtResource("4_fih0l"), ExtResource("5_tqkc6"), ExtResource("6_6faio"), null])
@@ -28,9 +31,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -558.0
+offset_left = -557.995
 offset_top = -193.0
-offset_right = 558.0
+offset_right = 558.00507
 offset_bottom = -85.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -63,6 +66,9 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Slot10" parent="BoxContainer" unique_id=1341328245 instance=ExtResource("1_ersrd")]
+layout_mode = 2
+
+[node name="Slot11" parent="BoxContainer" unique_id=1840706859 instance=ExtResource("1_ersrd")]
 layout_mode = 2
 
 [node name="BoxContainer2" type="BoxContainer" parent="." unique_id=1047410070]
@@ -106,6 +112,9 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Slot10" parent="BoxContainer2" unique_id=885427828 instance=ExtResource("1_ersrd")]
+layout_mode = 2
+
+[node name="Slot11" parent="BoxContainer2" unique_id=191328015 instance=ExtResource("1_ersrd")]
 layout_mode = 2
 
 [node name="BoxContainer3" type="BoxContainer" parent="." unique_id=1753534669]
@@ -152,6 +161,9 @@ layout_mode = 2
 [node name="Slot10" parent="BoxContainer3" unique_id=1704751829 instance=ExtResource("1_ersrd")]
 layout_mode = 2
 
+[node name="Slot11" parent="BoxContainer3" unique_id=1514479711 instance=ExtResource("1_ersrd")]
+layout_mode = 2
+
 [node name="BoxContainer4" type="BoxContainer" parent="." unique_id=1895341946]
 layout_mode = 1
 anchors_preset = 8
@@ -194,4 +206,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Slot10" parent="BoxContainer4" unique_id=1493178370 instance=ExtResource("1_ersrd")]
+layout_mode = 2
+
+[node name="Slot11" parent="BoxContainer4" unique_id=1495061159 instance=ExtResource("1_ersrd")]
 layout_mode = 2
