@@ -3,11 +3,11 @@
 extends Node3D
 class_name MarchCubesCompute
 
-@export_range(8, 256, 8) var chunkWidth: int = 32:
+@export_range(8, 4096, 8) var chunkWidth: int = 32:
 	set(value):
 		chunkWidth = value
 		
-@export_range(8, 64, 8) var chunkHeight: int = 32:
+@export_range(8, 256, 8) var chunkHeight: int = 32:
 	set(value):
 		chunkHeight = value
 

@@ -1,0 +1,159 @@
+[gd_scene format=3 uid="uid://bptteobbrql1y"]
+
+[ext_resource type="Script" uid="uid://2fnd4es5fg6p" path="res://Scripts/Player.gd" id="1_pqu7k"]
+[ext_resource type="PackedScene" uid="uid://db3dw4elilubw" path="res://Scenes/WorldManager.tscn" id="2_pqu7k"]
+[ext_resource type="Material" uid="uid://bky28pisu7hcd" path="res://Materials/player.tres" id="2_ti1bm"]
+[ext_resource type="Material" uid="uid://mmhw4wxmmgc1" path="res://Materials/white.tres" id="3_op4cu"]
+[ext_resource type="PackedScene" uid="uid://mwx5q7pol7ky" path="res://Scenes/CraftingTable.tscn" id="5_8l3nt"]
+[ext_resource type="PackedScene" uid="uid://boe3udje74rd2" path="res://Models/Battery.glb" id="8_q2d71"]
+[ext_resource type="PackedScene" uid="uid://bigguoih0f70p" path="res://Models/SolarPanel.glb" id="9_kn06e"]
+[ext_resource type="Material" uid="uid://f0unca2nf8rk" path="res://Materials/Water.tres" id="11_7yo87"]
+[ext_resource type="PackedScene" uid="uid://dip137op5b7w4" path="res://Scenes/ui.tscn" id="13_8l3nt"]
+[ext_resource type="PackedScene" uid="uid://bsnwgybdu2td3" path="res://Scenes/WindTurbine.tscn" id="13_kwl8l"]
+[ext_resource type="PackedScene" uid="uid://bg4ve414bndkl" path="res://Scenes/FurnaceT1.tscn" id="13_op4cu"]
+[ext_resource type="PackedScene" uid="uid://cj37fu4bc6cy" path="res://Models/truk.glb" id="22_w0bku"]
+[ext_resource type="PackedScene" uid="uid://df2788yx17oqb" path="res://Models/Pod.glb" id="23_0ao37"]
+
+[sub_resource type="Gradient" id="Gradient_31mi3"]
+offsets = PackedFloat32Array(0, 0.15990454, 0.849642, 0.9976134)
+colors = PackedColorArray(0, 0, 0, 1, 0.17370468, 0.12464001, 0.06430967, 1, 0.9631358, 0.8038448, 0.6295156, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_44f6d"]
+gradient = SubResource("Gradient_31mi3")
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_31mi3"]
+sky_top_color = Color(4.6205523e-06, 0.625139, 0.8861544, 1)
+sky_horizon_color = Color(0, 0.6627451, 0.84313726, 1)
+
+[sub_resource type="Sky" id="Sky_44f6d"]
+sky_material = SubResource("ProceduralSkyMaterial_31mi3")
+
+[sub_resource type="Environment" id="Environment_iacna"]
+background_mode = 2
+background_color = Color(0.023769587, 0, 0.41579223, 1)
+sky = SubResource("Sky_44f6d")
+ambient_light_sky_contribution = 0.0
+tonemap_mode = 2
+ssao_radius = 0.01
+sdfgi_enabled = true
+fog_density = 0.002
+fog_sky_affect = 0.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.002
+volumetric_fog_length = 30.0
+volumetric_fog_sky_affect = 0.0
+adjustment_enabled = true
+adjustment_color_correction = SubResource("GradientTexture1D_44f6d")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_uc036"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uc036"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_8l3nt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l11rc"]
+resource_local_to_scene = true
+albedo_color = Color(0.73333335, 0.3254902, 0.19607843, 1)
+metallic_specular = 0.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_kn06e"]
+
+[node name="World" type="Node3D" unique_id=425380973]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=618804016]
+environment = SubResource("Environment_iacna")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=1203197107]
+transform = Transform3D(0.651556, -0.073534444, 0.7550281, -0.7168263, 0.26604393, 0.64450026, -0.24826364, -0.96115214, 0.12063108, 0, 0, 0)
+light_volumetric_fog_energy = 5.0
+light_cull_mask = 4294966273
+shadow_enabled = true
+shadow_opacity = 0.96
+directional_shadow_max_distance = 300.0
+sky_mode = 1
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=1768123653 node_paths=PackedStringArray("characterBody", "camera_pivot", "camera")]
+transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, 22.839203, -2.8175342, 56.750153)
+script = ExtResource("1_pqu7k")
+speed = 10.0
+characterBody = NodePath(".")
+camera_pivot = NodePath("CameraPivot")
+camera = NodePath("CameraPivot/Camera3D")
+RAY_LENGTH = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=369928066]
+layers = 524288
+material_override = ExtResource("2_ti1bm")
+mesh = SubResource("CapsuleMesh_uc036")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=1463814721]
+shape = SubResource("CapsuleShape3D_uc036")
+
+[node name="CameraPivot" type="Node3D" parent="Player" unique_id=1559629034]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.93043256, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Player/CameraPivot" unique_id=1152764537]
+cull_mask = 524287
+current = true
+fov = 90.0
+
+[node name="Details" type="Node3D" parent="Player" unique_id=46134670]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Player/Details" unique_id=1798571983]
+transform = Transform3D(0.28499985, 0, 0, 0, 0.285, 0, 0, 0, 0.28499985, 0.19999997, 0.38899994, -0.4466653)
+layers = 524288
+material_override = ExtResource("3_op4cu")
+mesh = SubResource("SphereMesh_8l3nt")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Player/Details" unique_id=1481072752]
+transform = Transform3D(0.28499982, 0, 0, 0, 0.285, 0, 0, 0, 0.28499982, -0.19999997, 0.38899994, -0.4466653)
+layers = 524288
+material_override = ExtResource("3_op4cu")
+mesh = SubResource("SphereMesh_8l3nt")
+
+[node name="CraftingTable" parent="." unique_id=281181077 instance=ExtResource("5_8l3nt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.706917, -5.717999, 67.125275)
+
+[node name="Battery" parent="." unique_id=1496576069 instance=ExtResource("8_q2d71")]
+transform = Transform3D(-0.9859989, 0, 0.16675164, 0, 1, 0, -0.16675164, 0, -0.9859989, -4.7229633, -5.00915, 61.51391)
+
+[node name="SolarPanel" parent="." unique_id=1493178021 instance=ExtResource("9_kn06e")]
+transform = Transform3D(-0.99077624, 0, -0.13550815, 0, 1, 0, 0.13550815, 0, -0.99077624, -7.722385, -5.883024, 66.62245)
+
+[node name="SolarPanel2" parent="." unique_id=1035243673 instance=ExtResource("9_kn06e")]
+transform = Transform3D(-0.99077624, 0, -0.13550815, 0, 1, 0, 0.13550815, 0, -0.99077624, -6.766616, -5.816048, 66.21803)
+
+[node name="SolarPanel3" parent="." unique_id=1048532421 instance=ExtResource("9_kn06e")]
+transform = Transform3D(-0.99077624, 0, -0.13550815, 0, 1, 0, 0.13550815, 0, -0.99077624, -5.622382, -5.625424, 65.733864)
+
+[node name="Furnace1" parent="." unique_id=1658222846 instance=ExtResource("13_op4cu")]
+transform = Transform3D(-0.99980897, 0, 0.01954637, 0, 1, 0, -0.01954637, 0, -0.99980897, -11.579859, -6.0818515, 67.78506)
+
+[node name="WorldGenerator" parent="." unique_id=1561706391 instance=ExtResource("2_pqu7k")]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999998, 0, 0, 0, 0.99999976, 0.01939392, 0.14667511, 0.028219223)
+material = SubResource("StandardMaterial3D_l11rc")
+
+[node name="UI" parent="." unique_id=844746813 instance=ExtResource("13_8l3nt")]
+
+[node name="WindTurbine" parent="." unique_id=262050106 instance=ExtResource("13_kwl8l")]
+transform = Transform3D(-0.04558966, 0, -0.99896026, 0, 1, 0, 0.99896026, 0, -0.04558966, -35.00447, -5.0833316, 66.568665)
+visible = false
+
+[node name="WindTurbine2" parent="." unique_id=1495552305 instance=ExtResource("13_kwl8l")]
+transform = Transform3D(-0.04558966, 0, -0.99896026, 0, 1, 0, 0.99896026, 0, -0.04558966, -41.34424, -5.0484953, 58.477753)
+visible = false
+
+[node name="WindTurbine3" parent="." unique_id=1861969666 instance=ExtResource("13_kwl8l")]
+transform = Transform3D(-0.04558966, 0, -0.99896026, 0, 1, 0, 0.99896026, 0, -0.04558966, -46.963722, -2.601226, 49.929638)
+visible = false
+
+[node name="Water" type="MeshInstance3D" parent="." unique_id=424108989]
+transform = Transform3D(6951.8193, 0, 0, 0, 433.48422, 0, 0, 0, 2176.5828, 0, -6.6221924, 0)
+material_override = ExtResource("11_7yo87")
+mesh = SubResource("PlaneMesh_kn06e")
+
+[node name="truk" parent="." unique_id=1615626837 instance=ExtResource("22_w0bku")]
+transform = Transform3D(1, 0, 0, 0, 0.9943546, 0.10610788, 0, -0.10610788, 0.9943546, -31.160164, -3.4857526, 56.483807)
+
+[node name="Pod2" parent="." unique_id=1378655072 instance=ExtResource("23_0ao37")]
+transform = Transform3D(0.59412116, -0.4463268, -0.66918814, 0, 0.83193487, -0.5548735, 0.80437577, 0.32966208, 0.49427003, -11.728767, -5.3151746, 79.16148)

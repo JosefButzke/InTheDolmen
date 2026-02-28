@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dmllstk231tig"
+uid="uid://b5yhgdgg6ac27"
 path="res://.godot/imported/TreeT1.glb-36fbdbce074e83f0d9cfe88796fa2e9e.scn"
 
 [deps]
@@ -37,14 +37,6 @@ import_script/path=""
 materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
-_subresources={
-"materials": {
-"Material.001": {
-"use_external/enabled": true,
-"use_external/fallback_path": "res://Materials/tree.tres",
-"use_external/path": "uid://c55su3abt6mk8"
-}
-}
-}
+_subresources={}
 gltf/naming_version=2
 gltf/embedded_image_handling=1
