@@ -1,96 +1,12 @@
-[gd_scene format=3 uid="uid://cnhgqtkvlmusd"]
+[gd_scene format=3 uid="uid://cv8mlc27khe5d"]
 
-[ext_resource type="PackedScene" uid="uid://uxf4qmfe4n6n" path="res://Models/BobaSpike.glb" id="1_r28p6"]
-[ext_resource type="Script" uid="uid://cb8o2ivqfi5g" path="res://Scripts/Spike.gd" id="2_r76pj"]
+[ext_resource type="Script" uid="uid://cb8o2ivqfi5g" path="res://Scripts/BobaSpikeManager.gd" id="1_mxfa3"]
+[ext_resource type="PackedScene" uid="uid://b54cqmvkq388b" path="res://Models/BobaSpike.glb" id="3_tw1pg"]
+[ext_resource type="AudioStream" uid="uid://cq5ylgxakt252" path="res://Audios/spike-shoot.mp3" id="4_ky2e5"]
 
-[node name="BobaSpike" unique_id=248184809 instance=ExtResource("1_r28p6")]
+[node name="BobaSpike" unique_id=1911760903 node_paths=PackedStringArray("audioPlayer") instance=ExtResource("3_tw1pg")]
+script = ExtResource("1_mxfa3")
+audioPlayer = NodePath("AudioStreamPlayer3D")
 
-[node name="Cube" parent="." index="2" unique_id=241545300]
-script = ExtResource("2_r76pj")
-
-[node name="Cube_001" parent="." index="3" unique_id=43830825]
-script = ExtResource("2_r76pj")
-
-[node name="Cube_002" parent="." index="4" unique_id=1877336959]
-script = ExtResource("2_r76pj")
-
-[node name="Cube_003" parent="." index="5" unique_id=1509669469]
-script = ExtResource("2_r76pj")
-
-[node name="Cube_004" parent="." index="6" unique_id=1252015057]
-script = ExtResource("2_r76pj")
-
-[node name="Cube_005" parent="." index="7" unique_id=637487115]
-script = ExtResource("2_r76pj")
-
-[node name="Cube_006" parent="." index="8" unique_id=2002747841]
-script = ExtResource("2_r76pj")
-
-[node name="Cube_007" parent="." index="9" unique_id=434794953]
-script = ExtResource("2_r76pj")
-
-[node name="Cube_008" parent="." index="10" unique_id=1934408162]
-script = ExtResource("2_r76pj")
-
-[node name="Cube_009" parent="." index="11" unique_id=740817913]
-script = ExtResource("2_r76pj")
-
-[node name="Cube_010" parent="." index="12" unique_id=599294978]
-script = ExtResource("2_r76pj")
-
-[node name="Cube_011" parent="." index="13" unique_id=682962250]
-script = ExtResource("2_r76pj")
-
-[node name="Cube_012" parent="." index="14" unique_id=113278121]
-script = ExtResource("2_r76pj")
-
-[node name="Cube_013" parent="." index="15" unique_id=295757709]
-script = ExtResource("2_r76pj")
-
-[node name="Cube_014" parent="." index="16" unique_id=977302466]
-script = ExtResource("2_r76pj")
-
-[node name="Cube_015" parent="." index="17" unique_id=1366063715]
-script = ExtResource("2_r76pj")
-
-[node name="Cube_016" parent="." index="18" unique_id=1680138127]
-script = ExtResource("2_r76pj")
-
-[node name="Cube_017" parent="." index="19" unique_id=176429671]
-script = ExtResource("2_r76pj")
-
-[node name="Cube_018" parent="." index="20" unique_id=722139073]
-script = ExtResource("2_r76pj")
-
-[node name="Cube_019" parent="." index="21" unique_id=877031615]
-script = ExtResource("2_r76pj")
-
-[node name="Cube_020" parent="." index="22" unique_id=981432546]
-script = ExtResource("2_r76pj")
-
-[node name="Cube_021" parent="." index="23" unique_id=853620900]
-script = ExtResource("2_r76pj")
-
-[node name="Cube_022" parent="." index="24" unique_id=1525357164]
-script = ExtResource("2_r76pj")
-
-[node name="Cube_023" parent="." index="25" unique_id=1382828785]
-script = ExtResource("2_r76pj")
-
-[node name="Cube_024" parent="." index="26" unique_id=2075418434]
-script = ExtResource("2_r76pj")
-
-[node name="Cube_025" parent="." index="27" unique_id=560793196]
-script = ExtResource("2_r76pj")
-
-[node name="Cube_026" parent="." index="28" unique_id=1554611599]
-script = ExtResource("2_r76pj")
-
-[node name="Cube_027" parent="." index="29" unique_id=1656318300]
-script = ExtResource("2_r76pj")
-
-[node name="Cube_028" parent="." index="30" unique_id=502869407]
-script = ExtResource("2_r76pj")
-
-[node name="Cube_029" parent="." index="31" unique_id=635649321]
-script = ExtResource("2_r76pj")
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="34" unique_id=1895384124]
+stream = ExtResource("4_ky2e5")

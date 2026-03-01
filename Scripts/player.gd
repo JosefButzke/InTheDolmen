@@ -1,7 +1,7 @@
 extends Node3D
 
 @export var speed: float = 5.0
-@export var jump_velocity: float = 10
+@export var jump_velocity: float = 5.0
 @export var mouse_sensitivity: float = 0.002
 
 @export var characterBody: CharacterBody3D
@@ -21,6 +21,7 @@ var pitch := 0.0
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	add_to_group("player")
 	
 func _unhandled_input(event):
 	if event is InputEventMouseMotion && Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:

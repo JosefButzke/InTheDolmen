@@ -11,9 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://dip137op5b7w4" path="res://Scenes/ui.tscn" id="13_8l3nt"]
 [ext_resource type="PackedScene" uid="uid://bsnwgybdu2td3" path="res://Scenes/WindTurbine.tscn" id="13_kwl8l"]
 [ext_resource type="PackedScene" uid="uid://bg4ve414bndkl" path="res://Scenes/FurnaceT1.tscn" id="13_op4cu"]
+[ext_resource type="PackedScene" uid="uid://cv8mlc27khe5d" path="res://Scenes/BobaSpike.tscn" id="14_8l3nt"]
 [ext_resource type="PackedScene" uid="uid://cj37fu4bc6cy" path="res://Models/truk.glb" id="22_w0bku"]
 [ext_resource type="PackedScene" uid="uid://df2788yx17oqb" path="res://Models/Pod.glb" id="23_0ao37"]
-[ext_resource type="PackedScene" uid="uid://cnhgqtkvlmusd" path="res://Scenes/BobaSpike.tscn" id="24_d3ars"]
 
 [sub_resource type="Gradient" id="Gradient_31mi3"]
 offsets = PackedFloat32Array(0, 0.15990454, 0.849642, 0.9976134)
@@ -159,5 +159,20 @@ transform = Transform3D(1, 0, 0, 0, 0.9943546, 0.10610788, 0, -0.10610788, 0.994
 [node name="Pod2" parent="." unique_id=1378655072 instance=ExtResource("23_0ao37")]
 transform = Transform3D(0.59412116, -0.4463268, -0.66918814, 0, 0.83193487, -0.5548735, 0.80437577, 0.32966208, 0.49427003, -11.728767, -5.3151746, 79.16148)
 
-[node name="BobaSpike" parent="." unique_id=248184809 instance=ExtResource("24_d3ars")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.324589, -4.5259295, 70.56054)
+[node name="BobaSpike" parent="." unique_id=1911760903 instance=ExtResource("14_8l3nt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7629039, -4.273792, 69.254745)
+
+[node name="BobaSpike2" parent="." unique_id=1696669744 instance=ExtResource("14_8l3nt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.771189, -3.3986797, 87.42833)
+
+[node name="BobaSpike3" parent="." unique_id=1837842505 instance=ExtResource("14_8l3nt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.89058, -5.5587115, 62.11744)
+
+[node name="BobaSpike4" parent="." unique_id=2078992333 instance=ExtResource("14_8l3nt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7629039, -2.5035377, 84.6026)
+
+[node name="BobaSpike5" parent="." unique_id=1874926115 instance=ExtResource("14_8l3nt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.124014, -6.16324, 69.254745)
+
+[node name="BobaSpike6" parent="." unique_id=177524741 instance=ExtResource("14_8l3nt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.95161, -1.5601029, 90.68087)

@@ -6,11 +6,12 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var rows: Array[Node] = get_children()
+	var rows = get_children()
 	
 	for i in range(rows.size()):
-		var slotsRow = rows[i].get_children()
-		slotsUI.append_array(slotsRow)
+		for child in rows[i].get_children():
+			if child is TextureButton:
+				slotsUI.append(child)
 		
 	slotsNumber = slotsUI.size()
 	items.resize(slotsNumber)
