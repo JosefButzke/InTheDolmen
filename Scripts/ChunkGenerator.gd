@@ -3,6 +3,10 @@
 extends Node3D
 class_name MarchCubesCompute
 
+@export_range(1, 32) var chunksFromPlayer: int = 1:
+	set(value):
+		chunksFromPlayer = value
+
 @export_range(8, 4096, 8) var chunkWidth: int = 32:
 	set(value):
 		chunkWidth = value
@@ -29,32 +33,32 @@ class_name MarchCubesCompute
 		
 @export var material: StandardMaterial3D
 
-@export_tool_button("Run Compute", "Shader") var run_compute_action = run_compute
+@export_tool_button("Run Compute", "Shader") var run_compute_action = generate_world
 
 const VERTICES_SHADER := preload("res://Shaders/vertices.glsl")
 const MC_SHADER := preload("res://Shaders/march_cube.glsl")
 
-func run_compute():
-	print("---------- Start vertices compute shader ---------- ", Time.get_time_string_from_system())
+var _rd: RenderingDevice
+var _shader_vertices: RID
+var _shader_march_cube: RID
+var _pipeline: RID
+var _pipelineMC: RID
+
+func _ready():
+	_rd = RenderingServer.create_local_rendering_device()
+	_shader_vertices = _rd.shader_create_from_spirv(VERTICES_SHADER.get_spirv())
+	_shader_march_cube = _rd.shader_create_from_spirv(MC_SHADER.get_spirv())
+	_pipeline = _rd.compute_pipeline_create(_shader_vertices)
+	_pipelineMC = _rd.compute_pipeline_create(_shader_march_cube)
+
+func generate_world():
 	remove_children()
-	print("start", Time.get_time_string_from_system())
-	# Create a local rendering device.
-	var rd := RenderingServer.create_local_rendering_device()
-	print("p1", Time.get_time_string_from_system())
-	# Load GLSL shader
-	var shader_vertices_file := VERTICES_SHADER
-	var shader_vertices_spirv: RDShaderSPIRV = shader_vertices_file.get_spirv()
-	var shader_vertices := rd.shader_create_from_spirv(shader_vertices_spirv)
-	print("p2", Time.get_time_string_from_system())
-	var shader_march_cube_file := MC_SHADER
-	print("p2.1", Time.get_time_string_from_system())
-	var shader_march_cube_spirv: RDShaderSPIRV = shader_march_cube_file.get_spirv()
-	print("p2.2", Time.get_time_string_from_system())
-	var shader_march_cube := rd.shader_create_from_spirv(shader_march_cube_spirv)
-	print("p3", Time.get_time_string_from_system())
-	var pipeline := rd.compute_pipeline_create(shader_vertices)
-	var pipelineMC := rd.compute_pipeline_create(shader_march_cube)
-	print("end pipeline", Time.get_time_string_from_system())
+	var rd := _rd
+	var shader_vertices := _shader_vertices
+	var shader_march_cube := _shader_march_cube
+	var pipeline := _pipeline
+	var pipelineMC := _pipelineMC
+
 	# Buffer output to vertices
 	# Each float has 4 bytes (32 bit)
 	var floatBytes = 4
@@ -95,7 +99,7 @@ func run_compute():
 	uniformChunkParams.add_id(bufferChunkParams)
 	
 	var uniform_set := rd.uniform_set_create([uniformVertices, uniformNoiseParams, uniformChunkParams], shader_vertices, 0) # the last parameter (the 0) needs to match the "set" in our shader file
-	print("end uni vert", Time.get_time_string_from_system())
+	
 	# Create a compute pipeline
 
 	var compute_list := rd.compute_list_begin()
@@ -104,14 +108,12 @@ func run_compute():
 	rd.compute_list_dispatch(compute_list, int(chunkWidth / 8.0), int(chunkHeight / 8.0), int(chunkWidth / 8.0))
 	
 	rd.compute_list_add_barrier(compute_list)
-	print("end pipe vert", Time.get_time_string_from_system())	
 
-	print("start uni mc", Time.get_time_string_from_system())
 	var uniformVerticesIn := RDUniform.new()
 	uniformVerticesIn.uniform_type = RenderingDevice.UNIFORM_TYPE_STORAGE_BUFFER
 	uniformVerticesIn.binding = 0 # this needs to match the "binding" in our shader file
 	uniformVerticesIn.add_id(bufferVertices)
-	print(444, Time.get_time_string_from_system())
+
 	var bufferVerticesOut: RID = rd.storage_buffer_create(chunkWidth * chunkWidth * chunkHeight * floatBytes * vector4Items * 5)
 	
 	var uniformVerticesOut := RDUniform.new()
@@ -149,21 +151,16 @@ func run_compute():
 	uniformNormalsOut.add_id(bufferNormalsOut)
 	
 	var uniform_set_march_cube := rd.uniform_set_create([uniformVerticesIn, uniformVerticesOut, uniformChunkParamsMarchCube, uniformCounter, uniformNormalsOut], shader_march_cube, 0) # the last parameter (the 0) needs to match the "set" in our shader file
-	print("end uni mc", Time.get_time_string_from_system())
+
 	# Create a compute pipeline
-	
-	print("start pipe mc", Time.get_time_string_from_system())
 	rd.compute_list_bind_compute_pipeline(compute_list, pipelineMC)
 	rd.compute_list_bind_uniform_set(compute_list, uniform_set_march_cube, 0)
 	rd.compute_list_dispatch(compute_list, int((chunkWidth) / 8.0), int(chunkHeight / 8.0), int((chunkWidth) / 8.0))
 	rd.compute_list_end()
-	print(3, Time.get_time_string_from_system())
+
 	# Submit to GPU and wait for sync
-	print("end pipe mc", Time.get_time_string_from_system())
-	print("start sync", Time.get_time_string_from_system())
 	rd.submit()
-	rd.sync ()
-	print("end sync", Time.get_time_string_from_system())
+	rd.sync()
 	# Read back the data from the buffer
 
 	var output_vertices_bytes = rd.buffer_get_data(bufferVerticesOut)
@@ -187,10 +184,6 @@ func run_compute():
 			output_normals_vec4[i].y,
 			output_normals_vec4[i].z
 		))
-		
-		
-	print(5, Time.get_time_string_from_system())
-	print("Triangle size/ ", triangles.size(), " : ", vertex_count)
 
 	var mesh := ArrayMesh.new()
 
@@ -211,11 +204,9 @@ func run_compute():
 	mesh_instance_triangles.mesh = mesh
 	add_child(mesh_instance_triangles)
 	mesh_instance_triangles.owner = self
-	print(6, Time.get_time_string_from_system())
-	add_trimesh_collision(self , mesh, Transform3D(Basis.IDENTITY, mesh_instance_triangles.position))
-	print(7, Time.get_time_string_from_system())
+	add_trimesh_collision(mesh_instance_triangles, mesh, Transform3D(Basis.IDENTITY, mesh_instance_triangles.position))
 	
-func add_trimesh_collision(parent: Node3D, tri_mesh: Mesh, xform: Transform3D) -> void:
+func add_trimesh_collision(parent: Node3D, tri_mesh: Mesh, xform: Transform3D) -> StaticBody3D:
 	# Static body to hold the collision
 	var body := StaticBody3D.new()
 	body.name = "TrianglesBody"
@@ -236,12 +227,9 @@ func add_trimesh_collision(parent: Node3D, tri_mesh: Mesh, xform: Transform3D) -
 	# Ensure ownership so it gets saved
 	body.owner = parent
 	col.owner = parent
+	return body
 	
-
 func remove_children():
-	print("Removing Children...")
 	var children := get_children()
 	for child in children:
 		remove_child(child)
-		
-	print("Removing Children Done")
