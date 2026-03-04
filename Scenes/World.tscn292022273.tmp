@@ -11,13 +11,12 @@
 [ext_resource type="PackedScene" uid="uid://b5yhgdgg6ac27" path="res://Models/TreeT1.glb" id="10_r0dna"]
 [ext_resource type="PackedScene" uid="uid://okk0uyp2m751" path="res://Models/Grass2.glb" id="11_b5aes"]
 [ext_resource type="PackedScene" uid="uid://b4awl183garfr" path="res://Models/Grass.fbx" id="12_w0bku"]
+[ext_resource type="PackedScene" uid="uid://c5rt7c2yxgj1h" path="res://Models/Crafting.fbx" id="13_0ao37"]
 [ext_resource type="PackedScene" uid="uid://dip137op5b7w4" path="res://Scenes/ui.tscn" id="13_8l3nt"]
+[ext_resource type="PackedScene" uid="uid://bieep0lxwip17" path="res://Models/Furnace1.glb" id="14_d3ars"]
 [ext_resource type="PackedScene" uid="uid://bik110tlavnun" path="res://Models/Rocks.glb" id="15_l11rc"]
-[ext_resource type="PackedScene" uid="uid://cv8mlc27khe5d" path="res://Scenes/BobaSpike.tscn" id="16_rwt1y"]
 [ext_resource type="PackedScene" uid="uid://bigguoih0f70p" path="res://Models/SolarPanel.glb" id="16_w86vl"]
-[ext_resource type="PackedScene" uid="uid://mwx5q7pol7ky" path="res://Scenes/CraftingTable.tscn" id="17_mvfa8"]
-[ext_resource type="PackedScene" uid="uid://bg4ve414bndkl" path="res://Scenes/FurnaceT1.tscn" id="18_r0dna"]
-[ext_resource type="PackedScene" uid="uid://bsnwgybdu2td3" path="res://Scenes/WindTurbine.tscn" id="18_rwt1y"]
+[ext_resource type="PackedScene" uid="uid://b2cl8ke4k8jun" path="res://Models/WindTurbine.glb" id="17_33kev"]
 
 [sub_resource type="Gradient" id="Gradient_31mi3"]
 offsets = PackedFloat32Array(0, 0.15990454, 0.849642, 0.9976134)
@@ -56,7 +55,7 @@ adjustment_color_correction = SubResource("GradientTexture1D_44f6d")
 
 [sub_resource type="SphereMesh" id="SphereMesh_8l3nt"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_waglr"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p70al"]
 resource_local_to_scene = true
 albedo_color = Color(0.73333335, 0.3254902, 0.19607843, 1)
 metallic_specular = 0.0
@@ -79,7 +78,6 @@ sky_mode = 1
 transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, 0, 13.288712, 0)
 script = ExtResource("1_pqu7k")
 speed = 10.0
-jump_velocity = 8.0
 characterBody = NodePath(".")
 camera_pivot = NodePath("CameraPivot")
 camera = NodePath("CameraPivot/Camera3D")
@@ -118,10 +116,10 @@ mesh = SubResource("SphereMesh_8l3nt")
 [node name="UI" parent="." unique_id=844746813 instance=ExtResource("13_8l3nt")]
 
 [node name="WorldGenerator" parent="." unique_id=1561706391 instance=ExtResource("5_p70al")]
-material = SubResource("StandardMaterial3D_waglr")
+material = SubResource("StandardMaterial3D_p70al")
 
 [node name="Baloon" parent="." unique_id=499380810 instance=ExtResource("6_45d1s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.669912, 56.024895, -70.32084)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.669912, 29.247564, -27.74304)
 
 [node name="Pod2" parent="." unique_id=1256565128 instance=ExtResource("7_waglr")]
 transform = Transform3D(-0.8053659, 0.1715421, -0.5674146, 0.12348662, 0.98476315, 0.122443885, 0.57977325, 0.028543964, -0.81427777, -25.391012, 14.761658, -17.191408)
@@ -131,6 +129,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.488933, 8.254054, -22.713
 
 [node name="BobaSpike2" parent="." unique_id=1661642865 instance=ExtResource("8_rwt1y")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.718567, 8.053209, -32.515907)
+
+[node name="BobaSpike3" parent="." unique_id=125446136 instance=ExtResource("8_rwt1y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.553406, 14.699716, 21.176792)
 
 [node name="truk" parent="." unique_id=1615626837 instance=ExtResource("9_mvfa8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.401106, 4.0877438, -22.275038)
@@ -171,6 +172,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.872417, 22.487095, -51.636
 [node name="Grass8" parent="." unique_id=751526763 instance=ExtResource("12_w0bku")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.588142, 15.647887, -2.8882363)
 
+[node name="Crafting" parent="." unique_id=1119421936 instance=ExtResource("13_0ao37")]
+transform = Transform3D(-0.59882796, 0, -0.8008777, 0, 1, 0, 0.8008777, 0, -0.59882796, 22.913723, 12.982505, 18.215961)
+
+[node name="Furnace1" parent="." unique_id=1658222846 instance=ExtResource("14_d3ars")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.414314, 12.547958, 20.683598)
+
 [node name="Rocks" parent="." unique_id=1861379317 instance=ExtResource("15_l11rc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.222645, 24.565193, -0.7784698)
 
@@ -195,26 +202,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.727375, 19.40016, 23.3968
 [node name="SolarPanel3" parent="." unique_id=172597473 instance=ExtResource("16_w86vl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.435913, 19.729864, 24.53878)
 
-[node name="Baloon2" parent="." unique_id=122736936 instance=ExtResource("6_45d1s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.54343, 56.024895, 2.675438)
+[node name="WindTurbine" parent="." unique_id=242108010 instance=ExtResource("17_33kev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.707344, 27.629364, 44.700577)
 
-[node name="BobaSpike3" parent="." unique_id=1045699293 instance=ExtResource("16_rwt1y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.75927, 14.883208, 7.0242105)
-
-[node name="BobaSpike4" parent="." unique_id=225576559 instance=ExtResource("16_rwt1y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.215979, 13.402468, 13.807844)
-
-[node name="BobaSpike5" parent="." unique_id=1733153927 instance=ExtResource("16_rwt1y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.83591, 22.530783, 30.211346)
-
-[node name="CraftingTable" parent="." unique_id=281181077 instance=ExtResource("17_mvfa8")]
-transform = Transform3D(-0.10192439, 0, 0.99479216, 0, 1, 0, -0.99479216, 0, -0.10192439, -25.350695, 10.786917, 1.08219)
-
-[node name="Furnace1" parent="." unique_id=1658222846 instance=ExtResource("18_r0dna")]
-transform = Transform3D(0.46474928, 0, -0.8854423, 0, 1, 0, 0.8854423, 0, 0.46474928, -25.302092, 11.065833, 3.600626)
-
-[node name="WindTurbine" parent="." unique_id=262050106 instance=ExtResource("18_rwt1y")]
-transform = Transform3D(0.80919135, 0, -0.5875452, 0, 1, 0, 0.5875452, 0, 0.80919135, -45.17705, 26.187145, 24.602697)
-
-[node name="WindTurbine2" parent="." unique_id=1904430740 instance=ExtResource("18_rwt1y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.310295, 27.427683, 40.808483)
+[node name="WindTurbine2" parent="." unique_id=846923489 instance=ExtResource("17_33kev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.15644, 26.12197, 23.984661)
