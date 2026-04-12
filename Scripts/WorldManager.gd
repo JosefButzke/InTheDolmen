@@ -7,13 +7,17 @@ class_name MarchCubesCompute
 	set(value):
 		chunksFromPlayer = value
 
-@export_range(8, 4096, 8) var chunkWidth: int = 32:
+@export_range(32, 4096, 32) var chunkWidth: int = 32:
 	set(value):
 		chunkWidth = value
 		
-@export_range(8, 256, 8) var chunkHeight: int = 32:
+@export_range(32, 256, 32) var chunkHeight: int = 32:
 	set(value):
 		chunkHeight = value
+		
+@export_range(1, 8, 1) var resolution: float = 1:
+	set(value):
+		resolution = value
 
 @export_range(0, 8) var _octaves: int = 5:
 	set(value):
@@ -44,19 +48,27 @@ var _shader_march_cube: RID
 var _pipeline: RID
 var _pipelineMC: RID
 
-func _ready():
+func _exit_tree():
+	if _rd == null:
+		return
+	_rd.free_rid(_pipeline)
+	_rd.free_rid(_pipelineMC)
+	_rd.free_rid(_shader_vertices)
+	_rd.free_rid(_shader_march_cube)
+	_rd.free()
+
+func generate_world():
+	print("GENERATE")
 	_rd = RenderingServer.create_local_rendering_device()
 	_shader_vertices = _rd.shader_create_from_spirv(VERTICES_SHADER.get_spirv())
 	_shader_march_cube = _rd.shader_create_from_spirv(MC_SHADER.get_spirv())
 	_pipeline = _rd.compute_pipeline_create(_shader_vertices)
 	_pipelineMC = _rd.compute_pipeline_create(_shader_march_cube)
-
-func generate_world():
 	remove_children()
-
+		
 	for x in range(-chunksFromPlayer, chunksFromPlayer):
 			for z in range(-chunksFromPlayer, chunksFromPlayer):
-				generate_chunk(Vector3(x * (chunkWidth - 1), -chunkHeight / 2.0, z * (chunkWidth - 1)))
+				generate_chunk(Vector3(x * (chunkWidth - resolution), -chunkHeight / 2.0, z * (chunkWidth - resolution)))
 
 
 func generate_chunk(chunk_position: Vector3):
@@ -70,7 +82,7 @@ func generate_chunk(chunk_position: Vector3):
 	# Each float has 4 bytes (32 bit)
 	var floatBytes = 4
 	var vector4Items = 4
-	var bufferVertices: RID = rd.storage_buffer_create(chunkWidth * chunkWidth * chunkHeight * floatBytes * vector4Items)
+	var bufferVertices: RID = rd.storage_buffer_create((chunkWidth / resolution * chunkWidth / resolution * chunkHeight / resolution) * floatBytes * vector4Items)
 	
 	var uniformVertices := RDUniform.new()
 	uniformVertices.uniform_type = RenderingDevice.UNIFORM_TYPE_STORAGE_BUFFER
@@ -95,7 +107,7 @@ func generate_chunk(chunk_position: Vector3):
 	var chunkParams = PackedFloat32Array([
 		float(chunkWidth),
 		float(chunkHeight),
-		1.0, # t1
+		float(resolution), # resolution
 		1.0 # t2
 	]).to_byte_array()
 	var bufferChunkParams := rd.uniform_buffer_create(chunkParams.size(), chunkParams)
@@ -126,7 +138,7 @@ func generate_chunk(chunk_position: Vector3):
 	var compute_list := rd.compute_list_begin()
 	rd.compute_list_bind_compute_pipeline(compute_list, pipeline)
 	rd.compute_list_bind_uniform_set(compute_list, uniform_set, 0)
-	rd.compute_list_dispatch(compute_list, int(chunkWidth / 8.0), int(chunkHeight / 8.0), int(chunkWidth / 8.0))
+	rd.compute_list_dispatch(compute_list, int(chunkWidth / resolution / 8.0), int(chunkHeight / resolution / 8.0), int(chunkWidth / resolution / 8.0))
 	
 	rd.compute_list_add_barrier(compute_list)
 
@@ -135,7 +147,7 @@ func generate_chunk(chunk_position: Vector3):
 	uniformVerticesIn.binding = 0 # this needs to match the "binding" in our shader file
 	uniformVerticesIn.add_id(bufferVertices)
 
-	var bufferVerticesOut: RID = rd.storage_buffer_create(chunkWidth * chunkWidth * chunkHeight * floatBytes * vector4Items * 5)
+	var bufferVerticesOut: RID = rd.storage_buffer_create((chunkWidth / resolution * chunkWidth / resolution * chunkHeight / resolution) * floatBytes * vector4Items * 5)
 	
 	var uniformVerticesOut := RDUniform.new()
 	uniformVerticesOut.uniform_type = RenderingDevice.UNIFORM_TYPE_STORAGE_BUFFER
@@ -146,8 +158,8 @@ func generate_chunk(chunk_position: Vector3):
 	var chunkParamsMC = PackedFloat32Array([
 		float(chunkWidth),
 		float(chunkHeight),
-		1.0, # t1
-		1.0 # t2
+		1.0, # floor level
+		float(resolution)
 	]).to_byte_array()
 	var bufferChunkParamsMC := rd.uniform_buffer_create(chunkParamsMC.size(), chunkParamsMC)
 	
@@ -164,7 +176,7 @@ func generate_chunk(chunk_position: Vector3):
 	uniformCounter.binding = 3 # this needs to match the "binding" in our shader file
 	uniformCounter.add_id(counterBuffer)
 	
-	var bufferNormalsOut: RID = rd.storage_buffer_create(chunkWidth * chunkWidth * chunkHeight * floatBytes * vector4Items * 5)
+	var bufferNormalsOut: RID = rd.storage_buffer_create((chunkWidth / resolution * chunkWidth / resolution * chunkHeight / resolution) * floatBytes * vector4Items * 5)
 	
 	var uniformNormalsOut := RDUniform.new()
 	uniformNormalsOut.uniform_type = RenderingDevice.UNIFORM_TYPE_STORAGE_BUFFER
@@ -176,13 +188,21 @@ func generate_chunk(chunk_position: Vector3):
 	# Create a compute pipeline
 	rd.compute_list_bind_compute_pipeline(compute_list, pipelineMC)
 	rd.compute_list_bind_uniform_set(compute_list, uniform_set_march_cube, 0)
-	rd.compute_list_dispatch(compute_list, int((chunkWidth) / 8.0), int(chunkHeight / 8.0), int((chunkWidth) / 8.0))
+	rd.compute_list_dispatch(compute_list, int(chunkWidth / resolution / 8.0), int(chunkHeight / resolution / 8.0), int(chunkWidth / resolution / 8.0))
 	rd.compute_list_end()
 
 	# Submit to GPU and wait for sync
 	rd.submit()
 	rd.sync ()
 	# Read back the data from the buffer
+	
+	rd.free_rid(uniform_set)
+	rd.free_rid(uniform_set_march_cube)
+	rd.free_rid(bufferVertices)
+	rd.free_rid(bufferNoiseParams)
+	rd.free_rid(bufferChunkParams)
+	rd.free_rid(bufferChunkOffset)
+	rd.free_rid(bufferChunkParamsMC)
 
 	var output_vertices_bytes = rd.buffer_get_data(bufferVerticesOut)
 	var output_normals_bytes = rd.buffer_get_data(bufferNormalsOut)
@@ -193,6 +213,10 @@ func generate_chunk(chunk_position: Vector3):
 		
 	var counter_bytes = rd.buffer_get_data(counterBuffer)
 	var vertex_count = counter_bytes.to_int32_array()[0]
+	
+	rd.free_rid(bufferVerticesOut)
+	rd.free_rid(bufferNormalsOut)
+	rd.free_rid(counterBuffer)
 
 	for i in vertex_count:
 		triangles.append(Vector3(
@@ -250,6 +274,5 @@ func add_trimesh_collision(parent: Node3D, tri_mesh: Mesh, p: Vector3) -> void:
 	col.owner = parent
 	
 func remove_children():
-	var children := get_children()
-	for child in children:
-		remove_child(child)
+	for child in get_children():
+		child.queue_free()

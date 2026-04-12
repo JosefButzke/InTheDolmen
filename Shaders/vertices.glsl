@@ -18,7 +18,7 @@ layout(set = 0, binding = 1, std140) uniform NoiseParams {
 layout(set = 0, binding = 2, std140) uniform ChunkParams {
     float chunkWidth;
     float chunkHeight;
-    float t1;
+    float resolution;
     float t2;
 } chunk_params;
 
@@ -186,11 +186,16 @@ float noiseSplitter(vec3 p) {
     float noise = -1.0;
     float cavesFloorLevel = -(chunk_params.chunkHeight/2);
     float baseFloorLevel = 0.0;
-    float peaksLevel = chunk_params.chunkHeight - 1.0;
+    float peaksLevel = (chunk_params.chunkHeight/2.0) - chunk_params.resolution;
 
     // underground floor
     if(p.y == cavesFloorLevel) {
         return 1.0;
+    }
+
+    // peaks
+    if(p.y >= peaksLevel) {
+        return 0.0;
     }
 
     // SURFACE
@@ -208,10 +213,10 @@ float noiseSplitter(vec3 p) {
 // The code we want to execute in each invocation
 void main() {
     uvec3 position = gl_GlobalInvocationID.xyz;
-    if (uint(position.x) >= uint(chunk_params.chunkWidth) || uint(position.y) >= uint(chunk_params.chunkHeight) || uint(position.z) >= uint(chunk_params.chunkWidth)) return;
+    if (uint(position.x) >= uint(chunk_params.chunkWidth/chunk_params.resolution) || uint(position.y) >= uint(chunk_params.chunkHeight/chunk_params.resolution) || uint(position.z) >= uint(chunk_params.chunkWidth/chunk_params.resolution)) return;
     
-    uint index = int(position.z) * int(chunk_params.chunkHeight) * int(chunk_params.chunkWidth) + int(position.y) * int(chunk_params.chunkWidth) + int(position.x);
-    float height = noiseSplitter(vec3(position.x + chunk_offset.x, position.y + chunk_offset.y, position.z + chunk_offset.z));
+    uint index = int(position.z) * int(chunk_params.chunkHeight/chunk_params.resolution) * int(chunk_params.chunkWidth/chunk_params.resolution) + int(position.y) * int(chunk_params.chunkWidth/chunk_params.resolution) + int(position.x);
+    float height = noiseSplitter(vec3(position.x * chunk_params.resolution + chunk_offset.x, position.y * chunk_params.resolution + chunk_offset.y, position.z * chunk_params.resolution + chunk_offset.z));
 
-    vertices.data[index] = vec4(position.x, position.y, position.z, height);
+    vertices.data[index] = vec4(position.x * chunk_params.resolution, position.y * chunk_params.resolution, position.z * chunk_params.resolution, height);
 }

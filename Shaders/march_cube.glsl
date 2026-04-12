@@ -15,6 +15,7 @@ layout(set = 0, binding = 2, std140) uniform ChunkParams {
     float chunkWidth;
     float chunkHeight;
     float isoLevel;
+    float resolution;
 } chunk_params;
 
 layout(set = 0, binding = 3, std430) buffer CounterBuffer {
@@ -327,13 +328,13 @@ vec3 interpolateVerts(vec4 v1, vec4 v2) {
 }
 
 uint indexFromCoord(uint x, uint y, uint z) {
-    return int(z) * int(chunk_params.chunkHeight) * int(chunk_params.chunkWidth) + int(y) * int(chunk_params.chunkWidth) + int(x);
+    return int(z) * int(chunk_params.chunkHeight/chunk_params.resolution) * int(chunk_params.chunkWidth/chunk_params.resolution) + int(y) * int(chunk_params.chunkWidth/chunk_params.resolution) + int(x);
 }
 
 void main()
 {
     uvec3 position = gl_GlobalInvocationID.xyz;
-    if (uint(position.x) >= uint(chunk_params.chunkWidth-1) || uint(position.y) >= uint(chunk_params.chunkHeight-1) || uint(position.z) >= uint(chunk_params.chunkWidth-1)) return;
+    if (uint(position.x) >= uint((chunk_params.chunkWidth/chunk_params.resolution)-1) || uint(position.y) >= uint((chunk_params.chunkHeight/chunk_params.resolution)-1) || uint(position.z) >= uint((chunk_params.chunkWidth/chunk_params.resolution)-1)) return;
     
     // 8 corners of the current cube
     vec4 cubeCorners[8] = {
@@ -396,7 +397,7 @@ void main()
 
         uint _index = atomicAdd(CounterIndex.vertex_count, 3u);
 
-        verticesOut.vertex[_index] = vec4(vertex1, 1.0);        
+        verticesOut.vertex[_index] = vec4(vertex1, 1.0);
         verticesOut.vertex[_index+1] = vec4(vertex2, 1.0);
         verticesOut.vertex[_index+2] = vec4(vertex3, 1.0);
 
