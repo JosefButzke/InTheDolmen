@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bptteobbrql1y"]
 
+[ext_resource type="Script" uid="uid://faw42jrmeals" path="res://Scripts/DayCycle.gd" id="1_45d1s"]
 [ext_resource type="Script" uid="uid://2fnd4es5fg6p" path="res://Scripts/Player.gd" id="1_pqu7k"]
 [ext_resource type="Material" uid="uid://bky28pisu7hcd" path="res://Materials/player.tres" id="2_ti1bm"]
 [ext_resource type="Material" uid="uid://mmhw4wxmmgc1" path="res://Materials/white.tres" id="3_op4cu"]
@@ -16,6 +17,7 @@ gradient = SubResource("Gradient_31mi3")
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_31mi3"]
 sky_top_color = Color(4.6205523e-06, 0.625139, 0.8861544, 1)
 sky_horizon_color = Color(0, 0.6627451, 0.84313726, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Sky" id="Sky_44f6d"]
 sky_material = SubResource("ProceduralSkyMaterial_31mi3")
@@ -23,9 +25,11 @@ sky_material = SubResource("ProceduralSkyMaterial_31mi3")
 [sub_resource type="Environment" id="Environment_iacna"]
 background_mode = 2
 background_color = Color(0.023769587, 0, 0.41579223, 1)
+background_energy_multiplier = 0.0
 sky = SubResource("Sky_44f6d")
 ambient_light_sky_contribution = 0.0
 tonemap_mode = 2
+tonemap_exposure = 2.41
 ssao_radius = 0.01
 sdfgi_enabled = true
 fog_density = 0.002
@@ -53,14 +57,18 @@ metallic_specular = 0.0
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=618804016]
 environment = SubResource("Environment_iacna")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=1203197107]
-transform = Transform3D(0.651556, -0.073534444, 0.7550281, -0.7168263, 0.26604393, 0.64450026, -0.24826364, -0.96115214, 0.12063108, 0, 0, 0)
-light_volumetric_fog_energy = 5.0
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=1203197107 node_paths=PackedStringArray("env")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 3.0
 light_cull_mask = 4294966273
 shadow_enabled = true
-shadow_opacity = 0.96
 directional_shadow_max_distance = 300.0
 sky_mode = 1
+script = ExtResource("1_45d1s")
+day_duration = 10.0
+night_duration = 10.0
+env = NodePath("../WorldEnvironment")
 
 [node name="Player" type="CharacterBody3D" parent="." unique_id=1768123653 node_paths=PackedStringArray("characterBody", "camera_pivot", "camera")]
 transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, -16.072767, 12.496409, -32.989983)
