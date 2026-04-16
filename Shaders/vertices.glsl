@@ -200,7 +200,7 @@ float noiseSplitter(vec3 p) {
 
     // SURFACE
     if(p.y > baseFloorLevel) {
-        float noise = fbm(p.xz / noise_params.scale, int(noise_params.octaves), noise_params.lacunarity, noise_params.gain) * chunk_params.chunkHeight;
+        float noise = fbm(p.xz / noise_params.scale, int(noise_params.octaves), noise_params.lacunarity, noise_params.gain) * (chunk_params.chunkHeight/2);
         return noise - p.y;
     }
 
