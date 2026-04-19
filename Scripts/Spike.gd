@@ -2,9 +2,6 @@ extends Node3D
 
 var speed: float = 15.0
 
-func _ready():
-	print("Spike init")
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	var position_spike = position

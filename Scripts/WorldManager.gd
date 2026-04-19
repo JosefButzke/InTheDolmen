@@ -1,5 +1,4 @@
 @tool
-
 extends Node3D
 class_name MarchCubesCompute
 
@@ -15,7 +14,7 @@ class_name MarchCubesCompute
 	set(value):
 		chunkHeight = value
 		
-@export_range(1, 8, 1) var resolution: float = 1:
+@export_range(1, 16, 1) var resolution: float = 1:
 	set(value):
 		resolution = value
 
