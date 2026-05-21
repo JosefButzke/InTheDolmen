@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://bth8lsxsbwv1c"]
+
+[ext_resource type="PackedScene" uid="uid://c1x0b0dcrdq6v" path="res://Models/Zeta.blend" id="1_wvt00"]
+
+[node name="Zeta" unique_id=1588469178 instance=ExtResource("1_wvt00")]
+
+[node name="Cube_007" parent="Armature/Skeleton3D/ear_L" parent_id_path=PackedInt32Array(847467282) index="0" unique_id=2069802923]
+layers = 2
+
+[node name="Cube_006" parent="Armature/Skeleton3D/ear_R" parent_id_path=PackedInt32Array(809036164) index="0" unique_id=868645289]
+layers = 2
+
+[node name="Head" parent="Armature/Skeleton3D/Bone_001" parent_id_path=PackedInt32Array(2083765030) index="0" unique_id=2079016433]
+layers = 2
+
+[node name="Cube_008" parent="Armature/Skeleton3D/Bone_002" parent_id_path=PackedInt32Array(1044567098) index="0" unique_id=1155198452]
+layers = 2
+
+[node name="Cube_001" parent="Armature/Skeleton3D/Bone_003" parent_id_path=PackedInt32Array(6999170) index="0" unique_id=534487479]
+layers = 2

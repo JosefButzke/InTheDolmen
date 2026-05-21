@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://drbv21csxacvh"]
+
+[ext_resource type="Script" uid="uid://2fnd4es5fg6p" path="res://Scripts/Player.gd" id="1_kyqiw"]
+[ext_resource type="PackedScene" uid="uid://c1x0b0dcrdq6v" path="res://Models/Zeta.blend" id="2_kyqiw"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kyqiw"]
+height = 2.3481445
+
+[node name="CharacterBody" type="CharacterBody3D" unique_id=1718937912 node_paths=PackedStringArray("characterBody", "camera_pivot", "camera", "animationPlayer")]
+script = ExtResource("1_kyqiw")
+characterBody = NodePath(".")
+camera_pivot = NodePath("CameraPivot")
+camera = NodePath("CameraPivot/Camera3D")
+animationPlayer = NodePath("CollisionShape3D/Zeta/AnimationPlayer")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1503767060]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1795963, 0)
+shape = SubResource("CapsuleShape3D_kyqiw")
+
+[node name="Zeta" parent="CollisionShape3D" unique_id=99403961 instance=ExtResource("2_kyqiw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1795963, 0)
+
+[node name="Cube_007" parent="CollisionShape3D/Zeta/Armature/Skeleton3D/ear_L" parent_id_path=PackedInt32Array(99403961, 847467282) index="0" unique_id=2069802923]
+layers = 2
+
+[node name="Cube_006" parent="CollisionShape3D/Zeta/Armature/Skeleton3D/ear_R" parent_id_path=PackedInt32Array(99403961, 809036164) index="0" unique_id=868645289]
+layers = 2
+
+[node name="Head" parent="CollisionShape3D/Zeta/Armature/Skeleton3D/Bone_001" parent_id_path=PackedInt32Array(99403961, 2083765030) index="0" unique_id=2079016433]
+layers = 2
+
+[node name="Cube_008" parent="CollisionShape3D/Zeta/Armature/Skeleton3D/Bone_002" parent_id_path=PackedInt32Array(99403961, 1044567098) index="0" unique_id=1155198452]
+layers = 2
+
+[node name="Cube_001" parent="CollisionShape3D/Zeta/Armature/Skeleton3D/Bone_003" parent_id_path=PackedInt32Array(99403961, 6999170) index="0" unique_id=534487479]
+layers = 2
+
+[node name="CameraPivot" type="Node3D" parent="." unique_id=748533346]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9624084, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=1036512484]
+cull_mask = 1048573
+
+[editable path="CollisionShape3D/Zeta"]

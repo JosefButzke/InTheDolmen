@@ -10,6 +10,7 @@ extends Node3D
 @export_range(0, 16) var RAY_LENGTH: int = 8:
 	set(value):
 		RAY_LENGTH = value
+@export var animationPlayer: AnimationPlayer
 		
 var current_interactable_object: Interactable = null
 
@@ -55,6 +56,12 @@ func _physics_process(delta: float) -> void:
 		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
 		Input.get_action_strength("move_backward") - Input.get_action_strength("move_forward")
 	)
+	
+	if Input.get_action_strength("move_forward") > 0.0:
+		animationPlayer.play("Walk")
+	else:
+		animationPlayer.stop()
+		
 
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 

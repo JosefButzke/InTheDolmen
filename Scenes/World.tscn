@@ -1,11 +1,8 @@
 [gd_scene format=3 uid="uid://bptteobbrql1y"]
 
-[ext_resource type="Script" uid="uid://faw42jrmeals" path="res://Scripts/DayCycle.gd" id="1_45d1s"]
-[ext_resource type="Script" uid="uid://2fnd4es5fg6p" path="res://Scripts/Player.gd" id="1_pqu7k"]
-[ext_resource type="Material" uid="uid://bky28pisu7hcd" path="res://Materials/player.tres" id="2_ti1bm"]
-[ext_resource type="Material" uid="uid://mmhw4wxmmgc1" path="res://Materials/white.tres" id="3_op4cu"]
 [ext_resource type="PackedScene" uid="uid://btqfxn371icda" path="res://Scenes/WorldManager.scn" id="5_p70al"]
 [ext_resource type="PackedScene" uid="uid://mwx5q7pol7ky" path="res://Scenes/CraftingTable.tscn" id="7_kn06e"]
+[ext_resource type="PackedScene" uid="uid://drbv21csxacvh" path="res://Scenes/Player.tscn" id="8_q2d71"]
 [ext_resource type="PackedScene" uid="uid://cv8mlc27khe5d" path="res://Scenes/BobaSpike.tscn" id="9_ti1bm"]
 [ext_resource type="PackedScene" uid="uid://cib155hhch0fg" path="res://Models/Rocks.blend" id="10_kn06e"]
 [ext_resource type="PackedScene" uid="uid://dip137op5b7w4" path="res://Scenes/ui.tscn" id="13_8l3nt"]
@@ -20,10 +17,10 @@ ground_bottom_color = Color(0.34407577, 0.34407574, 0.34407574, 1)
 sky_material = SubResource("ProceduralSkyMaterial_31mi3")
 
 [sub_resource type="Environment" id="Environment_iacna"]
-background_mode = 1
-background_color = Color(0.15487596, 0.154876, 0.15487596, 1)
+background_mode = 2
+background_color = Color(1, 1, 1, 1)
 sky = SubResource("Sky_44f6d")
-ambient_light_source = 2
+ambient_light_source = 3
 ambient_light_sky_contribution = 0.0
 tonemap_mode = 3
 ssao_radius = 0.01
@@ -35,16 +32,10 @@ volumetric_fog_density = 0.001
 volumetric_fog_length = 30.0
 volumetric_fog_sky_affect = 0.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kn06e"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q2d71"]
 resource_local_to_scene = true
 albedo_color = Color(0.73333335, 0.3254902, 0.19607843, 1)
 metallic_specular = 0.0
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_uc036"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uc036"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_8l3nt"]
 
 [node name="World" type="Node3D" unique_id=425380973]
 
@@ -53,9 +44,9 @@ environment = SubResource("Environment_iacna")
 
 [node name="WorldGenerator" parent="." unique_id=1561706391 instance=ExtResource("5_p70al")]
 transform = Transform3D(0.9999999, 0, 0, 0, 0.9999998, 0, 0, 0, 0.99999976, -0.07588959, 0.18631935, -0.029281616)
-material = SubResource("StandardMaterial3D_kn06e")
+material = SubResource("StandardMaterial3D_q2d71")
 
-[node name="Sun" type="DirectionalLight3D" parent="." unique_id=1203197107 node_paths=PackedStringArray("env")]
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=1203197107]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 light_volumetric_fog_energy = 3.0
 light_cull_mask = 4294966273
@@ -63,50 +54,6 @@ shadow_enabled = true
 shadow_opacity = 0.99
 directional_shadow_max_distance = 300.0
 sky_mode = 1
-script = ExtResource("1_45d1s")
-day_duration = 30.0
-night_duration = 10.0
-env = NodePath("../WorldEnvironment")
-
-[node name="Player" type="CharacterBody3D" parent="." unique_id=1768123653 node_paths=PackedStringArray("characterBody", "camera_pivot", "camera")]
-transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, 80.92958, 23.59995, 0)
-script = ExtResource("1_pqu7k")
-speed = 10.0
-jump_velocity = 8.0
-characterBody = NodePath(".")
-camera_pivot = NodePath("CameraPivot")
-camera = NodePath("CameraPivot/Camera3D")
-RAY_LENGTH = 4
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=369928066]
-layers = 524288
-material_override = ExtResource("2_ti1bm")
-mesh = SubResource("CapsuleMesh_uc036")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=1463814721]
-shape = SubResource("CapsuleShape3D_uc036")
-
-[node name="CameraPivot" type="Node3D" parent="Player" unique_id=1559629034]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.93043256, 0)
-
-[node name="Camera3D" type="Camera3D" parent="Player/CameraPivot" unique_id=1152764537]
-cull_mask = 524287
-current = true
-fov = 90.0
-
-[node name="Details" type="Node3D" parent="Player" unique_id=46134670]
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Player/Details" unique_id=1798571983]
-transform = Transform3D(0.28499985, 0, 0, 0, 0.285, 0, 0, 0, 0.28499985, 0.19999997, 0.38899994, -0.4466653)
-layers = 524288
-material_override = ExtResource("3_op4cu")
-mesh = SubResource("SphereMesh_8l3nt")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Player/Details" unique_id=1481072752]
-transform = Transform3D(0.28499982, 0, 0, 0, 0.285, 0, 0, 0, 0.28499982, -0.19999997, 0.38899994, -0.4466653)
-layers = 524288
-material_override = ExtResource("3_op4cu")
-mesh = SubResource("SphereMesh_8l3nt")
 
 [node name="UI" parent="." unique_id=844746813 instance=ExtResource("13_8l3nt")]
 
@@ -133,3 +80,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 129, 25.423874, 47)
 
 [node name="Rocks3" parent="." unique_id=1687970599 instance=ExtResource("10_kn06e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 85, 24.356047, 7)
+
+[node name="Player" parent="." unique_id=835603282 instance=ExtResource("8_q2d71")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.31886, 19.178686, 4.3694267)
