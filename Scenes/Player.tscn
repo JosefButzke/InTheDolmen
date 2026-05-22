@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://drbv21csxacvh"]
 
 [ext_resource type="Script" uid="uid://2fnd4es5fg6p" path="res://Scripts/Player.gd" id="1_kyqiw"]
-[ext_resource type="PackedScene" uid="uid://c1x0b0dcrdq6v" path="res://Models/Zeta.blend" id="2_kyqiw"]
+[ext_resource type="PackedScene" uid="uid://bojvpy7uepo44" path="res://Models/Zeta.blend" id="2_kyqiw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kyqiw"]
 height = 2.3481445
@@ -17,22 +17,22 @@ animationPlayer = NodePath("CollisionShape3D/Zeta/AnimationPlayer")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1795963, 0)
 shape = SubResource("CapsuleShape3D_kyqiw")
 
-[node name="Zeta" parent="CollisionShape3D" unique_id=99403961 instance=ExtResource("2_kyqiw")]
+[node name="Zeta" parent="CollisionShape3D" unique_id=696630044 instance=ExtResource("2_kyqiw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1795963, 0)
 
-[node name="Cube_007" parent="CollisionShape3D/Zeta/Armature/Skeleton3D/ear_L" parent_id_path=PackedInt32Array(99403961, 847467282) index="0" unique_id=2069802923]
+[node name="Cube_007" parent="CollisionShape3D/Zeta/Armature/Skeleton3D/ear_L" parent_id_path=PackedInt32Array(696630044, 909932032) index="0" unique_id=1610862996]
 layers = 2
 
-[node name="Cube_006" parent="CollisionShape3D/Zeta/Armature/Skeleton3D/ear_R" parent_id_path=PackedInt32Array(99403961, 809036164) index="0" unique_id=868645289]
+[node name="Cube_006" parent="CollisionShape3D/Zeta/Armature/Skeleton3D/ear_R" parent_id_path=PackedInt32Array(696630044, 982487587) index="0" unique_id=254013351]
 layers = 2
 
-[node name="Head" parent="CollisionShape3D/Zeta/Armature/Skeleton3D/Bone_001" parent_id_path=PackedInt32Array(99403961, 2083765030) index="0" unique_id=2079016433]
+[node name="Head" parent="CollisionShape3D/Zeta/Armature/Skeleton3D/Bone_001" parent_id_path=PackedInt32Array(696630044, 861755085) index="0" unique_id=1095166655]
 layers = 2
 
-[node name="Cube_008" parent="CollisionShape3D/Zeta/Armature/Skeleton3D/Bone_002" parent_id_path=PackedInt32Array(99403961, 1044567098) index="0" unique_id=1155198452]
+[node name="Cube_008" parent="CollisionShape3D/Zeta/Armature/Skeleton3D/Bone_002" parent_id_path=PackedInt32Array(696630044, 726362787) index="0" unique_id=1882279382]
 layers = 2
 
-[node name="Cube_001" parent="CollisionShape3D/Zeta/Armature/Skeleton3D/Bone_003" parent_id_path=PackedInt32Array(99403961, 6999170) index="0" unique_id=534487479]
+[node name="Cube_001" parent="CollisionShape3D/Zeta/Armature/Skeleton3D/Bone_003" parent_id_path=PackedInt32Array(696630044, 1563188523) index="0" unique_id=1891361559]
 layers = 2
 
 [node name="CameraPivot" type="Node3D" parent="." unique_id=748533346]
@@ -40,5 +40,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9624084, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=1036512484]
 cull_mask = 1048573
+fov = 90.0
+
+[node name="FlashlightPivot" type="Node3D" parent="CameraPivot/Camera3D" unique_id=1063753544]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27549028, -0.2776574, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="CameraPivot/Camera3D/FlashlightPivot" unique_id=99824370]
+light_energy = 6.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 0.0
+shadow_bias = 2.056
+distance_fade_enabled = true
+spot_range = 77.1713
+spot_angle = 53.437496
 
 [editable path="CollisionShape3D/Zeta"]

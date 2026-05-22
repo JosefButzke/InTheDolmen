@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://btqfxn371icda" path="res://Scenes/WorldManager.scn" id="5_p70al"]
 [ext_resource type="PackedScene" uid="uid://mwx5q7pol7ky" path="res://Scenes/CraftingTable.tscn" id="7_kn06e"]
 [ext_resource type="PackedScene" uid="uid://drbv21csxacvh" path="res://Scenes/Player.tscn" id="8_q2d71"]
+[ext_resource type="PackedScene" uid="uid://cvwdtooymq2pq" path="res://Models/Truk.blend" id="8_uo7di"]
 [ext_resource type="PackedScene" uid="uid://cv8mlc27khe5d" path="res://Scenes/BobaSpike.tscn" id="9_ti1bm"]
 [ext_resource type="PackedScene" uid="uid://cib155hhch0fg" path="res://Models/Rocks.blend" id="10_kn06e"]
 [ext_resource type="PackedScene" uid="uid://dip137op5b7w4" path="res://Scenes/ui.tscn" id="13_8l3nt"]
@@ -11,7 +12,8 @@
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_31mi3"]
 sky_top_color = Color(4.6205523e-06, 0.625139, 0.8861544, 1)
 sky_horizon_color = Color(0, 0.6627451, 0.84313726, 1)
-ground_bottom_color = Color(0.34407577, 0.34407574, 0.34407574, 1)
+ground_bottom_color = Color(0.12591085, 0.12591085, 0.12591082, 1)
+ground_horizon_color = Color(0.12994218, 0.13340211, 0.14032987, 1)
 
 [sub_resource type="Sky" id="Sky_44f6d"]
 sky_material = SubResource("ProceduralSkyMaterial_31mi3")
@@ -21,6 +23,7 @@ background_mode = 2
 background_color = Color(1, 1, 1, 1)
 sky = SubResource("Sky_44f6d")
 ambient_light_source = 3
+ambient_light_color = Color(0.1331963, 0.13319644, 0.1331963, 1)
 ambient_light_sky_contribution = 0.0
 tonemap_mode = 3
 ssao_radius = 0.01
@@ -28,7 +31,9 @@ sdfgi_enabled = true
 fog_density = 0.002
 fog_sky_affect = 0.0
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.001
+volumetric_fog_density = 0.0072
+volumetric_fog_albedo = Color(1.504086e-07, 0.14787668, 0.21604261, 1)
+volumetric_fog_emission = Color(0.23031479, 0.23031497, 0.23031488, 1)
 volumetric_fog_length = 30.0
 volumetric_fog_sky_affect = 0.0
 
@@ -48,10 +53,10 @@ material = SubResource("StandardMaterial3D_q2d71")
 
 [node name="Sun" type="DirectionalLight3D" parent="." unique_id=1203197107]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
-light_volumetric_fog_energy = 3.0
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 4.0
 light_cull_mask = 4294966273
 shadow_enabled = true
-shadow_opacity = 0.99
 directional_shadow_max_distance = 300.0
 sky_mode = 1
 
@@ -82,4 +87,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 129, 25.423874, 47)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 85, 24.356047, 7)
 
 [node name="Player" parent="." unique_id=835603282 instance=ExtResource("8_q2d71")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.31886, 19.178686, 4.3694267)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.53963, -63.752125, -0.68749523)
+speed = 10.0
+jump_velocity = 15.0
+
+[node name="Truk" parent="." unique_id=1428532901 instance=ExtResource("8_uo7di")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 95.70278, 26.854313, 31.09561)
