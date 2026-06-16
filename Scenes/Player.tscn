@@ -2,11 +2,12 @@
 
 [ext_resource type="Script" uid="uid://2fnd4es5fg6p" path="res://Scripts/Player.gd" id="1_kyqiw"]
 [ext_resource type="PackedScene" uid="uid://bojvpy7uepo44" path="res://Models/Zeta.blend" id="2_kyqiw"]
+[ext_resource type="PackedScene" uid="uid://il87hl2g3m3u" path="res://Scenes/Multitool.tscn" id="3_gntrk"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kyqiw"]
 height = 2.3481445
 
-[node name="CharacterBody" type="CharacterBody3D" unique_id=1718937912 node_paths=PackedStringArray("characterBody", "camera_pivot", "camera", "animationPlayer")]
+[node name="CharacterBody" type="CharacterBody3D" unique_id=1718937912 node_paths=PackedStringArray("characterBody", "camera_pivot", "camera", "animationPlayer") groups=["Player"]]
 script = ExtResource("1_kyqiw")
 characterBody = NodePath(".")
 camera_pivot = NodePath("CameraPivot")
@@ -42,10 +43,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9624084, 0)
 cull_mask = 1048573
 fov = 90.0
 
-[node name="FlashlightPivot" type="Node3D" parent="CameraPivot/Camera3D" unique_id=1063753544]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27549028, -0.2776574, 0)
+[node name="Multitool" parent="CameraPivot/Camera3D" unique_id=1628307837 instance=ExtResource("3_gntrk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24430728, -0.40468824, -0.29990387)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="CameraPivot/Camera3D/FlashlightPivot" unique_id=99824370]
+[node name="FlashlightPivot" type="Node3D" parent="CameraPivot/Camera3D/Multitool" unique_id=1063753544]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.031183004, 0.12703085, 0.29990387)
+visible = false
+
+[node name="SpotLight3D" type="SpotLight3D" parent="CameraPivot/Camera3D/Multitool/FlashlightPivot" unique_id=99824370]
 light_energy = 6.0
 light_indirect_energy = 2.0
 light_volumetric_fog_energy = 0.0

@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://il87hl2g3m3u"]
+
+[ext_resource type="Script" uid="uid://crl3yuwi6pbdp" path="res://Scripts/Multitool.gd" id="1_uux45"]
+[ext_resource type="PackedScene" uid="uid://dmgd44b65fu50" path="res://Models/Beacon.blend" id="2_kqfyi"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_fj7nc"]
+
+[node name="Multitool" type="Node3D" unique_id=1628307837 node_paths=PackedStringArray("beacon")]
+script = ExtResource("1_uux45")
+beacon = NodePath("Beacon")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=774523330]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("BoxMesh_fj7nc")
+
+[node name="Beacon" parent="." unique_id=762429546 instance=ExtResource("2_kqfyi")]
+visible = false

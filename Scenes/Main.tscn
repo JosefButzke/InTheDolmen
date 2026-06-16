@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://bptteobbrql1y"]
+
+[ext_resource type="PackedScene" uid="uid://btqfxn371icda" path="res://Scenes/WorldGenerator.scn" id="1_kln2b"]
+[ext_resource type="PackedScene" uid="uid://dip137op5b7w4" path="res://Scenes/ui.tscn" id="2_rgh2o"]
+[ext_resource type="PackedScene" uid="uid://drbv21csxacvh" path="res://Scenes/Player.tscn" id="3_kln2b"]
+[ext_resource type="PackedScene" uid="uid://bqgx6lwh5huxr" path="res://Models/stalactites.blend" id="4_rgh2o"]
+[ext_resource type="PackedScene" uid="uid://dmgd44b65fu50" path="res://Models/Beacon.blend" id="5_pbw6q"]
+[ext_resource type="PackedScene" uid="uid://cv8mlc27khe5d" path="res://Scenes/BobaSpike.tscn" id="6_v1gob"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_31mi3"]
+sky_top_color = Color(4.6205523e-06, 0.625139, 0.8861544, 1)
+sky_horizon_color = Color(0, 0.6627451, 0.84313726, 1)
+ground_bottom_color = Color(0.12591085, 0.12591085, 0.12591082, 1)
+ground_horizon_color = Color(0.12994218, 0.13340211, 0.14032987, 1)
+
+[sub_resource type="Sky" id="Sky_44f6d"]
+sky_material = SubResource("ProceduralSkyMaterial_31mi3")
+
+[sub_resource type="Environment" id="Environment_iacna"]
+background_mode = 1
+background_color = Color(0.21709698, 0.8584577, 0.9999997, 1)
+sky = SubResource("Sky_44f6d")
+ambient_light_source = 3
+ambient_light_color = Color(0.1331963, 0.13319644, 0.1331963, 1)
+ambient_light_sky_contribution = 0.0
+tonemap_mode = 3
+ssao_radius = 0.01
+sdfgi_enabled = true
+fog_density = 0.002
+fog_sky_affect = 0.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0072
+volumetric_fog_albedo = Color(1.504086e-07, 0.14787668, 0.21604261, 1)
+volumetric_fog_emission = Color(0.23031479, 0.23031497, 0.23031488, 1)
+volumetric_fog_length = 30.0
+volumetric_fog_sky_affect = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jw32o"]
+resource_local_to_scene = true
+albedo_color = Color(0.73333335, 0.3254902, 0.19607843, 1)
+metallic_specular = 0.0
+
+[node name="World" type="Node3D" unique_id=425380973]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=618804016]
+environment = SubResource("Environment_iacna")
+
+[node name="WorldGenerator" parent="." unique_id=1561706391 instance=ExtResource("1_kln2b")]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999998, 0, 0, 0, 0.99999976, -0.07588959, 0.18631935, -0.029281616)
+material = SubResource("StandardMaterial3D_jw32o")
+
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=1203197107]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 4.0
+light_cull_mask = 4294966273
+shadow_enabled = true
+directional_shadow_max_distance = 300.0
+sky_mode = 1
+
+[node name="UI" parent="." unique_id=844746813 instance=ExtResource("2_rgh2o")]
+
+[node name="Player" parent="." unique_id=1718937912 instance=ExtResource("3_kln2b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.258812, 438.35275, 0)
+speed = 10.0
+jump_velocity = 15.0
+
+[node name="stalactites" parent="." unique_id=1009676538 instance=ExtResource("4_rgh2o")]
+transform = Transform3D(-1.9987853, -1.7131708, -3.011628, 2.3397996, -3.2316952, 0.2854568, -2.5554247, -1.6190091, 2.6169853, 56.99861, 440.9469, -17.969862)
+
+[node name="Beacon" parent="." unique_id=762429546 instance=ExtResource("5_pbw6q")]
+
+[node name="BobaSpike" parent="." unique_id=1911760903 instance=ExtResource("6_v1gob")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.488401, 440.4189, 1.6204101)
+
+[node name="BobaSpike2" parent="." unique_id=1369722109 instance=ExtResource("6_v1gob")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.646595, 441.65332, 26.129166)

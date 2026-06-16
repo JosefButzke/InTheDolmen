@@ -14,7 +14,7 @@ class_name MarchCubesCompute
 	set(value):
 		chunkHeight = value
 		
-@export_range(1, 16, 1) var resolution: float = 1:
+@export_range(1, 16, 1) var resolution: float = 4:
 	set(value):
 		resolution = value
 
@@ -38,7 +38,7 @@ class_name MarchCubesCompute
 
 @export_tool_button("Run Compute", "Shader") var run_compute_action = generate_world
 
-const VERTICES_SHADER := preload("res://Shaders/vertices.glsl")
+const VERTICES_SHADER := preload("res://Shaders/planet_vertices.glsl")
 const MC_SHADER := preload("res://Shaders/march_cube.glsl")
 
 var _rd: RenderingDevice
@@ -64,10 +64,15 @@ func generate_world():
 	_pipeline = _rd.compute_pipeline_create(_shader_vertices)
 	_pipelineMC = _rd.compute_pipeline_create(_shader_march_cube)
 	remove_children()
-		
-	for x in range(-chunksFromPlayer, chunksFromPlayer):
-			for z in range(-chunksFromPlayer, chunksFromPlayer):
-				generate_chunk(Vector3(x * (chunkWidth - resolution), -chunkHeight / 2.0, z * (chunkWidth - resolution)))
+	
+	if chunksFromPlayer == 1:
+		generate_chunk(Vector3(-chunkWidth / 2.0, -chunkHeight / 2.0, -chunkWidth / 2.0))
+	else:
+		for x in range(-chunksFromPlayer, chunksFromPlayer):
+			for y in range(-chunksFromPlayer, chunksFromPlayer):
+				for z in range(-chunksFromPlayer, chunksFromPlayer):
+					if y > 2:
+						generate_chunk(Vector3(x * (chunkWidth - resolution), y * (chunkHeight - resolution), z * (chunkWidth - resolution)))
 
 
 func generate_chunk(chunk_position: Vector3):
@@ -107,7 +112,7 @@ func generate_chunk(chunk_position: Vector3):
 		float(chunkWidth),
 		float(chunkHeight),
 		float(resolution), # resolution
-		1.0 # t2
+		0.0 # t2
 	]).to_byte_array()
 	var bufferChunkParams := rd.uniform_buffer_create(chunkParams.size(), chunkParams)
 	
@@ -121,7 +126,7 @@ func generate_chunk(chunk_position: Vector3):
 		float(chunk_position.x),
 		float(chunk_position.y),
 		float(chunk_position.z),
-		1.0 # t2
+		0.0 # t2
 	]).to_byte_array()
 	var bufferChunkOffset := rd.uniform_buffer_create(chunkOffset.size(), chunkOffset)
 	
@@ -192,7 +197,7 @@ func generate_chunk(chunk_position: Vector3):
 
 	# Submit to GPU and wait for sync
 	rd.submit()
-	rd.sync ()
+	rd.sync()
 	# Read back the data from the buffer
 	
 	rd.free_rid(uniform_set)
@@ -246,8 +251,10 @@ func generate_chunk(chunk_position: Vector3):
 	mesh.surface_set_material(0, material)
 	
 	mesh_instance_triangles.mesh = mesh
+	mesh_instance_triangles.visibility_range_end = 256.0
 	add_child(mesh_instance_triangles)
 	mesh_instance_triangles.owner = self
+	
 	add_trimesh_collision(self , mesh, mesh_instance_triangles.position)
 	
 func add_trimesh_collision(parent: Node3D, tri_mesh: Mesh, p: Vector3) -> void:

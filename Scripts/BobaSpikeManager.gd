@@ -12,8 +12,8 @@ var spike_script_added: bool = false
 var player: Node3D
 
 func _ready() -> void:
-	player = get_tree().get_first_node_in_group("player")
-	if(player == null):
+	player = get_tree().get_first_node_in_group("Player")
+	if (player == null):
 		print("Player ref missing to: ", self.name)
 	for child in get_children():
 		if child.name.begins_with("Spike") and child is MeshInstance3D:
@@ -47,7 +47,7 @@ func _process(delta: float) -> void:
 		audioPlayer.play()
 		_reset_spikes_after_delay()
 	
-	if(spike_script_added):
+	if (spike_script_added):
 		shoot_spikes(delta)
 		
 func shoot_spikes(delta: float) -> void:
