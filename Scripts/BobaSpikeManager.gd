@@ -53,7 +53,7 @@ func _process(delta: float) -> void:
 func shoot_spikes(delta: float) -> void:
 	var position_center = Vector3.ZERO
 	position_center.y = 0.0
-	print(spikes.size())
+	
 	for spike in spikes:
 		var position_spike = spike.position
 		position_spike.y = 0.0;

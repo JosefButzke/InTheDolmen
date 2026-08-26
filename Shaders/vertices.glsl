@@ -169,18 +169,6 @@ float fbm3d(int numLayers, float lacunarity, float persistence, float scale, vec
     return sum;
 }
 
-// Smooth step helper for "soft" cave walls in density fields.
-float smoothThreshold(float x, float threshold, float softness) {
-    // returns ~0 below threshold, ~1 above threshold, with smooth transition
-    return smoothstep(threshold - softness, threshold + softness, x);
-}
-
-// Height preference: 1.0 at cave band center, falls off above/below.
-float heightBand(float y, float centerY, float halfWidth) {
-    float d = abs(y - centerY) / max(halfWidth, 1e-5);
-    return clamp(1.0 - d, 0.0, 1.0);
-}
-
 float noiseSplitter(vec3 p) {
     // air 0 or lesser / ground 0 or bigger
     float noise = -1.0;

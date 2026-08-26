@@ -1,0 +1,110 @@
+[gd_scene format=3 uid="uid://doah3p8splhjm"]
+
+[ext_resource type="Material" uid="uid://dihcew3818baf" path="res://Materials/soil.tres" id="1_wgfkm"]
+[ext_resource type="PackedScene" uid="uid://bsnwgybdu2td3" path="res://Scenes/Constructions/WindTurbine.tscn" id="4_epfbx"]
+[ext_resource type="PackedScene" uid="uid://fsd2m0k0qdan" path="res://Scenes/Constructions/Outlet.tscn" id="5_0s85i"]
+[ext_resource type="PackedScene" uid="uid://bcv57wxp41nju" path="res://Scenes/Constructions/Battery.tscn" id="6_i0we6"]
+[ext_resource type="PackedScene" uid="uid://drbv21csxacvh" path="res://Scenes/Player.tscn" id="6_xyj56"]
+[ext_resource type="PackedScene" uid="uid://b0e65fwhh10ec" path="res://Models/BuildingSystem.blend" id="7_xyj56"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_g4v7s"]
+size = Vector3(2.9422607, 1, 2.7236328)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g4v7s"]
+size = Vector3(2.973877, 1, 2.6904907)
+
+[sub_resource type="Environment" id="Environment_p2bpe"]
+background_mode = 1
+background_color = Color(9.62615e-07, 0.79880965, 0.94106376, 1)
+ambient_light_source = 2
+
+[node name="TestZone" type="Node3D" unique_id=256140028]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1171405505]
+transform = Transform3D(10, 0, 0, 0, 0.5, 0, 0, 0, 10, 4.331189, 0, 5.0285444)
+material_override = ExtResource("1_wgfkm")
+mesh = SubResource("BoxMesh_g4v7s")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D" unique_id=2105368374]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D" unique_id=1484095703]
+transform = Transform3D(0.99999976, 0, 0, 0, 1, 0, 0, 0, 0.99999976, -0.017456055, 0, -0.011138916)
+shape = SubResource("BoxShape3D_g4v7s")
+debug_color = Color(1, 1, 1, 0.41960785)
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="." unique_id=59554127]
+transform = Transform3D(10, 0, 0, 0, 0.5, 0, 0, 0, 10, 4.331189, 0, 31.958092)
+material_override = ExtResource("1_wgfkm")
+mesh = SubResource("BoxMesh_g4v7s")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D5" unique_id=1617291462]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D5/StaticBody3D" unique_id=1436563812]
+transform = Transform3D(0.99999976, 0, 0, 0, 1, 0, 0, 0, 0.99999976, -0.017456055, 0, -0.011138916)
+shape = SubResource("BoxShape3D_g4v7s")
+debug_color = Color(1, 1, 1, 0.41960785)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=182790387]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 1, 0.003955841, 0.5526849, 7.7973804)
+material_override = ExtResource("1_wgfkm")
+mesh = SubResource("BoxMesh_g4v7s")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2" unique_id=1702698421]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D" unique_id=1017342760]
+transform = Transform3D(0.99999976, 0, 0, 0, 1, 0, 0, 0, 0.99999976, 0, 0, 0)
+shape = SubResource("BoxShape3D_g4v7s")
+debug_color = Color(1, 1, 1, 0.41960785)
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=2057875567]
+transform = Transform3D(0.21669939, 0, 0.99738777, 0, 1, 0, -2.9921632, 0, 0.07223313, 7.06129, 0.5526849, -0.19679046)
+material_override = ExtResource("1_wgfkm")
+mesh = SubResource("BoxMesh_g4v7s")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D3" unique_id=720577779]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D3/StaticBody3D" unique_id=1251587963]
+transform = Transform3D(0.99999976, 0, 0, 0, 1, 0, 0, 0, 0.99999976, 0, 0, 0)
+shape = SubResource("BoxShape3D_g4v7s")
+debug_color = Color(1, 1, 1, 0.41960785)
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="." unique_id=1806374891]
+transform = Transform3D(1.9954507, 0, 0.7467095, 0, 1, 0, -2.2401285, 0, 0.6651502, 5.0181684, 1.5961578, 7.006721)
+material_override = ExtResource("1_wgfkm")
+mesh = SubResource("BoxMesh_g4v7s")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D4" unique_id=1435686953]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D4/StaticBody3D" unique_id=722078019]
+transform = Transform3D(0.99999976, 0, 0, 0, 1, 0, 0, 0, 0.99999976, 0, 0, 0)
+shape = SubResource("BoxShape3D_g4v7s")
+debug_color = Color(1, 1, 1, 0.41960785)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1341679057]
+environment = SubResource("Environment_p2bpe")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=260834033]
+transform = Transform3D(0.92771554, 0.34968317, 0.13063592, 1.0818306e-09, -0.34995988, 0.9367647, 0.37328812, -0.86905104, -0.3246632, 0, 0, 0)
+
+[node name="WindTurbine" parent="." unique_id=796319636 instance=ExtResource("4_epfbx")]
+transform = Transform3D(0.20719185, 0, -0.21695977, 0, 0.29999998, 0, 0.21695977, 0, 0.20719185, 1.4954791, 0.25711346, -2.0840695)
+
+[node name="Outlet" parent="WindTurbine" unique_id=1874574698 instance=ExtResource("5_0s85i")]
+transform = Transform3D(-3.3330977, 0, 0.03962791, 0, 3.3333335, 0, -0.03962791, 0, -3.3330977, -0.015134335, 1.5049279, -1.0152364)
+
+[node name="Outlet2" parent="WindTurbine" unique_id=137020658 instance=ExtResource("5_0s85i")]
+transform = Transform3D(3.3330116, 0, -0.04635465, 0, 3.3333337, 0, 0.04635465, 0, 3.3330116, 0.029257774, 1.7725463, 0.39055443)
+
+[node name="Battery" parent="." unique_id=377283905 instance=ExtResource("6_i0we6")]
+transform = Transform3D(0.16611196, 0, -0.24981357, 0, 0.29999995, 0, 0.24981357, 0, 0.16611196, -0.55442524, 0.22127295, 0.29387176)
+
+[node name="Outlet3" parent="Battery" unique_id=1287200382 instance=ExtResource("5_0s85i")]
+transform = Transform3D(0.22641528, 0, 3.325635, 0, 3.3333333, 0, -3.325635, 0, 0.22641528, 0.7434828, 0.98060906, -0.08499226)
+
+[node name="Outlet2" parent="Battery" unique_id=2077371693 instance=ExtResource("5_0s85i")]
+transform = Transform3D(3.3330562, 0, 0.04298234, 0, 3.3333333, 0, -0.04298234, 0, 3.3330562, 0.07024574, 0.98060906, 0.7548248)
+
+[node name="BuildingSystem" parent="." unique_id=368764283 instance=ExtResource("7_xyj56")]
+transform = Transform3D(0.013451008, 0, -0.9999095, 0, 1, 0, 0.9999095, 0, 0.013451008, 9.766451, 0.39190674, 19.895576)
+
+[node name="CharacterBody" parent="." unique_id=1718937912 instance=ExtResource("6_xyj56")]

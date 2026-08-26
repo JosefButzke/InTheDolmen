@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bcv57wxp41nju"]
+
+[ext_resource type="PackedScene" uid="uid://cm32puvxvpu5b" path="res://Models/Battery.fbx" id="1_lxbyn"]
+
+[node name="Battery" type="Node3D" unique_id=377283905]
+
+[node name="Battery" parent="." unique_id=915408859 instance=ExtResource("1_lxbyn")]

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://cjfg8wkhgeu5"]
+
+[ext_resource type="Texture2D" uid="uid://y8ndo34ylrqi" path="res://Sprites/silica-rock.png" id="1_b6tp4"]
+[ext_resource type="Script" uid="uid://es4wis8qb51s" path="res://Scripts/Item.gd" id="1_lk1ra"]
+
+[resource]
+script = ExtResource("1_lk1ra")
+name = "Silica"
+description = "Resource from initial area"
+icon = ExtResource("1_b6tp4")
+weight = 1.0
+item_type = 4
+metadata/_custom_type_script = "uid://es4wis8qb51s"

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://c6rokm658otvh"]
+
+[ext_resource type="Script" uid="uid://es4wis8qb51s" path="res://Scripts/Item.gd" id="1_v533q"]
+[ext_resource type="Texture2D" uid="uid://d1k7oxpjaagk" path="res://Sprites/cable.png" id="1_x3kx2"]
+
+[resource]
+script = ExtResource("1_v533q")
+name = "Eletric Wire"
+description = "Conect outlets to tables"
+icon = ExtResource("1_x3kx2")
+max_stack = 1
+weight = 0.1
+item_type = 0
+metadata/_custom_type_script = "uid://es4wis8qb51s"

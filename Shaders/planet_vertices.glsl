@@ -169,29 +169,17 @@ float fbm3d(int numLayers, float lacunarity, float persistence, float scale, vec
     return sum;
 }
 
-// Smooth step helper for "soft" cave walls in density fields.
-float smoothThreshold(float x, float threshold, float softness) {
-    // returns ~0 below threshold, ~1 above threshold, with smooth transition
-    return smoothstep(threshold - softness, threshold + softness, x);
-}
-
-// Height preference: 1.0 at cave band center, falls off above/below.
-float heightBand(float y, float centerY, float halfWidth) {
-    float d = abs(y - centerY) / max(halfWidth, 1e-5);
-    return clamp(1.0 - d, 0.0, 1.0);
-}
-
 float noiseSplitter(vec3 p) {
-    float planet_radius = 440.0;
+    float PLANET_RADIUS = 1024.0;
 
     float distance_to_center = length(p);
 
-    if (distance_to_center >= planet_radius - 16.0 && distance_to_center <= planet_radius) {
-        return fbm3d(3, 0.4, 3.0, 16, p) + planet_radius - distance_to_center;
+    if (distance_to_center >= PLANET_RADIUS - 16.0 && distance_to_center <= PLANET_RADIUS) {
+        return fbm3d(3, 0.4, 3.0, 16, p) + PLANET_RADIUS - distance_to_center;
     }
 
-    if (distance_to_center > planet_radius) {
-        return fbm3d(3, 0.4, 3.0, 16, p) + planet_radius - distance_to_center;
+    if (distance_to_center > PLANET_RADIUS) {
+        return fbm3d(3, 0.2, 3.0, 16, p) + PLANET_RADIUS - distance_to_center;
     }
 
     return fbm3d(3, 0.4, 3.0, 16, p);

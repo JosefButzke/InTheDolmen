@@ -71,7 +71,7 @@ func generate_world():
 		for x in range(-chunksFromPlayer, chunksFromPlayer):
 			for y in range(-chunksFromPlayer, chunksFromPlayer):
 				for z in range(-chunksFromPlayer, chunksFromPlayer):
-					if y > 2:
+					if y > 6:
 						generate_chunk(Vector3(x * (chunkWidth - resolution), y * (chunkHeight - resolution), z * (chunkWidth - resolution)))
 
 
@@ -197,7 +197,7 @@ func generate_chunk(chunk_position: Vector3):
 
 	# Submit to GPU and wait for sync
 	rd.submit()
-	rd.sync()
+	rd.sync ()
 	# Read back the data from the buffer
 	
 	rd.free_rid(uniform_set)
@@ -221,6 +221,9 @@ func generate_chunk(chunk_position: Vector3):
 	rd.free_rid(bufferVerticesOut)
 	rd.free_rid(bufferNormalsOut)
 	rd.free_rid(counterBuffer)
+
+	if vertex_count == 0:
+		return
 
 	for i in vertex_count:
 		triangles.append(Vector3(
@@ -255,13 +258,16 @@ func generate_chunk(chunk_position: Vector3):
 	add_child(mesh_instance_triangles)
 	mesh_instance_triangles.owner = self
 	
-	add_trimesh_collision(self , mesh, mesh_instance_triangles.position)
+	add_trimesh_collision(self, mesh, mesh_instance_triangles.position)
 	
 func add_trimesh_collision(parent: Node3D, tri_mesh: Mesh, p: Vector3) -> void:
 	# Static body to hold the collision
 	var body := StaticBody3D.new()
 	body.name = "TrianglesBody"
 	body.position = p
+	body.collision_layer = 1
+	body.collision_mask = 1
+	body.add_to_group("terrain")
 	parent.add_child(body)
 
 	# Create concave collision from the mesh triangles
