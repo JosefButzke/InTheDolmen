@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://xdckbvbkaato"]
+
+[ext_resource type="PackedScene" uid="uid://df8iip70iemc0" path="res://models/lamp.glb" id="1_pmx0n"]
+
+[node name="Lamp" type="Node3D" unique_id=664931488]
+
+[node name="Mesh" parent="." unique_id=1539537731 instance=ExtResource("1_pmx0n")]
+transform = Transform3D(0.26, 0, 0, 0, 0.26, 0, 0, 0, 0.26, 0, 0, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=996426604]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.42864406, 0)
+light_color = Color(1, 1, 0.5803922, 1)
+light_energy = 13.278
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 7.024
+light_size = 1.0
+light_specular = 16.0
+shadow_enabled = true
+shadow_blur = 10.0
+distance_fade_begin = 0.0
+distance_fade_shadow = 10.04
+distance_fade_length = 10.7
+spot_attenuation = 1.21
+spot_angle = 45.51

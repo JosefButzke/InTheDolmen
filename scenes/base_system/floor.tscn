@@ -1,0 +1,55 @@
+[gd_scene format=4 uid="uid://731hrf06ydrf"]
+
+[ext_resource type="Material" uid="uid://qti1qgyuoj62" path="res://materials/metal_basic.tres" id="1_fndan"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_klgg6"]
+resource_name = "SoftMetal"
+cull_mode = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_6qfbq"]
+_surfaces = [{
+"aabb": AABB(-0.5071168, -0.010142475, -0.5071144, 1.0142307, 0.02028495, 1.0142307),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAQADAAIAAAAEAAEAAgADAAUAAgAFAAAAAAAGAAQAAAAFAAYABAAHAAEAAQAHAAMABAAGAAcABQADAAcABQAHAAYA"),
+"name": "SoftMetal",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAABAAAAAAD//wAA//8AAP//AQAAAAAA/////wAAAAAAAAAA//8AAAAA//8AAAAAAAD9////AAD///3///8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_7vb04"]
+resource_name = "Floor_Plane_004"
+_surfaces = [{
+"aabb": AABB(-0.5071168, -0.010142475, -0.5071144, 1.0142307, 0.02028495, 1.0142307),
+"attribute_data": PackedByteArray("AAD/f/9//v8AAP///3//fwAA/3//fwAA/3//fwAAAAD/f/9/joL///9///+Ogv9//38AAI6C/3//f/9/joIAAI6C/38ehf//joL//x6F/3+OggAAHoX/f46C/38ehQAA"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_klgg6"),
+"name": "SoftMetal",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAABAAAAVNX//wAA//9U1f//AQAAAFTVAAAAAP//VNUAAP//AABU1f///f///1TVAAD9////VNX/////AABU1QAAAQAAAFTVAAD9////VNUAAAAA//9U1QAA//8AAFTV//8BAAAA//8AAP//AAD//wAAAQAAAP///////wAA/////wAA//9U1f////8AAFTV//8BAAAAVNX///3///9U1QAAAAD///+////9/////7///wAA////vwAA/f////+/qipU1aoqVNWqKlTVqipU1aqqqqqqqqqqqqqqqqqqqqpU1VTVVNVU1VTVVNVU1VTV/7//v/+//7//v/+//7//v6oqqiqqKqoqqiqqKqoqqir/////////////////////")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_6qfbq")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fndan"]
+size = Vector3(1.0142307, 0.02028495, 1.0142307)
+
+[node name="Floor" type="Node3D" unique_id=2039052091]
+
+[node name="Floor_001" type="MeshInstance3D" parent="." unique_id=1757958526]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+material_override = ExtResource("1_fndan")
+mesh = SubResource("ArrayMesh_7vb04")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor_001" unique_id=778921973]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4305115e-06, 0, 9.536743e-07)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor_001/StaticBody3D" unique_id=1743662149]
+shape = SubResource("BoxShape3D_fndan")

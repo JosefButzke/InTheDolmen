@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cv8mlc27khe5d"]
+
+[ext_resource type="Script" uid="uid://cb8o2ivqfi5g" path="res://Scripts/boba_spike_manager.gd" id="1_mxfa3"]
+[ext_resource type="PackedScene" uid="uid://b54cqmvkq388b" path="res://models/boba_spike.glb" id="3_tw1pg"]
+[ext_resource type="AudioStream" uid="uid://cq5ylgxakt252" path="res://audios/spike_shoot.mp3" id="4_ky2e5"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
+height = 2.4064941
+
+[node name="BobaSpike" unique_id=1911760903 node_paths=PackedStringArray("audioPlayer") instance=ExtResource("3_tw1pg")]
+script = ExtResource("1_mxfa3")
+audioPlayer = NodePath("AudioStreamPlayer3D")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="34" unique_id=1895384124]
+stream = ExtResource("4_ky2e5")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="35" unique_id=904580795]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0" unique_id=545189189]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2089167, 0)
+shape = SubResource("CapsuleShape3D_g4v7s")

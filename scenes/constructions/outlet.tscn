@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://fsd2m0k0qdan"]
+
+[ext_resource type="PackedScene" uid="uid://dte0p7cu3gj4m" path="res://models/Outlet.blend" id="1_g1s72"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g4v7s"]
+size = Vector3(0.63708496, 0.5332031, 0.67297363)
+
+[node name="Outlet" type="Node3D" unique_id=1874574698]
+
+[node name="Outlet" parent="." unique_id=1545149280 instance=ExtResource("1_g1s72")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -0.02519232)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Outlet" unique_id=1576974]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Outlet/StaticBody3D" unique_id=1813327789]
+transform = Transform3D(0.99999976, 0, 0, 0, 0.99999976, 0, 0, 0, 0.99999976, -0.00030517887, 0.015624996, -0.16351314)
+shape = SubResource("BoxShape3D_g4v7s")

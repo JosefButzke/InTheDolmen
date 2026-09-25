@@ -17,7 +17,13 @@ general/updates_per_second=100
 config/name="InTheDolmen"
 run/main_scene="uid://bptteobbrql1y"
 config/features=PackedStringArray("4.7", "Forward Plus")
+run/max_fps=60
 config/icon="res://icon.svg"
+
+[autoload]
+
+BuildingManager="*uid://j0oja07sy3to"
+GetLookTarget="*uid://be6w4ly2lux72"
 
 [display]
 
@@ -32,19 +38,19 @@ enabled=PackedStringArray()
 [file_customization]
 
 folder_colors={
-"res://Audios/": "gray",
-"res://Fonts/": "gray",
-"res://Materials/": "orange",
-"res://Models/": "blue",
-"res://Scenes/": "purple",
-"res://Scenes/BaseSystem/": "red",
-"res://Scenes/Constructions/": "teal",
-"res://Scenes/Enviroment/": "green",
-"res://Scenes/Items/": "orange",
-"res://Scenes/Terrain/": "purple",
-"res://Scenes/UI/": "pink",
 "res://Scripts/": "red",
-"res://Shaders/": "pink"
+"res://Shaders/": "pink",
+"res://audios/": "gray",
+"res://fonts/": "gray",
+"res://materials/": "orange",
+"res://models/": "blue",
+"res://scenes/": "purple",
+"res://scenes/base_system/": "red",
+"res://scenes/constructions/": "teal",
+"res://scenes/enviroment/": "green",
+"res://scenes/items/": "orange",
+"res://scenes/terrain/": "purple",
+"res://scenes/ui/": "pink"
 }
 
 [filesystem]
@@ -91,6 +97,7 @@ Inventory={
 
 [layer_names]
 
+2d_physics/layer_2="Placement"
 3d_physics/layer_2="Interactable"
 
 [physics]

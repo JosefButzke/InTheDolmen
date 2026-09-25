@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://cgl4d64uekwoe"]
+
+[ext_resource type="PackedScene" uid="uid://dmgd44b65fu50" path="res://models/beacon.blend" id="1_nuno5"]
+[ext_resource type="Script" uid="uid://dxwr1ekcjgnl5" path="res://Scripts/beacon.gd" id="2_bnsir"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_bnsir"]
+radius = 0.22846812
+
+[node name="Beacon" unique_id=762429546 instance=ExtResource("1_nuno5")]
+script = ExtResource("2_bnsir")
+speed = 30.0
+
+[node name="Mesh_001" parent="." index="1" unique_id=1187015813]
+transform = Transform3D(1, 0, 0, 0, 0.010928251, -0.9999404, 0, 0.9999404, 0.010928251, 0, 0, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Mesh_001" index="0" unique_id=930531882]
+transform = Transform3D(-0.5, 0, 0.86602545, 0, 0.9999999, -9.313226e-10, -0.8660254, -9.313226e-10, -0.4999999, 0, 2.0211308, 0.02208874)
+light_energy = 5.0
+omni_range = 20.0
+
+[node name="Area3D" type="Area3D" parent="." index="2" unique_id=1351260292]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.72454697)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0" unique_id=780731205]
+shape = SubResource("SphereShape3D_bnsir")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_body_entered"]

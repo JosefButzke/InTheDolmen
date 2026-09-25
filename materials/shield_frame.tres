@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://b47w5v6olycgb"]
+
+[resource]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+disable_receive_shadows = true

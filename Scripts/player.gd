@@ -1,5 +1,8 @@
 extends Node3D
 
+enum MovementMode {NORMAL, SPHERE}
+@export var movement_mode: MovementMode = MovementMode.SPHERE
+
 @export var speed: float = 5.0
 @export var jump_velocity: float = 5.0
 @export var mouse_sensitivity: float = 0.002
@@ -32,6 +35,19 @@ func _unhandled_input(event):
 		pitch -= event.relative.y * mouse_sensitivity
 		pitch = clamp(pitch, deg_to_rad(max_look_down), deg_to_rad(max_look_up))
 		camera_pivot.rotation.x = pitch
+		
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo:
+		# KEY_1 through KEY_9 are sequential in Godot's KeyList
+		if event.keycode >= KEY_1 and event.keycode <= KEY_9:
+			var slot_index = event.keycode - KEY_1 # 0-based index
+			#UIManager.instance.select_hotbar_slot(slot_index)
+			BuildingManager.change_part_selected(slot_index)
+
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and current_interactable_object:
+			current_interactable_object.on_interact()
+
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ESC"):
@@ -52,11 +68,14 @@ func _align_to_planet(planet_up: Vector3, delta: float) -> void:
 	quaternion = (Quaternion(rotation_axis.normalized(), step) * quaternion).normalized()
 
 func _physics_process(delta: float) -> void:
-	var planet_up: Vector3 = global_position.normalized()
-	if planet_up == Vector3.ZERO:
+	var planet_up: Vector3
+	if movement_mode == MovementMode.SPHERE:
+		planet_up = global_position.normalized()
+		if planet_up == Vector3.ZERO:
+			planet_up = Vector3.UP
+		_align_to_planet(planet_up, delta)
+	else:
 		planet_up = Vector3.UP
-
-	_align_to_planet(planet_up, delta)
 
 	# Tell CharacterBody3D which direction is "up" for floor detection and sliding.
 	characterBody.up_direction = planet_up
@@ -94,22 +113,19 @@ func _physics_process(delta: float) -> void:
 	characterBody.velocity = current_horizontal + planet_up * vertical_velocity
 	characterBody.move_and_slide()
 
-	var space_state = get_world_3d().direct_space_state
-	var mousepos = get_viewport().get_mouse_position()
-	var origin = camera.project_ray_origin(mousepos)
-	var end = origin + camera.project_ray_normal(mousepos) * RAY_LENGTH
-	var query = PhysicsRayQueryParameters3D.create(origin, end, Constants.interactableLayer)
-	query.exclude = [self]
-	query.collide_with_areas = true
-
-	var result = space_state.intersect_ray(query)
+	var result = Utils.get_look_target(camera, RAY_LENGTH, Constants.interactableLayer, [characterBody.get_rid()], true)
 	var new_interactable_object: Interactable = null
 
 	if not result.is_empty():
 		var collider = result["collider"]
-		var parent = collider.get_parent()
-		if parent is Interactable:
-			new_interactable_object = parent
+
+		if collider is Interactable:
+			new_interactable_object = collider
+		elif collider is CollisionObject3D:
+			# the ray returns the body, so find which CollisionShape3D was hit
+			var shape_owner = collider.shape_owner_get_owner(collider.shape_find_owner(result["shape"]))
+			if shape_owner is Interactable:
+				new_interactable_object = shape_owner
 
 	if new_interactable_object != current_interactable_object:
 		if current_interactable_object:
