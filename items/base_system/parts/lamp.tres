@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://dxenulli3smf1"]
+
+[ext_resource type="Texture2D" uid="uid://cw0rayrseqhth" path="res://images/shader_texture_input.png" id="1_2fayl"]
+[ext_resource type="Script" uid="uid://es4wis8qb51s" path="res://scripts/abstracts/item.gd" id="2_plg1q"]
+
+[resource]
+script = ExtResource("2_plg1q")
+name = "Lamp"
+description = "building lamp"
+icon = ExtResource("1_2fayl")
+max_stack = 1
+weight = 1.0
+item_type = 6
+metadata/_custom_type_script = "uid://es4wis8qb51s"

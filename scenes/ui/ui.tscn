@@ -1,11 +1,13 @@
 [gd_scene format=3 uid="uid://dip137op5b7w4"]
 
-[ext_resource type="Script" uid="uid://bwwyxaswtu3yk" path="res://scenes/ui/ui_manager.gd" id="1_nf4gj"]
+[ext_resource type="Script" uid="uid://bwwyxaswtu3yk" path="res://scripts/ui/ui_manager.gd" id="1_nf4gj"]
 [ext_resource type="PackedScene" uid="uid://785u8sb6pbtc" path="res://scenes/ui/hotbar.tscn" id="1_nxvpl"]
 [ext_resource type="PackedScene" uid="uid://8q0lfykmhgqv" path="res://scenes/ui/inventory.tscn" id="2_dewlx"]
-[ext_resource type="PackedScene" uid="uid://b7xhpmht22rem" path="res://scenes/ui/slot.tscn" id="4_2246s"]
+[ext_resource type="Resource" uid="uid://dlpawciafbwr" path="res://items/base_system/builder_device.tres" id="2_g5kmx"]
+[ext_resource type="PackedScene" uid="uid://b2c2b7dvlmo2l" path="res://scenes/ui/building_menu.tscn" id="5_0dwhk"]
+[ext_resource type="PackedScene" uid="uid://dnuyv6vjpbc1k" path="res://scenes/ui/exit_menu.tscn" id="6_exit"]
 
-[node name="UI" type="Control" unique_id=844746813 node_paths=PackedStringArray("inventory", "hotbar")]
+[node name="UI" type="Control" unique_id=844746813 node_paths=PackedStringArray("inventory", "hotbar", "menu")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,6 +18,8 @@ mouse_filter = 2
 script = ExtResource("1_nf4gj")
 inventory = NodePath("Inventory")
 hotbar = NodePath("Hotbar")
+menu = NodePath("ExitMenu")
+item_test = ExtResource("2_g5kmx")
 
 [node name="Inventory" parent="." unique_id=1195171337 instance=ExtResource("2_dewlx")]
 layout_mode = 1
@@ -24,19 +28,11 @@ offset_top = -480.125
 offset_right = 617.803
 offset_bottom = -75.44574
 
-[node name="Slot" parent="Inventory" unique_id=863137491 instance=ExtResource("4_2246s")]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -266.0005
-offset_top = -754.2196
-offset_right = 265.9995
-offset_bottom = -222.21964
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="Hotbar" parent="." unique_id=1407471595 instance=ExtResource("1_nxvpl")]
+layout_mode = 1
+
+[node name="BuildingMenu" parent="." unique_id=2066430907 instance=ExtResource("5_0dwhk")]
+layout_mode = 1
+
+[node name="ExitMenu" parent="." instance=ExtResource("6_exit")]
 layout_mode = 1

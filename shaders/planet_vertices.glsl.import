@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://drw3pyk18jkv0"
+path="res://.godot/imported/planet_vertices.glsl-7a205b1c73a8d6fdcc2f33b14b24c5db.res"
+
+[deps]
+
+source_file="res://shaders/planet_vertices.glsl"
+dest_files=["res://.godot/imported/planet_vertices.glsl-7a205b1c73a8d6fdcc2f33b14b24c5db.res"]
+
+[params]
+

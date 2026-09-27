@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://vh5rone4s52v"]
+
+[ext_resource type="Script" uid="uid://es4wis8qb51s" path="res://scripts/abstracts/item.gd" id="1_1qy4v"]
+[ext_resource type="Texture2D" uid="uid://cw0rayrseqhth" path="res://images/shader_texture_input.png" id="1_gtac3"]
+
+[resource]
+script = ExtResource("1_1qy4v")
+name = "Wall"
+description = "building wall"
+icon = ExtResource("1_gtac3")
+max_stack = 1
+weight = 1.0
+item_type = 6
+metadata/_custom_type_script = "uid://es4wis8qb51s"

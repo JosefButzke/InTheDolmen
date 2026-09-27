@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cgl4d64uekwoe"]
 
 [ext_resource type="PackedScene" uid="uid://dmgd44b65fu50" path="res://models/beacon.blend" id="1_nuno5"]
-[ext_resource type="Script" uid="uid://dxwr1ekcjgnl5" path="res://Scripts/beacon.gd" id="2_bnsir"]
+[ext_resource type="Script" uid="uid://dxwr1ekcjgnl5" path="res://scripts/beacon.gd" id="2_bnsir"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_bnsir"]
 radius = 0.22846812

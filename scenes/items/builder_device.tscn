@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bu52yrhemhfys"]
+
+[ext_resource type="Script" uid="uid://j0oja07sy3to" path="res://scripts/building/building_manager.gd" id="1_k0eiu"]
+[ext_resource type="PackedScene" uid="uid://becq261nxcuie" path="res://models/builder_device.blend" id="2_gaoub"]
+
+[node name="BuilderDevice" type="Node3D" unique_id=2076996452]
+script = ExtResource("1_k0eiu")
+
+[node name="builder_device" parent="." unique_id=419873974 instance=ExtResource("2_gaoub")]
+transform = Transform3D(-0.17535187, 0.044180628, 0.085438825, 0.0056722965, 0.18209426, -0.08251975, -0.09601847, -0.06992679, -0.16090587, 0, 0, 0)

@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://xdckbvbkaato"]
 
 [ext_resource type="PackedScene" uid="uid://df8iip70iemc0" path="res://models/lamp.glb" id="1_pmx0n"]
+[ext_resource type="Script" uid="uid://bcrx80u50i8hh" path="res://scripts/building/placement_point.gd" id="2_i0nyx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gmtqn"]
 
 [node name="Lamp" type="Node3D" unique_id=664931488]
 
@@ -9,7 +12,7 @@ transform = Transform3D(0.26, 0, 0, 0, 0.26, 0, 0, 0, 0.26, 0, 0, 0)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=996426604]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.42864406, 0)
-light_color = Color(1, 1, 0.5803922, 1)
+light_color = Color(0.9638099, 0.9738185, 0.7894448, 1)
 light_energy = 13.278
 light_indirect_energy = 0.0
 light_volumetric_fog_energy = 7.024
@@ -22,3 +25,11 @@ distance_fade_shadow = 10.04
 distance_fade_length = 10.7
 spot_attenuation = 1.21
 spot_angle = 45.51
+
+[node name="Placement" type="StaticBody3D" parent="." unique_id=252539402]
+transform = Transform3D(1, 2.1175824e-22, 0, 0, 1, 2.6822243e-22, 0, 2.6822238e-22, 1, -8.4703295e-22, 0, -6.7055595e-22)
+collision_layer = 2
+
+[node name="Snap1" type="CollisionShape3D" parent="Placement" unique_id=1312594727]
+shape = SubResource("BoxShape3D_gmtqn")
+script = ExtResource("2_i0nyx")

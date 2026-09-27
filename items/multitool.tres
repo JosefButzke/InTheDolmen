@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://b3vgunouvpmb8"]
+
+[ext_resource type="PackedScene" uid="uid://il87hl2g3m3u" path="res://scenes/items/multitool.tscn" id="1_1je1i"]
+[ext_resource type="Script" uid="uid://es4wis8qb51s" path="res://scripts/abstracts/item.gd" id="1_vjtic"]
+[ext_resource type="Texture2D" uid="uid://c4q2bmujmanc6" path="res://images/wave.png" id="2_lwdmc"]
+
+[resource]
+script = ExtResource("1_vjtic")
+name = "Multitool"
+icon = ExtResource("2_lwdmc")
+max_stack = 1
+weight = 5.0
+item_type = 0
+equip_scene = ExtResource("1_1je1i")
+metadata/_custom_type_script = "uid://es4wis8qb51s"

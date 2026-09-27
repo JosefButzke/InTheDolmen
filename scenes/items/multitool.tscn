@@ -1,10 +1,10 @@
 [gd_scene format=4 uid="uid://il87hl2g3m3u"]
 
-[ext_resource type="Script" uid="uid://crl3yuwi6pbdp" path="res://Scripts/multitool.gd" id="1_uux45"]
+[ext_resource type="Script" uid="uid://crl3yuwi6pbdp" path="res://scripts/multitool_manager.gd" id="1_uux45"]
+[ext_resource type="PackedScene" uid="uid://cgl4d64uekwoe" path="res://scenes/items/beacon.tscn" id="2_15sst"]
 [ext_resource type="Material" uid="uid://d0ssg3nmcw3sh" path="res://materials/shield.tres" id="2_tsdx2"]
 [ext_resource type="Material" uid="uid://b47w5v6olycgb" path="res://materials/shield_frame.tres" id="3_o8yt2"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_fj7nc"]
+[ext_resource type="PackedScene" uid="uid://conl85xtkgxqq" path="res://models/multitool.glb" id="3_qsw10"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xeeb4"]
 resource_name = "Material"
@@ -208,21 +208,20 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_p5wry")
 
-[node name="Multitool" type="Node3D" unique_id=1628307837 node_paths=PackedStringArray("beacon_deploy_point")]
+[node name="Multitool" type="Node3D" unique_id=1628307837 node_paths=PackedStringArray("beacon_deploy_point", "flashlight")]
 script = ExtResource("1_uux45")
 beacon_deploy_point = NodePath("BeaconDeployPoint")
-beacon = Object(Node3D,"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","transform":Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":false,"visibility_parent":NodePath(""),"script":null)
+beacon = ExtResource("2_15sst")
+flashlight = NodePath("FlashlightPivot/SpotLight3D")
 
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=774523330]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.5, 0, 0, 0)
-mesh = SubResource("BoxMesh_fj7nc")
+[node name="multitool2" parent="." unique_id=1300417010 instance=ExtResource("3_qsw10")]
 
 [node name="BeaconDeployPoint" type="Node3D" parent="." unique_id=1884286485]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2513924)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.057327606, -1.3230243)
 
 [node name="Shield" type="Node3D" parent="." unique_id=1832280029]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.26170903, 0.16798994, -0.19857612)
+visible = false
 
 [node name="Shield1" type="MeshInstance3D" parent="Shield" unique_id=369385819]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10053411, -0.39254332, 0)
@@ -260,3 +259,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19973788, 0.12036525, 0)
 material_override = ExtResource("3_o8yt2")
 gi_mode = 0
 mesh = SubResource("ArrayMesh_3omgl")
+
+[node name="FlashlightPivot" type="Node3D" parent="." unique_id=1210775854]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.07855886, 0.14503312, -0.773582)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="FlashlightPivot" unique_id=891417940]
+visible = false
+light_energy = 6.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 0.0
+shadow_bias = 2.056
+distance_fade_enabled = true
+spot_range = 77.1713
+spot_angle = 53.437496

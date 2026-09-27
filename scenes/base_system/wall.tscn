@@ -1,5 +1,9 @@
 [gd_scene format=4 uid="uid://d2b8e1sowtdgg"]
 
+[ext_resource type="Script" uid="uid://bcrx80u50i8hh" path="res://scripts/building/placement_point.gd" id="1_4fe3b"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f2qgj"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5yvd6"]
 resource_name = "Material.003"
 cull_mode = 2
@@ -42,8 +46,37 @@ size = Vector3(1.0142307, 0.056798194, 1.0142307)
 
 [node name="Wall" type="Node3D" unique_id=815168979]
 
+[node name="Placement" type="StaticBody3D" parent="." unique_id=1178435071]
+transform = Transform3D(1, 2.1175824e-22, 0, 0, 1, 2.6822243e-22, 0, 2.6822238e-22, 1, 0, 0, 0)
+collision_layer = 2
+
+[node name="TL" type="CollisionShape3D" parent="Placement" unique_id=1685956429]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 5, 0)
+shape = SubResource("BoxShape3D_f2qgj")
+script = ExtResource("1_4fe3b")
+
+[node name="TR" type="CollisionShape3D" parent="Placement" unique_id=1853201078]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.536, 5, 0)
+shape = SubResource("BoxShape3D_f2qgj")
+script = ExtResource("1_4fe3b")
+
+[node name="BR" type="CollisionShape3D" parent="Placement" unique_id=401246849]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.536, 0, 0)
+shape = SubResource("BoxShape3D_f2qgj")
+script = ExtResource("1_4fe3b")
+
+[node name="BL" type="CollisionShape3D" parent="Placement" unique_id=1192888728]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.536, 0, 0)
+shape = SubResource("BoxShape3D_f2qgj")
+script = ExtResource("1_4fe3b")
+
+[node name="Attachment" type="CollisionShape3D" parent="Placement" unique_id=1594290908]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("BoxShape3D_f2qgj")
+script = ExtResource("1_4fe3b")
+
 [node name="Plane_065" type="MeshInstance3D" parent="." unique_id=1089972862]
-transform = Transform3D(5, 0, 0, 0, -2.1855695e-07, -5, 0, 5, -2.1855695e-07, 0, 0, 0)
+transform = Transform3D(5, 0, 0, 0, -2.1855695e-07, -5, 0, 5, -2.1855695e-07, 0, 2.5, 0)
 mesh = SubResource("ArrayMesh_o2i1q")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Plane_065" unique_id=578136945]

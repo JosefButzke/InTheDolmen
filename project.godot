@@ -22,8 +22,10 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-BuildingManager="*uid://j0oja07sy3to"
 GetLookTarget="*uid://be6w4ly2lux72"
+Events="*uid://d0vigx4jct4wg"
+Constants="*uid://coydm6k7vl5a6"
+SaveGame="*uid://c4vx3fv48pm02"
 
 [display]
 
@@ -38,10 +40,9 @@ enabled=PackedStringArray()
 [file_customization]
 
 folder_colors={
-"res://Scripts/": "red",
-"res://Shaders/": "pink",
 "res://audios/": "gray",
 "res://fonts/": "gray",
+"res://items/": "yellow",
 "res://materials/": "orange",
 "res://models/": "blue",
 "res://scenes/": "purple",
@@ -50,7 +51,9 @@ folder_colors={
 "res://scenes/enviroment/": "green",
 "res://scenes/items/": "orange",
 "res://scenes/terrain/": "purple",
-"res://scenes/ui/": "pink"
+"res://scenes/ui/": "pink",
+"res://scripts/": "red",
+"res://shaders/": "pink"
 }
 
 [filesystem]

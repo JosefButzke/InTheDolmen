@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://785u8sb6pbtc"]
 
 [ext_resource type="PackedScene" uid="uid://b7xhpmht22rem" path="res://scenes/ui/slot.tscn" id="1_1074w"]
-[ext_resource type="Script" uid="uid://bwjwnf11twl54" path="res://scenes/ui/hotbar.gd" id="2_hotbar"]
+[ext_resource type="Script" uid="uid://bwjwnf11twl54" path="res://scripts/ui/hotbar_manager.gd" id="2_hotbar"]
+[ext_resource type="Texture2D" uid="uid://cyym2mlrb3bul" path="res://images/hexagon-vertical.png" id="2_tyl16"]
+[ext_resource type="Texture2D" uid="uid://c3hvylylfgim6" path="res://images/hexagon-vertical-border.png" id="3_pikvf"]
 
 [node name="Hotbar" type="Control" unique_id=1407471595]
-script = ExtResource("2_hotbar")
 layout_mode = 3
 anchors_preset = 7
 anchor_left = 0.5
@@ -13,6 +14,9 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
+script = ExtResource("2_hotbar")
+slot_tex_default = ExtResource("2_tyl16")
+slot_tex_selected = ExtResource("3_pikvf")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1084101752]
 layout_mode = 1

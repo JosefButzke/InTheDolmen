@@ -1,6 +1,9 @@
 [gd_scene format=4 uid="uid://731hrf06ydrf"]
 
+[ext_resource type="Script" uid="uid://bcrx80u50i8hh" path="res://scripts/building/placement_point.gd" id="1_agutp"]
 [ext_resource type="Material" uid="uid://qti1qgyuoj62" path="res://materials/metal_basic.tres" id="1_fndan"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ttedu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_klgg6"]
 resource_name = "SoftMetal"
@@ -42,6 +45,34 @@ shadow_mesh = SubResource("ArrayMesh_6qfbq")
 size = Vector3(1.0142307, 0.02028495, 1.0142307)
 
 [node name="Floor" type="Node3D" unique_id=2039052091]
+
+[node name="Placement" type="StaticBody3D" parent="." unique_id=1331623862]
+transform = Transform3D(1, 2.1175824e-22, 0, 0, 1, 2.6822243e-22, 0, 2.6822238e-22, 1, -8.4703295e-22, 0, -6.7055595e-22)
+collision_layer = 2
+
+[node name="TL" type="CollisionShape3D" parent="Placement" unique_id=986714763]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.536, 0, -2.536)
+shape = SubResource("BoxShape3D_ttedu")
+script = ExtResource("1_agutp")
+
+[node name="TR" type="CollisionShape3D" parent="Placement" unique_id=163851814]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.536, 0, -2.536)
+shape = SubResource("BoxShape3D_ttedu")
+script = ExtResource("1_agutp")
+
+[node name="BR" type="CollisionShape3D" parent="Placement" unique_id=1182511198]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.536, 0, 2.536)
+shape = SubResource("BoxShape3D_ttedu")
+script = ExtResource("1_agutp")
+
+[node name="BL" type="CollisionShape3D" parent="Placement" unique_id=1526124539]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.536, 0, 2.536)
+shape = SubResource("BoxShape3D_ttedu")
+script = ExtResource("1_agutp")
+
+[node name="Attachment" type="CollisionShape3D" parent="Placement" unique_id=1545344335]
+shape = SubResource("BoxShape3D_ttedu")
+script = ExtResource("1_agutp")
 
 [node name="Floor_001" type="MeshInstance3D" parent="." unique_id=1757958526]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)

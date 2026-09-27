@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://qti1qgyuoj62"]
 
-[ext_resource type="Shader" uid="uid://8g6ufn5ta4qb" path="res://Shaders/metal_basic.tres" id="1_1vrn3"]
+[ext_resource type="Shader" uid="uid://8g6ufn5ta4qb" path="res://shaders/metal_basic.tres" id="1_1vrn3"]
 
 [resource]
 render_priority = 0

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://dlpawciafbwr"]
+
+[ext_resource type="Texture2D" uid="uid://dsu73scd01nif" path="res://addons/MotherBoard.png" id="2_vjn6w"]
+[ext_resource type="Script" uid="uid://es4wis8qb51s" path="res://scripts/abstracts/item.gd" id="3_1d1br"]
+[ext_resource type="PackedScene" uid="uid://bu52yrhemhfys" path="res://scenes/items/builder_device.tscn" id="4_bdev"]
+
+[resource]
+script = ExtResource("3_1d1br")
+name = "Builder"
+description = "Build Base"
+icon = ExtResource("2_vjn6w")
+max_stack = 1
+weight = 1.0
+item_type = 0
+equip_scene = ExtResource("4_bdev")
+metadata/_custom_type_script = "uid://es4wis8qb51s"

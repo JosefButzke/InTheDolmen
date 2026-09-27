@@ -2,7 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://btqfxn371icda" path="res://scenes/terrain/planet.scn" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://drbv21csxacvh" path="res://scenes/player.tscn" id="2_0wfyh"]
-[ext_resource type="PackedScene" uid="uid://ci2u01sx53s3u" path="res://scenes/base_system/frame.tscn" id="3_sugp2"]
+[ext_resource type="PackedScene" uid="uid://dip137op5b7w4" path="res://scenes/ui/ui.tscn" id="3_sugp2"]
+[ext_resource type="PackedScene" uid="uid://ci2u01sx53s3u" path="res://scenes/base_system/frame.tscn" id="4_jyhfs"]
+[ext_resource type="Resource" uid="uid://dlpawciafbwr" path="res://items/base_system/builder_device.tres" id="4_tefeu"]
+[ext_resource type="Resource" uid="uid://b3vgunouvpmb8" path="res://items/multitool.tres" id="5_o6xl0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tefeu"]
 
@@ -30,10 +33,10 @@ fog_sky_affect = 0.0
 fog_depth_end = 300.0
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.0151
-volumetric_fog_emission = Color(0.4313402, 0.43134028, 0.43134007, 1)
+volumetric_fog_emission = Color(0.13916105, 0.025964044, 0.031202814, 1)
 volumetric_fog_sky_affect = 0.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sugp2"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jyhfs"]
 resource_local_to_scene = true
 albedo_color = Color(0.73333335, 0.3254902, 0.19607843, 1)
 metallic_specular = 0.0
@@ -44,19 +47,22 @@ metallic_specular = 0.0
 environment = SubResource("Environment_g4v7s")
 
 [node name="Planet" parent="." unique_id=2004964775 instance=ExtResource("1_o5qli")]
-material = SubResource("StandardMaterial3D_sugp2")
+material = SubResource("StandardMaterial3D_jyhfs")
 
 [node name="Player" parent="." unique_id=1718937912 instance=ExtResource("2_0wfyh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1019.32153, 0)
 floor_max_angle = 1.0471976
 safe_margin = 0.1
 jump_velocity = 10.0
-RAY_LENGTH = 16
 
 [node name="Sun" type="DirectionalLight3D" parent="." unique_id=1583791210]
 transform = Transform3D(0.6059884, 0.5751012, 0.54957867, 0, -0.69088244, 0.72296715, 0.7954735, -0.4381097, -0.41866675, 0, 0, 0)
-light_angular_distance = 0.1
+light_angular_distance = 0.5
 shadow_enabled = true
 
-[node name="Frame" parent="." unique_id=1566021089 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16407892, 1020.4843, -8.096248)
+[node name="UI" parent="." unique_id=844746813 instance=ExtResource("3_sugp2")]
+item_test_build = ExtResource("4_tefeu")
+item_test_multi = ExtResource("5_o6xl0")
+
+[node name="Frame" parent="." unique_id=1566021089 instance=ExtResource("4_jyhfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7174197, 1020.3402, -5.8887286)
