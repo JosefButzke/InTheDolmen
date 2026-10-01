@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://8q0lfykmhgqv"]
 
-[ext_resource type="PackedScene" uid="uid://b7xhpmht22rem" path="res://scenes/ui/slot.tscn" id="1_ersrd"]
+[ext_resource type="PackedScene" uid="uid://b7xhpmht22rem" path="res://scenes/ui/slot_ui.tscn" id="1_ersrd"]
 [ext_resource type="Script" uid="uid://b864srjw6qvhw" path="res://scripts/ui/inventory_manager.gd" id="1_jbd0o"]
 [ext_resource type="Script" uid="uid://es4wis8qb51s" path="res://scripts/abstracts/item.gd" id="2_4ne0y"]
 [ext_resource type="Resource" uid="uid://be8qqkosu5r7p" path="res://items/coal.tres" id="3_yeyjc"]

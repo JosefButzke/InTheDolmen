@@ -1,0 +1,336 @@
+[gd_scene format=3 uid="uid://b2c2b7dvlmo2l"]
+
+[ext_resource type="Script" uid="uid://conbc0v5qu8tl" path="res://scripts/ui/building_menu.gd" id="1_8eonf"]
+[ext_resource type="PackedScene" uid="uid://b7xhpmht22rem" path="res://scenes/ui/slot_ui.tscn" id="7_t1f6n"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8eonf"]
+
+[node name="BuildingMenu" type="Control" unique_id=1195171337]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -613.515
+offset_top = -410.28503
+offset_right = 622.08997
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+script = ExtResource("1_8eonf")
+
+[node name="Column" type="VBoxContainer" parent="." unique_id=249766396]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -334.0005
+offset_top = -330.28503
+offset_right = 333.9995
+offset_bottom = -106.28516
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Attachments" type="HBoxContainer" parent="Column" unique_id=79229538]
+layout_mode = 2
+alignment = 1
+
+[node name="HBS1" type="Panel" parent="Column/Attachments" unique_id=1670672494]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(108, 108)
+layout_mode = 2
+
+[node name="Slot" parent="Column/Attachments/HBS1" unique_id=863137491 instance=ExtResource("7_t1f6n")]
+layout_mode = 0
+offset_right = 108.0
+offset_bottom = 108.0
+
+[node name="Label" type="Label" parent="Column/Attachments/HBS1" unique_id=1157453782]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -23.5
+offset_top = -34.0
+offset_right = 23.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "Frame"
+
+[node name="HBS2" type="Panel" parent="Column/Attachments" unique_id=855339391]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(108, 108)
+layout_mode = 2
+
+[node name="Slot" parent="Column/Attachments/HBS2" unique_id=1949370914 instance=ExtResource("7_t1f6n")]
+layout_mode = 0
+offset_right = 108.0
+offset_bottom = 108.0
+
+[node name="Label" type="Label" parent="Column/Attachments/HBS2" unique_id=2138408334]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -29.5
+offset_top = -34.0
+offset_right = 29.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "Floor"
+
+[node name="HBS3" type="Panel" parent="Column/Attachments" unique_id=202099320]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(108, 108)
+layout_mode = 2
+
+[node name="Slot" parent="Column/Attachments/HBS3" unique_id=2062563468 instance=ExtResource("7_t1f6n")]
+layout_mode = 0
+offset_right = 108.0
+offset_bottom = 108.0
+
+[node name="Label" type="Label" parent="Column/Attachments/HBS3" unique_id=597656348]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = -34.0
+offset_right = 25.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "Wall"
+
+[node name="HBS4" type="Panel" parent="Column/Attachments" unique_id=1411301262]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(108, 108)
+layout_mode = 2
+
+[node name="Slot" parent="Column/Attachments/HBS4" unique_id=221565663 instance=ExtResource("7_t1f6n")]
+layout_mode = 0
+offset_right = 108.0
+offset_bottom = 108.0
+
+[node name="Label" type="Label" parent="Column/Attachments/HBS4" unique_id=1150242957]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -32.5
+offset_top = -34.0
+offset_right = 32.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "Lamp"
+
+[node name="HBS5" type="Panel" parent="Column/Attachments" unique_id=448459153]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(108, 108)
+layout_mode = 2
+
+[node name="Slot" parent="Column/Attachments/HBS5" unique_id=2000900905 instance=ExtResource("7_t1f6n")]
+layout_mode = 0
+offset_right = 108.0
+offset_bottom = 108.0
+
+[node name="Label" type="Label" parent="Column/Attachments/HBS5" unique_id=1338249931]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_top = -34.0
+offset_right = 7.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "5"
+
+[node name="Parts" type="HBoxContainer" parent="Column" unique_id=944513384]
+layout_mode = 2
+alignment = 1
+
+[node name="HBS1" type="Panel" parent="Column/Parts" unique_id=1712717968]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(108, 108)
+layout_mode = 2
+
+[node name="Slot" parent="Column/Parts/HBS1" unique_id=2128494989 instance=ExtResource("7_t1f6n")]
+layout_mode = 0
+offset_right = 108.0
+offset_bottom = 108.0
+
+[node name="Label" type="Label" parent="Column/Parts/HBS1" unique_id=1864830338]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -23.5
+offset_top = -34.0
+offset_right = 23.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "Frame"
+label_settings = SubResource("LabelSettings_8eonf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBS2" type="Panel" parent="Column/Parts" unique_id=608780048]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(108, 108)
+layout_mode = 2
+
+[node name="Slot" parent="Column/Parts/HBS2" unique_id=344080984 instance=ExtResource("7_t1f6n")]
+layout_mode = 0
+offset_right = 108.0
+offset_bottom = 108.0
+
+[node name="Label" type="Label" parent="Column/Parts/HBS2" unique_id=2078909587]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -29.5
+offset_top = -34.0
+offset_right = 29.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "Floor"
+label_settings = SubResource("LabelSettings_8eonf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBS3" type="Panel" parent="Column/Parts" unique_id=301626472]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(108, 108)
+layout_mode = 2
+
+[node name="Slot" parent="Column/Parts/HBS3" unique_id=854004645 instance=ExtResource("7_t1f6n")]
+layout_mode = 0
+offset_right = 108.0
+offset_bottom = 108.0
+
+[node name="Label" type="Label" parent="Column/Parts/HBS3" unique_id=489892854]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = -34.0
+offset_right = 25.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "Wall"
+label_settings = SubResource("LabelSettings_8eonf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBS4" type="Panel" parent="Column/Parts" unique_id=87438804]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(108, 108)
+layout_mode = 2
+
+[node name="Slot" parent="Column/Parts/HBS4" unique_id=713655544 instance=ExtResource("7_t1f6n")]
+layout_mode = 0
+offset_right = 108.0
+offset_bottom = 108.0
+
+[node name="Label" type="Label" parent="Column/Parts/HBS4" unique_id=1178925206]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -32.5
+offset_top = -34.0
+offset_right = 32.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "Lamp"
+label_settings = SubResource("LabelSettings_8eonf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBS5" type="Panel" parent="Column/Parts" unique_id=1374844967]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(108, 108)
+layout_mode = 2
+
+[node name="Slot" parent="Column/Parts/HBS5" unique_id=151891852 instance=ExtResource("7_t1f6n")]
+layout_mode = 0
+offset_right = 108.0
+offset_bottom = 108.0
+
+[node name="Label" type="Label" parent="Column/Parts/HBS5" unique_id=576778570]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_top = -34.0
+offset_right = 7.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "5"
+label_settings = SubResource("LabelSettings_8eonf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBS6" type="Panel" parent="Column/Parts" unique_id=321397891]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(108, 108)
+layout_mode = 2
+
+[node name="Slot" parent="Column/Parts/HBS6" unique_id=34150428 instance=ExtResource("7_t1f6n")]
+layout_mode = 0
+offset_right = 108.0
+offset_bottom = 108.0
+
+[node name="Label" type="Label" parent="Column/Parts/HBS6" unique_id=1330798040]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_top = -34.0
+offset_right = 7.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "6"
+label_settings = SubResource("LabelSettings_8eonf")
+horizontal_alignment = 1
+vertical_alignment = 1

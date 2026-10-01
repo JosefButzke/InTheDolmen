@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://c55yjibppcgiy"]
+
+[ext_resource type="Script" uid="uid://es4wis8qb51s" path="res://scripts/abstracts/item.gd" id="1_7tw63"]
+[ext_resource type="Texture2D" uid="uid://y8ndo34ylrqi" path="res://images/silica-rock.png" id="1_83rco"]
+
+[resource]
+script = ExtResource("1_7tw63")
+name = "Sulfur"
+icon = ExtResource("1_83rco")
+weight = 1.0
+item_type = 4
+metadata/_custom_type_script = "uid://es4wis8qb51s"

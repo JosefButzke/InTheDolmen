@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://f75xiay7cuwi"]
+
+[ext_resource type="Script" uid="uid://es4wis8qb51s" path="res://scripts/abstracts/item.gd" id="1_feb8q"]
+[ext_resource type="Texture2D" uid="uid://cw0rayrseqhth" path="res://images/shader_texture_input.png" id="1_is6g8"]
+
+[resource]
+script = ExtResource("1_feb8q")
+name = "Ceiling"
+icon = ExtResource("1_is6g8")
+max_stack = 1
+weight = 1.0
+item_type = 6
+metadata/_custom_type_script = "uid://es4wis8qb51s"

@@ -7,11 +7,18 @@ var _marker: MeshInstance3D
 
 func _ready() -> void:
 	_marker = MeshInstance3D.new()
-	var box := BoxMesh.new()
+	var sphere := SphereMesh.new()
 	var shape = get("shape")
-	box.size = shape.size if shape is BoxShape3D else Vector3.ONE * 0.3
-	box.material = _get_marker_material()
-	_marker.mesh = box
+	var radius := 0.15
+	if shape is SphereShape3D:
+		radius = shape.radius
+	elif shape is BoxShape3D:
+		var s: Vector3 = shape.size
+		radius = minf(s.x, minf(s.y, s.z)) * 0.5
+	sphere.radius = radius
+	sphere.height = radius * 2.0
+	sphere.material = _get_marker_material()
+	_marker.mesh = sphere
 	_marker.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	add_child(_marker)
 

@@ -11,3 +11,6 @@ signal building_part_selected(index: int)
 signal building_mode_changed(active: bool)
 
 var building_active: bool = false # last value sent through building_mode_changed
+
+signal ui_interact_icon_show(icon_name: Item.ItemType, label: String)
+signal ui_interact_icon_hide()

@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://k8b4ur3e5sjp"]
+
+[ext_resource type="Shader" uid="uid://r7birwqdky7l" path="res://shaders/grass.gdshader" id="1_oysvd"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_oysvd")
+shader_parameter/BASE_COLOUR = Color(0.7882353, 0.32941177, 0, 1)
+shader_parameter/TIP_COLOUR = Color(1, 0.43137255, 0, 1)
+shader_parameter/C21 = Color(0.99986047, 0.3189007, 0.30304804, 1)
+shader_parameter/C22 = Color(1, 0.78431374, 0.011764706, 1)
+shader_parameter/grass_height = 5.0
+shader_parameter/grass_min_height = 1.0

@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://il87hl2g3m3u"]
 
-[ext_resource type="Script" uid="uid://crl3yuwi6pbdp" path="res://scripts/multitool_manager.gd" id="1_uux45"]
+[ext_resource type="Script" uid="uid://crl3yuwi6pbdp" path="res://scripts/tools/multitool_manager.gd" id="1_uux45"]
 [ext_resource type="PackedScene" uid="uid://cgl4d64uekwoe" path="res://scenes/items/beacon.tscn" id="2_15sst"]
 [ext_resource type="Material" uid="uid://d0ssg3nmcw3sh" path="res://materials/shield.tres" id="2_tsdx2"]
 [ext_resource type="Material" uid="uid://b47w5v6olycgb" path="res://materials/shield_frame.tres" id="3_o8yt2"]
@@ -267,7 +267,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.07855886, 0.14503312, -0.7
 visible = false
 light_energy = 6.0
 light_indirect_energy = 2.0
-light_volumetric_fog_energy = 0.0
+light_volumetric_fog_energy = 3.0
 shadow_bias = 2.056
 distance_fade_enabled = true
 spot_range = 77.1713

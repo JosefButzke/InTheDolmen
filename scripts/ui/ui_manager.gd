@@ -5,15 +5,23 @@ class_name UIManager
 @export var hotbar: Hotbar
 @export var menu: Control
 
-@export var item_test_build: Item #temp
-@export var item_test_multi: Item #temp
+@export var icon_container: VBoxContainer
+@export var icon_tex: TextureRect
+@export var icon_label: Label
+
+@export var item_test_hotbar_1: Item #temp
+@export var item_test_hotbar_2: Item #temp
 
 func _ready() -> void:
 	inventory.visible = false
-	menu.visible = false;
-
-	hotbar.add_item(1, item_test_multi)	
-	hotbar.add_item(2, item_test_build)
+	menu.visible = false
+	icon_container.visible = false
+	
+	Events.ui_interact_icon_show.connect(_interact_icon_show)
+	Events.ui_interact_icon_hide.connect(_interact_icon_hide)
+	
+	hotbar.add_item(1, item_test_hotbar_1)
+	hotbar.add_item(2, item_test_hotbar_2)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("Inventory"):
@@ -47,3 +55,12 @@ func _update_mouse_mode() -> void:
 
 func select_hotbar_slot(index: int) -> void:
 	hotbar.select_slot(index)
+
+func _interact_icon_show(icon_name: Item.ItemType, label: String) -> void:
+	icon_tex.texture = preload("res://images/ore.png")
+	icon_container.visible = true;
+	icon_label.text = label
+	
+func _interact_icon_hide() -> void:
+	icon_container.visible = false
+	icon_label.text = ""

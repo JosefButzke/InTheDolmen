@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bsnwgybdu2td3"]
 
-[ext_resource type="Script" uid="uid://c7vayfy7jbkbe" path="res://scripts/wind_turbine.gd" id="1_a67jo"]
+[ext_resource type="Script" uid="uid://c7vayfy7jbkbe" path="res://scripts/building/wind_turbine.gd" id="1_a67jo"]
 [ext_resource type="PackedScene" uid="uid://bg3vboyrs3b7d" path="res://models/WindTurbine.blend" id="2_a67jo"]
 
 [node name="WindTurbine" type="Node3D" unique_id=796319636 node_paths=PackedStringArray("animaton_player")]

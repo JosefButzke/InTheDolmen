@@ -1,15 +1,15 @@
 extends Control
 
-@onready var container: HBoxContainer = $HBoxContainer
+@onready var container: HBoxContainer = $Column/Parts
 
 var building_items: Array[Item] = [
-	preload("res://items/base_system/parts/frame.tres"),
+	preload("res://items/base_system/parts/frame_v.tres"),
+	preload("res://items/base_system/parts/frame_h.tres"),
 	preload("res://items/base_system/parts/wall.tres"),
 	preload("res://items/base_system/parts/floor.tres"),
-	preload("res://items/base_system/parts/stairs.tres"),
+	preload("res://items/base_system/parts/ceiling.tres"),
 	preload("res://items/base_system/parts/lamp.tres"),
 ]
-
 
 func _ready() -> void:
 	visible = false

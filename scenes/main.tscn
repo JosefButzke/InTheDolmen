@@ -3,9 +3,17 @@
 [ext_resource type="PackedScene" uid="uid://btqfxn371icda" path="res://scenes/terrain/planet.scn" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://drbv21csxacvh" path="res://scenes/player.tscn" id="2_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://dip137op5b7w4" path="res://scenes/ui/ui.tscn" id="3_sugp2"]
-[ext_resource type="PackedScene" uid="uid://ci2u01sx53s3u" path="res://scenes/base_system/frame.tscn" id="4_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://ci2u01sx53s3u" path="res://scenes/base_system/frame_v.tscn" id="4_jyhfs"]
 [ext_resource type="Resource" uid="uid://dlpawciafbwr" path="res://items/base_system/builder_device.tres" id="4_tefeu"]
 [ext_resource type="Resource" uid="uid://b3vgunouvpmb8" path="res://items/multitool.tres" id="5_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://731hrf06ydrf" path="res://scenes/base_system/floor.tscn" id="6_tefeu"]
+[ext_resource type="Texture2D" uid="uid://bqqtc7swi8v5g" path="res://images/ore.png" id="6_trceg"]
+[ext_resource type="PackedScene" uid="uid://cwudw2cat7x31" path="res://scenes/enviroment/copper.tscn" id="8_85g3d"]
+[ext_resource type="PackedScene" uid="uid://cw36dbrfexvn8" path="res://scenes/enviroment/sulfur.tscn" id="9_choun"]
+[ext_resource type="Script" uid="uid://ny265885mme4" path="res://scripts/enviroment/grass_generator.gd" id="10_choun"]
+[ext_resource type="Material" uid="uid://k8b4ur3e5sjp" path="res://materials/grass.tres" id="11_ya4ey"]
+[ext_resource type="PackedScene" uid="uid://cv8mlc27khe5d" path="res://scenes/enviroment/boba_spike.tscn" id="12_eb6dy"]
+[ext_resource type="PackedScene" uid="uid://b3q01ww0wvbjk" path="res://scenes/enviroment/coal.tscn" id="14_a8y0u"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tefeu"]
 
@@ -17,8 +25,6 @@ background_mode = 1
 background_color = Color(0, 0.86533487, 0.9989304, 1)
 sky = SubResource("Sky_tbgi4")
 ambient_light_source = 3
-ambient_light_color = Color(0.12955844, 0.12955847, 0.12955844, 1)
-ambient_light_sky_contribution = 0.15
 reflected_light_source = 2
 tonemap_mode = 3
 ssao_radius = 0.01
@@ -32,11 +38,11 @@ fog_density = 0.3402
 fog_sky_affect = 0.0
 fog_depth_end = 300.0
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.0151
+volumetric_fog_density = 0.0048
 volumetric_fog_emission = Color(0.13916105, 0.025964044, 0.031202814, 1)
 volumetric_fog_sky_affect = 0.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jyhfs"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a8y0u"]
 resource_local_to_scene = true
 albedo_color = Color(0.73333335, 0.3254902, 0.19607843, 1)
 metallic_specular = 0.0
@@ -47,22 +53,174 @@ metallic_specular = 0.0
 environment = SubResource("Environment_g4v7s")
 
 [node name="Planet" parent="." unique_id=2004964775 instance=ExtResource("1_o5qli")]
-material = SubResource("StandardMaterial3D_jyhfs")
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999998, 0, 0, 0, 0.99999976, 0.0052604675, 0.22607422, 0.030914307)
+material = SubResource("StandardMaterial3D_a8y0u")
 
 [node name="Player" parent="." unique_id=1718937912 instance=ExtResource("2_0wfyh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1019.32153, 0)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1019.32153, 0)
 floor_max_angle = 1.0471976
 safe_margin = 0.1
 jump_velocity = 10.0
 
 [node name="Sun" type="DirectionalLight3D" parent="." unique_id=1583791210]
 transform = Transform3D(0.6059884, 0.5751012, 0.54957867, 0, -0.69088244, 0.72296715, 0.7954735, -0.4381097, -0.41866675, 0, 0, 0)
-light_angular_distance = 0.5
 shadow_enabled = true
 
-[node name="UI" parent="." unique_id=844746813 instance=ExtResource("3_sugp2")]
-item_test_build = ExtResource("4_tefeu")
-item_test_multi = ExtResource("5_o6xl0")
+[node name="UI" parent="." unique_id=844746813 node_paths=PackedStringArray("icon_container", "icon_tex", "icon_label") instance=ExtResource("3_sugp2")]
+icon_container = NodePath("VBoxContainer")
+icon_tex = NodePath("VBoxContainer/InteractIcon")
+icon_label = NodePath("VBoxContainer/Label")
+item_test_hotbar_1 = ExtResource("5_o6xl0")
+item_test_hotbar_2 = ExtResource("4_tefeu")
 
-[node name="Frame" parent="." unique_id=1566021089 instance=ExtResource("4_jyhfs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7174197, 1020.3402, -5.8887286)
+[node name="VBoxContainer" type="VBoxContainer" parent="UI" unique_id=1756913369]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -29.5
+offset_right = 20.0
+offset_bottom = 29.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="InteractIcon" type="TextureRect" parent="UI/VBoxContainer" unique_id=1947317398]
+custom_maximum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("6_trceg")
+
+[node name="Label" type="Label" parent="UI/VBoxContainer" unique_id=1670944606]
+layout_mode = 2
+text = "Ore"
+horizontal_alignment = 1
+
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="." unique_id=199509133 node_paths=PackedStringArray("planet")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1019.9456, 0)
+script = ExtResource("10_choun")
+material = ExtResource("11_ya4ey")
+planet = NodePath("../Planet")
+grass_height = 4.0
+
+[node name="Floor" parent="." unique_id=2039052091 instance=ExtResource("6_tefeu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0740213, 1020.8421, -9.31416)
+
+[node name="Frame" parent="Floor" unique_id=1566021089 instance=ExtResource("4_jyhfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.536, -5.072, -2.5360003)
+
+[node name="Frame2" parent="Floor" unique_id=414839585 instance=ExtResource("4_jyhfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.536, -5.072, 2.5360003)
+
+[node name="Frame3" parent="Floor" unique_id=1160160560 instance=ExtResource("4_jyhfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.536, -5.072, -2.5360003)
+
+[node name="Frame4" parent="Floor" unique_id=955823198 instance=ExtResource("4_jyhfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.536, -5.072, 2.5360003)
+
+[node name="BobaSpike" parent="." unique_id=1911760903 instance=ExtResource("12_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.459696, 1021.43854, 22.453867)
+
+[node name="BobaSpike2" parent="." unique_id=1817756737 instance=ExtResource("12_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.008255, 1020.2135, -14.012487)
+
+[node name="BobaSpike3" parent="." unique_id=41094724 instance=ExtResource("12_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.723175, 1021.77136, -16.22654)
+
+[node name="BobaSpike4" parent="." unique_id=447396755 instance=ExtResource("12_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.0101037, 1017.1631, 25.052504)
+
+[node name="BobaSpike5" parent="." unique_id=774090149 instance=ExtResource("12_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.11351, 1020.75543, 5.2617283)
+
+[node name="BobaSpike6" parent="." unique_id=395512850 instance=ExtResource("12_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66.94361, 1021.1786, -12.81413)
+
+[node name="BobaSpike7" parent="." unique_id=1005548558 instance=ExtResource("12_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 61.284576, 1020.68616, -8.169909)
+
+[node name="BobaSpike8" parent="." unique_id=888852518 instance=ExtResource("12_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52.454884, 1022.3994, 19.489431)
+
+[node name="BobaSpike9" parent="." unique_id=1309632958 instance=ExtResource("12_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.73996, 1020.47095, 56.013515)
+
+[node name="BobaSpike10" parent="." unique_id=1178718170 instance=ExtResource("12_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -95.4005, 1010.6735, 43.22593)
+
+[node name="BobaSpike11" parent="." unique_id=730886551 instance=ExtResource("12_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -99.0502, 1019.7228, 9.644542)
+
+[node name="BobaSpike12" parent="." unique_id=85726700 instance=ExtResource("12_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -66.13712, 1020.8337, 14.6858)
+
+[node name="BobaSpike13" parent="." unique_id=2015782022 instance=ExtResource("12_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -79.89477, 1026.457, -38.548424)
+
+[node name="BobaSpike14" parent="." unique_id=1816340200 instance=ExtResource("12_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -62.80741, 1019.9918, -64.14711)
+
+[node name="Copper" parent="." unique_id=107767193 instance=ExtResource("8_85g3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.484271, 1023.9659, 13.740618)
+
+[node name="Sulfur" parent="." unique_id=909655604 instance=ExtResource("9_choun")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.40716, 1023.34906, 5.219955)
+
+[node name="Sulfur4" parent="." unique_id=1552058589 instance=ExtResource("14_a8y0u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.39914, 1024.7283, -0.94125366)
+
+[node name="Copper3" parent="." unique_id=1974966566 instance=ExtResource("8_85g3d")]
+transform = Transform3D(0.77785414, 0, -0.62844485, 0, 1, 0, 0.62844485, 0, 0.77785414, -33.42363, 1023.4665, 21.94968)
+
+[node name="Sulfur8" parent="." unique_id=972817960 instance=ExtResource("14_a8y0u")]
+transform = Transform3D(0.77785414, 0, -0.62844485, 0, 1, 0, 0.62844485, 0, 0.77785414, 9.681934, 1021.949, -46.88774)
+
+[node name="Copper5" parent="." unique_id=1857241865 instance=ExtResource("8_85g3d")]
+transform = Transform3D(0.77785414, 0, -0.62844485, 0, 1, 0, 0.62844485, 0, 0.77785414, -24.275639, 1020.44226, -19.379688)
+
+[node name="Sulfur12" parent="." unique_id=808887457 instance=ExtResource("14_a8y0u")]
+transform = Transform3D(0.77785414, 0, -0.62844485, 0, 1, 0, 0.62844485, 0, 0.77785414, 33.92072, 1022.5266, -15.85368)
+
+[node name="Copper7" parent="." unique_id=216604369 instance=ExtResource("8_85g3d")]
+transform = Transform3D(0.77785414, 0, -0.62844485, 0, 1, 0, 0.62844485, 0, 0.77785414, -27.618969, 1022.98834, 35.833755)
+
+[node name="Sulfur14" parent="." unique_id=1467770938 instance=ExtResource("9_choun")]
+transform = Transform3D(0.77785414, 0, -0.62844485, 0, 1, 0, 0.62844485, 0, 0.77785414, -14.545643, 1022.2241, 35.441906)
+
+[node name="Sulfur13" parent="." unique_id=723632877 instance=ExtResource("14_a8y0u")]
+transform = Transform3D(0.77785414, 0, -0.62844485, 0, 1, 0, 0.62844485, 0, 0.77785414, -41.311275, 1022.7579, 37.891926)
+
+[node name="Sulfur11" parent="." unique_id=509484731 instance=ExtResource("9_choun")]
+transform = Transform3D(0.77785414, 0, -0.62844485, 0, 1, 0, 0.62844485, 0, 0.77785414, 60.68635, 1021.8508, -18.3037)
+
+[node name="Copper6" parent="." unique_id=1588132416 instance=ExtResource("8_85g3d")]
+transform = Transform3D(0.77785414, 0, -0.62844485, 0, 1, 0, 0.62844485, 0, 0.77785414, 47.613026, 1021.8232, -17.91185)
+
+[node name="Sulfur10" parent="." unique_id=645580214 instance=ExtResource("9_choun")]
+transform = Transform3D(0.77785414, 0, -0.62844485, 0, 1, 0, 0.62844485, 0, 0.77785414, -11.202312, 1017.62164, -19.771538)
+
+[node name="Sulfur9" parent="." unique_id=2000234545 instance=ExtResource("14_a8y0u")]
+transform = Transform3D(0.77785414, 0, -0.62844485, 0, 1, 0, 0.62844485, 0, 0.77785414, -37.967945, 1023.5881, -17.321518)
+
+[node name="Sulfur7" parent="." unique_id=1949108184 instance=ExtResource("9_choun")]
+transform = Transform3D(0.77785414, 0, -0.62844485, 0, 1, 0, 0.62844485, 0, 0.77785414, 36.447567, 1015.67773, -49.33776)
+
+[node name="Copper4" parent="." unique_id=284248925 instance=ExtResource("8_85g3d")]
+transform = Transform3D(0.77785414, 0, -0.62844485, 0, 1, 0, 0.62844485, 0, 0.77785414, 23.37424, 1021.5269, -48.94591)
+
+[node name="Sulfur6" parent="." unique_id=138686955 instance=ExtResource("9_choun")]
+transform = Transform3D(0.77785414, 0, -0.62844485, 0, 1, 0, 0.62844485, 0, 0.77785414, -20.350304, 1023.5351, 21.557833)
+
+[node name="Sulfur5" parent="." unique_id=920489215 instance=ExtResource("14_a8y0u")]
+transform = Transform3D(0.77785414, 0, -0.62844485, 0, 1, 0, 0.62844485, 0, 0.77785414, -47.115936, 1021.97705, 24.007849)
+
+[node name="Sulfur3" parent="." unique_id=1090406827 instance=ExtResource("9_choun")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.11908, 1024.0201, -19.667732)
+
+[node name="Copper2" parent="." unique_id=807196710 instance=ExtResource("8_85g3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.041965, 1023.3018, -11.14707)
+
+[node name="Sulfur2" parent="." unique_id=779433631 instance=ExtResource("14_a8y0u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.127096, 1019.37915, 23.946434)

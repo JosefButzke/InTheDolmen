@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://mwx5q7pol7ky"]
 
-[ext_resource type="Script" uid="uid://x6khisff42ed" path="res://scripts/crafting_table_manager.gd" id="1_8y42y"]
+[ext_resource type="Script" uid="uid://x6khisff42ed" path="res://scripts/tables/crafting_table_manager.gd" id="1_8y42y"]
 [ext_resource type="AudioStream" uid="uid://digoc3ss2annx" path="res://audios/switch_on.mp3" id="2_nt55c"]
 [ext_resource type="AudioStream" uid="uid://ds6e5m0r0ywx4" path="res://audios/switch_off.mp3" id="3_qwhyd"]
 [ext_resource type="PackedScene" uid="uid://di36rfdeog77t" path="res://models/crafting_table.blend" id="4_8y42y"]

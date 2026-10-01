@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://dk3cmym18ci6p"]
+
+[ext_resource type="Texture2D" uid="uid://cw0rayrseqhth" path="res://images/shader_texture_input.png" id="1_xecad"]
+[ext_resource type="Script" uid="uid://es4wis8qb51s" path="res://scripts/abstracts/item.gd" id="2_qqjwi"]
+
+[resource]
+script = ExtResource("2_qqjwi")
+name = "Frame H"
+description = "building frame"
+icon = ExtResource("1_xecad")
+max_stack = 1
+weight = 1.0
+item_type = 6
+metadata/_custom_type_script = "uid://es4wis8qb51s"

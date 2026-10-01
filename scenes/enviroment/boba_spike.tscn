@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cv8mlc27khe5d"]
 
-[ext_resource type="Script" uid="uid://cb8o2ivqfi5g" path="res://scripts/boba_spike_manager.gd" id="1_mxfa3"]
+[ext_resource type="Script" uid="uid://cb8o2ivqfi5g" path="res://scripts/enviroment/boba_spike_manager.gd" id="1_mxfa3"]
 [ext_resource type="PackedScene" uid="uid://b54cqmvkq388b" path="res://models/boba_spike.glb" id="3_tw1pg"]
 [ext_resource type="AudioStream" uid="uid://cq5ylgxakt252" path="res://audios/spike_shoot.mp3" id="4_ky2e5"]
 
@@ -10,6 +10,108 @@ height = 2.4064941
 [node name="BobaSpike" unique_id=1911760903 node_paths=PackedStringArray("audioPlayer") instance=ExtResource("3_tw1pg")]
 script = ExtResource("1_mxfa3")
 audioPlayer = NodePath("AudioStreamPlayer3D")
+
+[node name="Body" parent="." index="0" unique_id=1969885971]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 3.6646543, 0)
+
+[node name="Stem" parent="." index="1" unique_id=575591831]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="Spike_032" parent="." index="2" unique_id=1554279180]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.13040161, 2.9596405, -0.31481737)
+
+[node name="Spike_001" parent="." index="3" unique_id=880631759]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.11060337, 4.3963823, -0.26702017)
+
+[node name="Spike_002" parent="." index="4" unique_id=1511052951]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.11060337, 2.393687, -0.26702017)
+
+[node name="Spike_003" parent="." index="5" unique_id=2076725034]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.13040161, 3.6533027, -0.31481734)
+
+[node name="Spike_004" parent="." index="6" unique_id=188192289]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.2670201, 2.3936868, -0.11060337)
+
+[node name="Spike_005" parent="." index="7" unique_id=962034296]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.31481734, 3.6533027, -0.13040161)
+
+[node name="Spike_006" parent="." index="8" unique_id=2048002241]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.3148173, 2.9596405, -0.13040158)
+
+[node name="Spike_007" parent="." index="9" unique_id=1708654973]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.26702014, 4.3963823, -0.11060337)
+
+[node name="Spike_008" parent="." index="10" unique_id=679669002]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.31481728, 2.9596405, 0.1304016)
+
+[node name="Spike_009" parent="." index="11" unique_id=2113655645]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.26702014, 4.3963823, 0.11060337)
+
+[node name="Spike_010" parent="." index="12" unique_id=1307608570]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.26702014, 2.3936868, 0.11060337)
+
+[node name="Spike_011" parent="." index="13" unique_id=1142244444]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.31481728, 3.6533027, 0.13040158)
+
+[node name="Spike_012" parent="." index="14" unique_id=1278787852]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.1304016, 2.9596405, 0.31481728)
+
+[node name="Spike_013" parent="." index="15" unique_id=1040529633]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.11060337, 4.3963823, 0.26702014)
+
+[node name="Spike_014" parent="." index="16" unique_id=2095370042]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.11060336, 2.3936868, 0.26702014)
+
+[node name="Spike_015" parent="." index="17" unique_id=2032210026]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.13040158, 3.6533027, 0.31481728)
+
+[node name="Spike_016" parent="." index="18" unique_id=718019753]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.11060337, 2.3936868, 0.26702014)
+
+[node name="Spike_017" parent="." index="19" unique_id=661099902]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.1304016, 3.6533027, 0.31481725)
+
+[node name="Spike_018" parent="." index="20" unique_id=1089787793]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.1304016, 2.9596405, 0.3148173)
+
+[node name="Spike_019" parent="." index="21" unique_id=1458083068]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.11060336, 4.3963823, 0.26702014)
+
+[node name="Spike_020" parent="." index="22" unique_id=627205300]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.2670201, 2.3936868, 0.11060337)
+
+[node name="Spike_021" parent="." index="23" unique_id=2133982645]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.31481728, 3.6533027, 0.13040158)
+
+[node name="Spike_022" parent="." index="24" unique_id=704967229]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.31481728, 2.9596405, 0.1304016)
+
+[node name="Spike_023" parent="." index="25" unique_id=461441979]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.26702014, 4.3963823, 0.11060337)
+
+[node name="Spike_024" parent="." index="26" unique_id=1935777995]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.31481728, 2.9596405, -0.1304016)
+
+[node name="Spike_025" parent="." index="27" unique_id=1676909495]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.26702014, 4.3963823, -0.11060337)
+
+[node name="Spike_026" parent="." index="28" unique_id=981115124]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.26702014, 2.3936868, -0.11060337)
+
+[node name="Spike_027" parent="." index="29" unique_id=1518814880]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.31481728, 3.6533027, -0.1304016)
+
+[node name="Spike_028" parent="." index="30" unique_id=969343433]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.13040158, 2.9596405, -0.31481728)
+
+[node name="Spike_029" parent="." index="31" unique_id=2035082558]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.110603385, 4.3963823, -0.26702017)
+
+[node name="Spike_030" parent="." index="32" unique_id=536822905]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.110603355, 2.3936868, -0.26702017)
+
+[node name="Spike_031" parent="." index="33" unique_id=1055250575]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.13040158, 3.6533027, -0.3148173)
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="34" unique_id=1895384124]
 stream = ExtResource("4_ky2e5")

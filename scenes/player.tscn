@@ -14,29 +14,28 @@ characterBody = NodePath(".")
 camera_pivot = NodePath("CameraPivot")
 camera = NodePath("CameraPivot/Camera3D")
 hand_pivot = NodePath("CameraPivot/Camera3D/HandPivot")
-animationPlayer = NodePath("CollisionShape3D/Zeta/AnimationPlayer")
+animationPlayer = NodePath("Zeta/AnimationPlayer")
+
+[node name="Zeta" parent="." unique_id=696630044 instance=ExtResource("2_kyqiw")]
+
+[node name="Cube_007" parent="Zeta/Armature/Skeleton3D/ear_L" parent_id_path=PackedInt32Array(696630044, 2143614923) index="0" unique_id=451960710]
+layers = 2
+
+[node name="Cube_006" parent="Zeta/Armature/Skeleton3D/ear_R" parent_id_path=PackedInt32Array(696630044, 940751566) index="0" unique_id=1353756856]
+layers = 2
+
+[node name="Head" parent="Zeta/Armature/Skeleton3D/Bone_001" parent_id_path=PackedInt32Array(696630044, 1665644672) index="0" unique_id=928249989]
+layers = 2
+
+[node name="Cube_008" parent="Zeta/Armature/Skeleton3D/Bone_002" parent_id_path=PackedInt32Array(696630044, 2006602099) index="0" unique_id=762161950]
+layers = 2
+
+[node name="Cube_001" parent="Zeta/Armature/Skeleton3D/Bone_003" parent_id_path=PackedInt32Array(696630044, 1821378840) index="0" unique_id=457299061]
+layers = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1503767060]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1795963, 0)
 shape = SubResource("CapsuleShape3D_kyqiw")
-
-[node name="Zeta" parent="CollisionShape3D" unique_id=696630044 instance=ExtResource("2_kyqiw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1795963, 0)
-
-[node name="Cube_007" parent="CollisionShape3D/Zeta/Armature/Skeleton3D/ear_L" parent_id_path=PackedInt32Array(696630044, 2143614923) index="0" unique_id=451960710]
-layers = 2
-
-[node name="Cube_006" parent="CollisionShape3D/Zeta/Armature/Skeleton3D/ear_R" parent_id_path=PackedInt32Array(696630044, 940751566) index="0" unique_id=1353756856]
-layers = 2
-
-[node name="Head" parent="CollisionShape3D/Zeta/Armature/Skeleton3D/Bone_001" parent_id_path=PackedInt32Array(696630044, 1665644672) index="0" unique_id=928249989]
-layers = 2
-
-[node name="Cube_008" parent="CollisionShape3D/Zeta/Armature/Skeleton3D/Bone_002" parent_id_path=PackedInt32Array(696630044, 2006602099) index="0" unique_id=762161950]
-layers = 2
-
-[node name="Cube_001" parent="CollisionShape3D/Zeta/Armature/Skeleton3D/Bone_003" parent_id_path=PackedInt32Array(696630044, 1821378840) index="0" unique_id=457299061]
-layers = 2
 
 [node name="CameraPivot" type="Node3D" parent="." unique_id=748533346]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9624084, 0)
@@ -48,4 +47,4 @@ fov = 90.0
 [node name="HandPivot" type="Node3D" parent="CameraPivot/Camera3D" unique_id=1928805322]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4857105, -0.3466668, -0.678303)
 
-[editable path="CollisionShape3D/Zeta"]
+[editable path="Zeta"]

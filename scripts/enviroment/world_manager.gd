@@ -40,6 +40,7 @@ class_name MarchCubesCompute
 
 const VERTICES_SHADER := preload("res://shaders/planet_vertices.glsl")
 const MC_SHADER := preload("res://shaders/march_cube.glsl")
+const ISO_LEVEL := 1.0 # shared with the grass placement so blades sit on this surface
 
 var _rd: RenderingDevice
 var _shader_vertices: RID
@@ -162,7 +163,7 @@ func generate_chunk(chunk_position: Vector3):
 	var chunkParamsMC = PackedFloat32Array([
 		float(chunkWidth),
 		float(chunkHeight),
-		1.0, # floor level
+		ISO_LEVEL, # floor level
 		float(resolution)
 	]).to_byte_array()
 	var bufferChunkParamsMC := rd.uniform_buffer_create(chunkParamsMC.size(), chunkParamsMC)
@@ -197,7 +198,7 @@ func generate_chunk(chunk_position: Vector3):
 
 	# Submit to GPU and wait for sync
 	rd.submit()
-	rd.sync()
+	rd.sync ()
 	# Read back the data from the buffer
 	
 	rd.free_rid(uniform_set)

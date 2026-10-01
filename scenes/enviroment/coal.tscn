@@ -1,8 +1,8 @@
-[gd_scene format=4 uid="uid://cwudw2cat7x31"]
+[gd_scene format=4 uid="uid://b3q01ww0wvbjk"]
 
-[ext_resource type="Material" uid="uid://bdl16m4bfo08x" path="res://materials/copper.tres" id="1_vfi47"]
-[ext_resource type="Script" uid="uid://bar3bw1y6vlcm" path="res://scripts/enviroment/resource.gd" id="2_2q3mt"]
-[ext_resource type="Resource" uid="uid://cofy5qr1b7til" path="res://items/copper.tres" id="2_a1iyi"]
+[ext_resource type="Script" uid="uid://bar3bw1y6vlcm" path="res://scripts/enviroment/resource.gd" id="2_12iwg"]
+[ext_resource type="Material" uid="uid://djhqw1qput7cy" path="res://materials/coal.tres" id="2_kcljc"]
+[ext_resource type="Resource" uid="uid://be8qqkosu5r7p" path="res://items/coal.tres" id="3_kcljc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3q4m4"]
 resource_name = "Material.001"
@@ -144,37 +144,38 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_tcclh")
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_g4v7s"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_pdaco"]
 radius = 1.5763651
 
-[node name="Copper" type="Node3D" unique_id=107767193]
+[node name="Sulfur" type="Node3D" unique_id=107767193]
+script = ExtResource("2_12iwg")
 
 [node name="Icosphere" type="MeshInstance3D" parent="." unique_id=1874592366]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
-material_override = ExtResource("1_vfi47")
+material_override = ExtResource("2_kcljc")
 mesh = SubResource("ArrayMesh_6ssv0")
 
 [node name="Icosphere_001" type="MeshInstance3D" parent="." unique_id=1255119381]
-transform = Transform3D(0.601886, 0, 0, 0, 0.601886, 0, 0, 0, 0.601886, 0.46333277, 0.8472397, 0.9039427)
-material_override = ExtResource("1_vfi47")
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.46333277, 0.8472397, 0.9039427)
+material_override = ExtResource("2_kcljc")
 mesh = SubResource("ArrayMesh_2xktk")
 
 [node name="Icosphere_002" type="MeshInstance3D" parent="." unique_id=344970115]
-transform = Transform3D(0.42078185, 0, 0, 0, 0.42078185, 0, 0, 0, 0.42078185, -0.7077571, 1.1093224, -0.15877523)
-material_override = ExtResource("1_vfi47")
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.7077571, 1.1093224, -0.15877523)
+material_override = ExtResource("2_kcljc")
 mesh = SubResource("ArrayMesh_vx861")
 
 [node name="Icosphere_003" type="MeshInstance3D" parent="." unique_id=1820226975]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5996631, 1.482744, -0.46217623)
-material_override = ExtResource("1_vfi47")
+material_override = ExtResource("2_kcljc")
 mesh = SubResource("ArrayMesh_b57pq")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=144484194]
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=2020424810]
 collision_layer = 3
-script = ExtResource("2_2q3mt")
-item = ExtResource("2_a1iyi")
+script = ExtResource("2_12iwg")
+item = ExtResource("3_kcljc")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=432646156]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1337048359]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.722453, 0.21974337)
-shape = SubResource("SphereShape3D_g4v7s")
+shape = SubResource("SphereShape3D_pdaco")
 debug_color = Color(0.9890024, 0, 0.23727062, 0.41960785)

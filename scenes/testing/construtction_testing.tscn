@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b7syxnxm16j1g"]
 
 [ext_resource type="PackedScene" uid="uid://d2b8e1sowtdgg" path="res://scenes/base_system/wall.tscn" id="1_web52"]
-[ext_resource type="PackedScene" uid="uid://ci2u01sx53s3u" path="res://scenes/base_system/frame.tscn" id="3_oa8cu"]
+[ext_resource type="PackedScene" uid="uid://ci2u01sx53s3u" path="res://scenes/base_system/frame_v.tscn" id="3_oa8cu"]
 [ext_resource type="PackedScene" uid="uid://dsqsa5nc8ubpa" path="res://scenes/base_system/door_frame.tscn" id="4_xoe8s"]
 [ext_resource type="PackedScene" uid="uid://bsnwgybdu2td3" path="res://scenes/constructions/wind_turbine.tscn" id="5_vn1hf"]
 [ext_resource type="PackedScene" uid="uid://731hrf06ydrf" path="res://scenes/base_system/floor.tscn" id="6_fpb3g"]

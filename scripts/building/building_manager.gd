@@ -1,13 +1,13 @@
 extends Node3D
 
 var building_parts: Array[PackedScene] = [
-	preload("res://scenes/base_system/frame.tscn"),
+	preload("res://scenes/base_system/frame_v.tscn"),
+	preload("res://scenes/base_system/frame_h.tscn"),
 	preload("res://scenes/base_system/wall.tscn"),
 	preload("res://scenes/base_system/floor.tscn"),
-	preload("res://scenes/base_system/stairs.tscn"),
+	preload("res://scenes/base_system/ceiling.tscn"),
 	preload("res://scenes/constructions/lamp.tscn"),
 ]
-
 
 var selected_part_index: int = 0
 var selected_snap_index: int = 0
